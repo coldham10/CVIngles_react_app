@@ -8,39 +8,47 @@
         },
         "sections": [
             {
-                "name": "datos",
+                "id": "datos",
                 "fullName": "Datos Personales",
                 "entries": [
                     {
-                        "name": "name",
+                        "id": "name",
                         "displayName": "Nombre Completo",
                         "type": "text",
                         "value": null,
                         "fixed": true
                     },
                     {
-                        "name": "dob",
+                        "id": "dob",
                         "displayName": "Fecha de nacimiento",
                         "type": "date",
                         "value": null,
                         "fixed": true
                     },
                     {
-                        "name": "address",
+                        "id": "address",
                         "displayName": "Dirección",
                         "type": "text",
                         "value": null,
                         "fixed": true
+                    },
+                    {
+                        "id": "contact0",
+                        "displayName": "Modo de contacto 1",
+                        "type": "text",
+                        "value": null,
+                        "fixed": false,
+                        "contactType": "phone" 
                     }
                 ]
             },
             {
-                "name": "estudios",
+                "id": "estudios",
                 "fullName": "Estudios",
                 "entries": []
             },
             {
-                "name": "experiencia",
+                "id": "experiencia",
                 "fullName": "Experiencia Laboral",
                 "entries": []
             }
@@ -48,13 +56,15 @@
     },
     "entryDefaults": {
         "datos": {
-            "name": null,
+            "id": null,
             "displayName": null,
             "type": "text",
             "value": null,
-            "fixed": false
+            "fixed": false,
+            "contactType": "phone"
         },
         "estudios": {
+            "id": null,
             "degree": {
                 "displayName": "Nombre del estudio",
                 "type": "text",
@@ -92,6 +102,7 @@
             }
         },
         "experiencia": {
+            "id": null,
             "title": {
                 "displayName": "Titulo",
                 "type": "text",
