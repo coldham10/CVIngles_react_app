@@ -32,13 +32,13 @@ function CVEntry(props) {
                     variant="outline-secondary"
                     title={shortenContactType(props.contactType)}
                 >
-                <Dropdown.Item onClick={() => props.changeEntry([{
+                <Dropdown.Item onClick={() => props.updateEntry([{
                     'key': 'contactType',
                     'val': 'wa'}])}
                 >
                     <FaWhatsapp color="green"/>{'  '}WhatsApp
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => props.changeEntry([{
+                <Dropdown.Item onClick={() => props.updateEntry([{
                     'key': 'contactType',
                     'val': 'phone'}])}
                 >
@@ -47,7 +47,12 @@ function CVEntry(props) {
                 </DropdownButton>
               <Form.Control type={props.type} className="rounded-right"/>
                <InputGroup.Append>
-                   <Button variant="link"> <FaTrash /> </Button> 
+                   <Button
+                        variant="link"
+                        onClick={() => props.deleteEntry()}
+                   >
+                    <FaTrash />
+                   </Button> 
                </InputGroup.Append>
             </InputGroup>
             </Form.Group>
@@ -62,7 +67,8 @@ function CVSection(props) {
             idx={i}
             section={props.data.id}
             {...entry}
-            changeEntry={changes => props.changeEntry(entry.id, changes)}
+            updateEntry={changes => props.updateEntry(entry.id, changes)}
+            deleteEntry={() => props.deleteEntry(entry.id)}
         />
     );
     return (
@@ -82,7 +88,6 @@ class CVForm extends React.Component {
     }
 
     addEntry(section, sectionIdx) {
-        console.log('added');
         let newEntry;
         switch(section.id) {
             case 'datos':
@@ -133,6 +138,18 @@ class CVForm extends React.Component {
         return null;
     }
 
+    deleteEntry(section, sectionIdx, entryId) {
+        const entryIdx = section.entries.findIndex(entry => entry.id === entryId);
+        const newSection = JSON.parse(JSON.stringify(section)); //Deep copy
+        newSection.entries = section.entries.slice(0, entryIdx)
+            .concat(section.entries.slice(entryIdx +1));
+        this.setState({sections: 
+            this.state.sections.slice(0, sectionIdx)
+            .concat(newSection)
+            .concat(this.state.sections.slice(sectionIdx+1))}
+        );
+    }
+
     render() {
         const sections = this.state.sections.map((section, idx) => {
             return (
@@ -140,7 +157,8 @@ class CVForm extends React.Component {
                 key={idx}
                 data={section}
                 addEntry={() => this.addEntry(section, idx)}
-                changeEntry={(entryId, changes) => this.updateEntry(section.id, entryId, changes)}
+                updateEntry={(entryId, changes) => this.updateEntry(section.id, entryId, changes)}
+                deleteEntry={(entryId) => this.deleteEntry(section, idx, entryId)}
                 />
             );
         });
