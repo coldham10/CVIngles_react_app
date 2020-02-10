@@ -12,25 +12,25 @@
                 "fullName": "Datos Personales",
                 "entries": [
                     {
-                        "infoType": "personal",
                         "name": "name",
                         "displayName": "Nombre Completo",
                         "type": "text",
-                        "value": null
+                        "value": null,
+                        "fixed": true
                     },
                     {
-                        "infoType": "personal",
                         "name": "dob",
                         "displayName": "Fecha de nacimiento",
                         "type": "date",
-                        "value": null
+                        "value": null,
+                        "fixed": true
                     },
                     {
-                        "infoType": "personal",
                         "name": "address",
                         "displayName": "Dirección",
                         "type": "text",
-                        "value": null
+                        "value": null,
+                        "fixed": true
                     }
                 ]
             },
@@ -48,11 +48,11 @@
     },
     "entryDefaults": {
         "datos": {
-            "infoType": "contact",
             "name": null,
             "displayName": null,
-            "type": null,
-            "value": null
+            "type": "text",
+            "value": null,
+            "fixed": false
         },
         "estudios": {
             "degree": {

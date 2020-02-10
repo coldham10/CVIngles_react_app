@@ -1,9 +1,17 @@
+:root {
+    --terra : #ed6a5a;
+    --platinum : #e6ebe0;
+    --cambridge : #9bc1bc;
+    --cadet : #5ca4a9;
+    --blond : #f4f1bb;
+}
+
 body {
-    background-color: #e6ebe0;
+    background-color: var(--platinum);
 }
 
 .custom-nav {
-    background-color: #5ca4a9;
+    background-color: var(--cadet);
 }
 
 .main-header {
