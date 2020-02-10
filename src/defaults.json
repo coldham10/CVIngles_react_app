@@ -1,0 +1,118 @@
+{
+    "formDefaults": {
+        "options" : {
+            "inputLang": null,
+            "outputLang": null,
+            "userEmailAddress": null,
+            "service": "basic"
+        },
+        "sections": [
+            {
+                "name": "datos",
+                "fullName": "Datos Personales",
+                "entries": [
+                    {
+                        "infoType": "personal",
+                        "name": "name",
+                        "displayName": "Nombre Completo",
+                        "type": "text",
+                        "value": null
+                    },
+                    {
+                        "infoType": "personal",
+                        "name": "dob",
+                        "displayName": "Fecha de nacimiento",
+                        "type": "date",
+                        "value": null
+                    },
+                    {
+                        "infoType": "personal",
+                        "name": "address",
+                        "displayName": "Dirección",
+                        "type": "text",
+                        "value": null
+                    }
+                ]
+            },
+            {
+                "name": "estudios",
+                "fullName": "Estudios",
+                "entries": []
+            },
+            {
+                "name": "experiencia",
+                "fullName": "Experiencia Laboral",
+                "entries": []
+            }
+        ]
+    },
+    "entryDefaults": {
+        "datos": {
+            "infoType": "contact",
+            "name": null,
+            "displayName": null,
+            "type": null,
+            "value": null
+        },
+        "estudios": {
+            "degree": {
+                "displayName": "Nombre del estudio",
+                "type": "text",
+                "value": null
+            },
+            "startYear": {
+                "displayName": "Año de emezar",
+                "type": "year",
+                "value": null
+            },
+            "endYear":{
+                "displayName": "Año de terminar",
+                "type": "year",
+                "value": null
+            },
+            "university":{
+                "displayName": "Nombre de universidad",
+                "type": "text",
+                "value": null
+            },
+            "location":{
+                "displayName": "Ciudad, país",
+                "type": "text",
+                "value": null
+            },
+            "grade":{
+                "displayName": "Nota (x.x/x)",
+                "type": "text",
+                "value": null
+            },
+            "description":{
+                "displayName": "Descripción",
+                "type": "text",
+                "value": null
+            }
+        },
+        "experiencia": {
+            "title": {
+                "displayName": "Titulo",
+                "type": "text",
+                "value": null
+            },
+            "employer": {
+                "displayName": "Empleador",
+                "type": "text",
+                "value": null
+            },
+            "location": {
+                "displayName": "Ciudad, país",
+                "type": "text",
+                "value": null
+            },
+            "description": {
+                "displayName": "Descripción",
+                "type": "text",
+                "value": null
+            },
+            "achievements": []
+        }
+    }
+}
