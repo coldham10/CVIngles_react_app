@@ -140,9 +140,19 @@ class CVForm extends React.Component {
 
     deleteEntry(section, sectionIdx, entryId) {
         const entryIdx = section.entries.findIndex(entry => entry.id === entryId);
-        const newSection = JSON.parse(JSON.stringify(section)); //Deep copy
+        const  newSection = JSON.parse(JSON.stringify(section)); //Deep copy
         newSection.entries = section.entries.slice(0, entryIdx)
             .concat(section.entries.slice(entryIdx +1));
+        if (section.id === "datos") {
+            let cont = 0;
+            for (let i = 0; i < newSection.entries.length; i++) {
+                if (!newSection.entries[i].fixed) {
+                    newSection.entries[i].id = 'contact' + cont++;
+                    newSection.entries[i].displayName = 'Modo de contacto ' + cont;
+                }
+            }
+        }
+
         this.setState({sections: 
             this.state.sections.slice(0, sectionIdx)
             .concat(newSection)
