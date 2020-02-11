@@ -18,12 +18,12 @@ import PopoverStickOnHover from './PopoverStickOnHover.jsx';
 
 function CVEntry(props) {
     /*Each elelment of a section, including personal information, jobs, etc*/
-    if (props.section === 'datos' && props.fixed) {
+    if (props.section === 'datos' && props.data.fixed) {
         /*Some personal info fields cannot be deleted. Shown in defaults.json*/
         return (
             <Form.Group>
-                <Form.Label>{props.displayName}</Form.Label>
-                <Form.Control type={props.type}>
+                <Form.Label>{props.data.displayName}</Form.Label>
+                <Form.Control type={props.data.type}>
                 </Form.Control>
             </Form.Group>
         );
@@ -32,12 +32,12 @@ function CVEntry(props) {
         /*Extensible personal data. Each field is a single InputGroup, with a dropdown for the type of info*/
         return (
             <Form.Group>
-            <Form.Label>{props.displayName}</Form.Label>
+            <Form.Label>{props.data.displayName}</Form.Label>
             <InputGroup>
                 <DropdownButton
                     as={InputGroup.Prepend} 
                     variant="outline-secondary"
-                    title={shortenContactType(props.contactType)}
+                    title={shortenContactType(props.data.contactType)}
                 >
                     {/*WhatsApp*/}
                     <Dropdown.Item onClick={() => props.updateEntry([{
@@ -113,7 +113,7 @@ function CVEntry(props) {
                         <FaTwitter color="#00aced"/>{'  '}Twitter
                     </Dropdown.Item>
                 </DropdownButton>
-                <Form.Control type={props.type} className="rounded-right"/>
+                <Form.Control type={props.data.type} className="rounded-right"/>
                 <InputGroup.Append>
                     <Button
                         variant="link"
@@ -126,6 +126,28 @@ function CVEntry(props) {
             </Form.Group>
         );
     }
+    if (props.section === 'estudios') {
+        const entryNames = Object.getOwnPropertyNames(props.data);
+        entryNames.shift(); //remove "id" from list
+        const subEntries = [];
+        for (let i = 0; i < entryNames.length; i++) {
+            subEntries.push(
+                <Form.Group key={i}>
+                    <Form.Label>
+                        {props.data[entryNames[i]].displayName}
+                    </Form.Label>
+                </Form.Group>
+            );
+        }
+        return (
+            <>
+            <h3 className="text-center">{props.data.displayName}</h3>
+            <Container className="degree-unit border rounded">
+                {subEntries}
+            </Container>
+            </>
+        );
+    }
 }
 
 function CVSection(props) {
@@ -134,7 +156,7 @@ function CVSection(props) {
             key={i}
             idx={i}
             section={props.data.id}
-            {...entry}
+            data={entry}
             updateEntry={changes => props.updateEntry(entry.id, changes)}
             deleteEntry={() => props.deleteEntry(entry.id)}
         />
@@ -165,6 +187,8 @@ class CVForm extends React.Component {
                 break;
             case 'estudios':
                 newEntry = {...this.defaults.entryDefaults.estudios};
+                newEntry.id = 'degree' + (this.state.sections[1].entries.length);
+                newEntry.displayName = 'Carrera ' + (this.state.sections[1].entries.length +1);
                 break;
             case 'experiencia':
                 newEntry = {...this.defaults.entryDefaults.experiencia};
@@ -274,7 +298,7 @@ function shortenContactType(contactType) {
         case 'twitter':
             return (<FaTwitter color="#00aced"/>);
         default:
-            return 'Icon not defined';
+            return 'Icon not defined: ' + contactType;
     }
 }
 

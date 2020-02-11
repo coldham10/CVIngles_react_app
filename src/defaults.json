@@ -64,7 +64,6 @@
             "contactType": "phone"
         },
         "estudios": {
-            "id": null,
             "degree": {
                 "displayName": "Nombre del estudio",
                 "type": "text",
