@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaWhatsapp, FaPhone, FaTrash, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,7 +10,8 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { FaWhatsapp, FaPhone, FaTrash } from 'react-icons/fa';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 
 function CVEntry(props) {
@@ -34,16 +36,51 @@ function CVEntry(props) {
                 >
                 <Dropdown.Item onClick={() => props.updateEntry([{
                     'key': 'contactType',
-                    'val': 'wa'}])}
+                    'val': 'wa'},
+                    {'key': 'type',
+                    'val': 'tel'}])}
                 >
                     <FaWhatsapp color="green"/>{'  '}WhatsApp
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => props.updateEntry([{
                     'key': 'contactType',
-                    'val': 'phone'}])}
+                    'val': 'phone'},
+                    {'key': 'type',
+                    'val': 'tel'}])}
                 >
                     <FaPhone />{'  '}Telefono
                 </Dropdown.Item>
+                <Dropdown.Item onClick={() => props.updateEntry([{
+                    'key': 'contactType',
+                    'val': 'email'},
+                    {'key': 'type',
+                    'val': 'email'}])}
+                >
+                    <FaEnvelope />{'  '}email
+                </Dropdown.Item>
+                <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 250, hide: 1200 }}
+                    overlay={
+                      <Popover>
+                        <Popover.Title as="h3">{'¿Sabías?'}</Popover.Title>
+                        <Popover.Content>
+                            Puedes personalizar tu URL de LinkedIn. Haga clic 
+                            <a target="_blank" href="https://www.linkedin.com/help/linkedin/answer/594/personalizar-la-url-de-tu-perfil-publico?lang=es"> aquí </a>
+                             para aprender como.
+                        </Popover.Content>
+                      </Popover>
+                    }
+                >
+                <Dropdown.Item onClick={() => props.updateEntry([{
+                    'key': 'contactType',
+                    'val': 'li'},
+                    {'key': 'type',
+                    'val': 'text'}])}
+                >
+                    <FaLinkedin color="#0072b1"/>{'  '}LinkedIn
+                </Dropdown.Item>
+            </OverlayTrigger>
                 </DropdownButton>
               <Form.Control type={props.type} className="rounded-right"/>
                <InputGroup.Append>
@@ -51,7 +88,7 @@ function CVEntry(props) {
                         variant="link"
                         onClick={() => props.deleteEntry()}
                    >
-                    <FaTrash />
+                    <FaTrash color="#ed6a5a"/>
                    </Button> 
                </InputGroup.Append>
             </InputGroup>
@@ -173,8 +210,13 @@ class CVForm extends React.Component {
             );
         });
         return (
-            <Container >
-            <Form className="cv-form border rounded">
+            <Container>
+            <Form
+                className="cv-form border rounded"
+                onKeyPress={event => {
+                    if (event.which === 13 /* Enter */) event.preventDefault();
+                }}>
+            <h1>Crea Tu Hoja de Vida</h1>
             {/*TODO: Validation, separate checkout page*/}
             {sections}
                 <Button variant="primary" type="submit">
@@ -189,9 +231,13 @@ class CVForm extends React.Component {
 function shortenContactType(contactType) {
     switch (contactType) {
         case 'phone':
-            return (<FaPhone />);
+            return (<FaPhone color="#606060"/>);
         case 'wa':
             return (<FaWhatsapp color="green"/>);
+        case 'email':
+            return (<FaEnvelope color="#606060"/>);
+        case 'li':
+            return (<FaLinkedin color="#0072b1"/>);
         default:
             return 'Icon not defined';
     }

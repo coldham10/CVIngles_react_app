@@ -6,12 +6,13 @@
     --blond : #f4f1bb;
 }
 
-body {
-    background-color: var(--platinum);
-}
-
 .custom-nav {
     background-color: var(--cadet);
+    border-bottom: 2px solid var(--terra);
+}
+
+.btn-primary {
+    background-color: var(--terra);
 }
 
 .main-header {
@@ -27,9 +28,11 @@ body {
 .cv-form {
     margin-top: 80px;
     padding: 20px;
+    background-color: var(--cadet);
 }
 
 .cv-form-section {
+    background-color: var(--platinum);
     padding: 20px;
     margin: 10px;
 }

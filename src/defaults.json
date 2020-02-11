@@ -35,7 +35,7 @@
                     {
                         "id": "contact0",
                         "displayName": "Modo de contacto 1",
-                        "type": "text",
+                        "type": "tel",
                         "value": null,
                         "fixed": false,
                         "contactType": "phone" 
