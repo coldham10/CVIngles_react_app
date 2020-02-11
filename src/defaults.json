@@ -64,39 +64,60 @@
             "contactType": "phone"
         },
         "estudios": {
-            "degree": {
+            "00-degree": {
                 "displayName": "Nombre del estudio",
+                "show": true,
                 "type": "text",
+                "as": "input",
+                "length": 12,
                 "value": null
             },
-            "startYear": {
+            "01-startYear": {
                 "displayName": "Año de emezar",
+                "show": true,
                 "type": "year",
+                "as": "input",
+                "length": 4,
                 "value": null
             },
-            "endYear":{
+            "02-endYear":{
                 "displayName": "Año de terminar",
+                "show": true,
                 "type": "year",
+                "as": "input",
+                "length": 4,
                 "value": null
             },
-            "university":{
-                "displayName": "Nombre de universidad",
-                "type": "text",
-                "value": null
-            },
-            "location":{
-                "displayName": "Ciudad, país",
-                "type": "text",
-                "value": null
-            },
-            "grade":{
+            "03-grade":{
                 "displayName": "Nota (x.x/x)",
+                "show": true,
                 "type": "text",
+                "as": "input",
+                "length": 4,
                 "value": null
             },
-            "description":{
-                "displayName": "Descripción",
+            "04-university":{
+                "displayName": "Nombre de universidad",
+                "show": true,
                 "type": "text",
+                "as": "input",
+                "length": 6,
+                "value": null
+            },
+            "05-location":{
+                "displayName": "Ciudad, País",
+                "show": true,
+                "type": "text",
+                "as": "input",
+                "length": 6,
+                "value": null
+            },
+            "06-description":{
+                "displayName": "Descripción",
+                "show": true,
+                "type": "text",
+                "as": "textarea",
+                "length": 12,
                 "value": null
             }
         },

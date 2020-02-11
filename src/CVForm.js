@@ -11,6 +11,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Popover from 'react-bootstrap/Popover';
+import Alert from 'react-bootstrap/Alert';
+import Col from 'react-bootstrap/Col';
 
 import PopoverStickOnHover from './PopoverStickOnHover.jsx';
 
@@ -128,22 +130,43 @@ function CVEntry(props) {
     }
     if (props.section === 'estudios') {
         const entryNames = Object.getOwnPropertyNames(props.data);
-        entryNames.shift(); //remove "id" from list
-        const subEntries = [];
+        entryNames.sort();
+        const rows = [];
+        let row = [];
+        let rowLength = 0;
         for (let i = 0; i < entryNames.length; i++) {
-            subEntries.push(
-                <Form.Group key={i}>
-                    <Form.Label>
-                        {props.data[entryNames[i]].displayName}
-                    </Form.Label>
-                </Form.Group>
-            );
+            if (props.data[entryNames[i]].show) {
+                if (rowLength + props.data[entryNames[i]].length <= 12) {
+                    row.push(
+                            <Form.Group as={Col} md={props.data[entryNames[i]].length} key={i}>
+                                <Form.Label>
+                                    {props.data[entryNames[i]].displayName}
+                                </Form.Label>
+                                <Form.Control
+                                    className="rounded"
+                                    type={props.data[entryNames[i]].type}
+                                    as={props.data[entryNames[i]].as}
+                                />
+                            </Form.Group>
+                    );
+                    rowLength += props.data[entryNames[i]].length;
+                }
+                if (rowLength >=12) {
+                    rows.push(
+                        <Form.Row>
+                            {row}
+                        </Form.Row>
+                    );
+                    row = [];
+                    rowLength = 0;
+                }
+            }
         }
         return (
             <>
-            <h3 className="text-center">{props.data.displayName}</h3>
             <Container className="degree-unit border rounded">
-                {subEntries}
+            <h3 className="text-center">{props.data.displayName}</h3>
+                {rows}
             </Container>
             </>
         );
@@ -175,6 +198,9 @@ class CVForm extends React.Component {
         super(props);
         this.defaults = require('./defaults.json');
         this.state = this.defaults.formDefaults;
+        /*TODO import formVisited from props, managed by App*/
+        /*XXX: remove, should be managed by the alert*/
+        this.loadLocal()
     }
 
     addEntry(section, sectionIdx) {
@@ -203,6 +229,7 @@ class CVForm extends React.Component {
             .concat(replacementSection)
             .concat(this.state.sections.slice(sectionIdx+1))}
         );
+        this.saveLocal();
     }
 
     updateEntry(sectionId, entryId, changes) {
@@ -227,7 +254,7 @@ class CVForm extends React.Component {
             .concat(newSection)
             .concat(this.state.sections.slice(secIdx+1))}
         );
-        return null;
+        this.saveLocal();
     }
 
     deleteEntry(section, sectionIdx, entryId) {
@@ -250,6 +277,17 @@ class CVForm extends React.Component {
             .concat(newSection)
             .concat(this.state.sections.slice(sectionIdx+1))}
         );
+        sessionStorage.setItem("formVisited", "true");
+        this.saveLocal();
+    }
+
+    loadLocal() {
+        //TODO this.state = JSON.parse(localStorage.getItem("userCVData"));
+        return null;
+    }
+
+    saveLocal() {
+        localStorage.setItem("userCVData", JSON.stringify(this.state));
     }
 
     render() {
@@ -264,14 +302,27 @@ class CVForm extends React.Component {
                 />
             );
         });
+        let loadAlert = "";
+        //TODO save only if form contains fields, not just changes. Delete if info deleted.
+        if (localStorage.getItem("userCVData") && this.formVisited) {
+            loadAlert = (
+                <Alert variant="info" dismissible onClose={() => localStorage.removeItem("userCVData")}> 
+                    Sample alert! 
+                    <Alert.Link onClick={() => this.loadLocal()}>
+                        {' '}click here to load saved...
+                    </Alert.Link>
+                </Alert>
+            );
+        }
         return (
             <Container>
             <Form
                 className="cv-form border rounded"
                 onKeyPress={event => {
-                    if (event.which === 13 /* Enter */) event.preventDefault();
+                    if (event.which === 13 && event.target.type !== 'textarea'  /* Enter */) event.preventDefault();
                 }}>
             <h1>Crea Tu Hoja de Vida</h1>
+            {loadAlert}
             {/*TODO: Validation, separate checkout page*/}
             {sections}
                 <Button variant="primary" type="submit">
