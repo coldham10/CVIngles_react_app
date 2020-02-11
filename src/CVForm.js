@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaWhatsapp, FaPhone, FaTrash, FaEnvelope, FaLinkedin } from 'react-icons/fa';
+import { FaWhatsapp, FaPhone, FaTrash, FaEnvelope, FaLinkedin, FaGlobeAmericas, FaTwitter} from 'react-icons/fa';
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -10,12 +10,16 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+
+import PopoverStickOnHover from './PopoverStickOnHover.jsx';
+
 
 
 function CVEntry(props) {
+    /*Each elelment of a section, including personal information, jobs, etc*/
     if (props.section === 'datos' && props.fixed) {
+        /*Some personal info fields cannot be deleted. Shown in defaults.json*/
         return (
             <Form.Group>
                 <Form.Label>{props.displayName}</Form.Label>
@@ -25,6 +29,7 @@ function CVEntry(props) {
         );
     }
     if (props.section === 'datos') {
+        /*Extensible personal data. Each field is a single InputGroup, with a dropdown for the type of info*/
         return (
             <Form.Group>
             <Form.Label>{props.displayName}</Form.Label>
@@ -34,63 +39,89 @@ function CVEntry(props) {
                     variant="outline-secondary"
                     title={shortenContactType(props.contactType)}
                 >
-                <Dropdown.Item onClick={() => props.updateEntry([{
-                    'key': 'contactType',
-                    'val': 'wa'},
-                    {'key': 'type',
-                    'val': 'tel'}])}
-                >
-                    <FaWhatsapp color="green"/>{'  '}WhatsApp
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => props.updateEntry([{
-                    'key': 'contactType',
-                    'val': 'phone'},
-                    {'key': 'type',
-                    'val': 'tel'}])}
-                >
-                    <FaPhone />{'  '}Telefono
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => props.updateEntry([{
-                    'key': 'contactType',
-                    'val': 'email'},
-                    {'key': 'type',
-                    'val': 'email'}])}
-                >
-                    <FaEnvelope />{'  '}email
-                </Dropdown.Item>
-                <OverlayTrigger
-                    placement="left"
-                    delay={{ show: 250, hide: 1200 }}
-                    overlay={
-                      <Popover>
-                        <Popover.Title as="h3">{'¿Sabías?'}</Popover.Title>
-                        <Popover.Content>
-                            Puedes personalizar tu URL de LinkedIn. Haga clic 
-                            <a target="_blank" href="https://www.linkedin.com/help/linkedin/answer/594/personalizar-la-url-de-tu-perfil-publico?lang=es"> aquí </a>
-                             para aprender como.
-                        </Popover.Content>
-                      </Popover>
-                    }
-                >
-                <Dropdown.Item onClick={() => props.updateEntry([{
-                    'key': 'contactType',
-                    'val': 'li'},
-                    {'key': 'type',
-                    'val': 'text'}])}
-                >
-                    <FaLinkedin color="#0072b1"/>{'  '}LinkedIn
-                </Dropdown.Item>
-            </OverlayTrigger>
+                    {/*WhatsApp*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([{
+                        'key': 'contactType',
+                        'val': 'wa'},
+                        {'key': 'type',
+                        'val': 'tel'}])}
+                    >
+                        <FaWhatsapp color="green"/>{'  '}WhatsApp
+                    </Dropdown.Item>
+                    {/*Phone*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([{
+                        'key': 'contactType',
+                        'val': 'phone'},
+                        {'key': 'type',
+                        'val': 'tel'}])}
+                    >
+                        <FaPhone />{'  '}Telefono
+                    </Dropdown.Item>
+                    {/*Email*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([{
+                        'key': 'contactType',
+                        'val': 'email'},
+                        {'key': 'type',
+                        'val': 'email'}])}
+                    >
+                        <FaEnvelope />{'  '}Email
+                    </Dropdown.Item>
+                    {/*Linkedin has a helper popover for customizing url*/}
+                    <PopoverStickOnHover
+                        component={
+                            <>
+                            <Popover.Title as="h3">{'¿Sabías?'}</Popover.Title>
+                            <Popover.Content>
+                                Puedes personalizar tu URL de LinkedIn. Haga clic 
+                                <a target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://www.linkedin.com/help/linkedin/answer/594/personalizar-la-url-de-tu-perfil-publico?lang=es"
+                                > aquí </a>
+                                para aprender como.
+                            </Popover.Content>
+                            </>
+                        }
+                        placement="left"
+                        onMouseEnter={() => { }}
+                        delay={200}
+                    >
+                        <Dropdown.Item onClick={() => props.updateEntry([{
+                            'key': 'contactType',
+                            'val': 'li'},
+                            {'key': 'type',
+                            'val': 'text'}])}
+                        >
+                            <FaLinkedin color="#0072b1"/>{'  '}LinkedIn
+                        </Dropdown.Item>
+                    </PopoverStickOnHover>
+                    {/*website*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([{
+                        'key': 'contactType',
+                        'val': 'web'},
+                        {'key': 'type',
+                        'val': 'url'}])}
+                    >
+                        <FaGlobeAmericas />{'  '}Sitio Personal
+                    </Dropdown.Item>
+                    {/*Twitter*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([{
+                        'key': 'contactType',
+                        'val': 'twitter'},
+                        {'key': 'type',
+                        'val': 'text'}])}
+                    >
+                        <FaTwitter color="#00aced"/>{'  '}Twitter
+                    </Dropdown.Item>
                 </DropdownButton>
-              <Form.Control type={props.type} className="rounded-right"/>
-               <InputGroup.Append>
-                   <Button
+                <Form.Control type={props.type} className="rounded-right"/>
+                <InputGroup.Append>
+                    <Button
                         variant="link"
                         onClick={() => props.deleteEntry()}
-                   >
-                    <FaTrash color="#ed6a5a"/>
-                   </Button> 
-               </InputGroup.Append>
+                    >
+                        <FaTrash color="#ed6a5a"/>
+                    </Button> 
+                </InputGroup.Append>
             </InputGroup>
             </Form.Group>
         );
@@ -238,6 +269,10 @@ function shortenContactType(contactType) {
             return (<FaEnvelope color="#606060"/>);
         case 'li':
             return (<FaLinkedin color="#0072b1"/>);
+        case 'web':
+            return (<FaGlobeAmericas color="#606060"/>);
+        case 'twitter':
+            return (<FaTwitter color="#00aced"/>);
         default:
             return 'Icon not defined';
     }
