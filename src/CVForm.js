@@ -16,204 +16,8 @@ import Col from 'react-bootstrap/Col';
 
 import PopoverStickOnHover from './PopoverStickOnHover.jsx';
 
-import {CVEntry, DatosEntry, EstudiosEntry, EstudiosSubEntry} from './CVEntry.js';
+import {DatosEntry, EstudiosEntry, ExperienciaEntry} from './CVEntry.js';
 
-
-
-//function CVEntry(props) {
-//    /*Each elelment of a section, including personal information, jobs, etc*/
-//    if (props.section === 'datos' && props.data.fixed) {
-//        /*Some personal info fields cannot be deleted. Shown in defaults.json*/
-//        return (
-//            <Form.Group>
-//                <Form.Label>{props.data.displayName}</Form.Label>
-//                <Form.Control
-//                    type={props.data.type}
-//                    onChange={(e) => props.updateEntry([{'value': e.target.value}])}
-//                />
-//            </Form.Group>
-//        );
-//    }
-//    else if (props.section === 'datos') {
-//        /*Extensible personal data. Each field is a single InputGroup, with a dropdown for the type of info*/
-//        return (
-//            <Form.Group>
-//            <Form.Label>{props.data.displayName}</Form.Label>
-//            <InputGroup>
-//                <DropdownButton
-//                    as={InputGroup.Prepend} 
-//                    variant="outline-secondary"
-//                    title={shortenContactType(props.data.contactType)}
-//                >
-//                    {/*WhatsApp*/}
-//                    <Dropdown.Item onClick={() => props.updateEntry([
-//                        {'contactType' : 'wa'},
-//                        {'type': 'tel'}
-//                    ])}>
-//                        <FaWhatsapp color="green"/>{'  '}WhatsApp
-//                    </Dropdown.Item>
-//                    {/*Phone*/}
-//                    <Dropdown.Item onClick={() => props.updateEntry([
-//                        {'contactType' : 'phone'},
-//                        {'type': 'tel'}
-//                    ])}>
-//                        <FaPhone />{'  '}Telefono
-//                    </Dropdown.Item>
-//                    {/*Email*/}
-//                    <Dropdown.Item onClick={() => props.updateEntry([
-//                        {'contactType' : 'email'},
-//                        {'type': 'email'}
-//                    ])}>
-//                        <FaEnvelope />{'  '}Email
-//                    </Dropdown.Item>
-//                    {/*Linkedin has a helper popover for customizing url*/}
-//                    <PopoverStickOnHover
-//                        component={
-//                            <>
-//                            <Popover.Title as="h3">{'¿Sabías?'}</Popover.Title>
-//                            <Popover.Content>
-//                                Puedes personalizar tu URL de LinkedIn. Haga clic 
-//                                <a target="_blank"
-//                                    rel="noopener noreferrer"
-//                                    href="https://www.linkedin.com/help/linkedin/answer/594/personalizar-la-url-de-tu-perfil-publico?lang=es"
-//                                > aquí </a>
-//                                para aprender como.
-//                            </Popover.Content>
-//                            </>
-//                        }
-//                        placement="left"
-//                        onMouseEnter={() => { }}
-//                        delay={200}
-//                    >
-//                        <Dropdown.Item onClick={() => props.updateEntry([
-//                            {'contactType' : 'li'},
-//                            {'type': 'text'}
-//                        ])}>
-//                            <FaLinkedin color="#0072b1"/>{'  '}LinkedIn
-//                        </Dropdown.Item>
-//                    </PopoverStickOnHover>
-//                    {/*Website*/}
-//                    <Dropdown.Item onClick={() => props.updateEntry([
-//                        {'contactType' : 'web'},
-//                        {'type': 'url'}
-//                    ])}>
-//                        <FaGlobeAmericas />{'  '}Sitio Personal
-//                    </Dropdown.Item>
-//                    {/*Twitter*/}
-//                    <Dropdown.Item onClick={() => props.updateEntry([
-//                        {'contactType' : 'twitter'},
-//                        {'type': 'text'}
-//                    ])}>
-//                        <FaTwitter color="#00aced"/>{'  '}Twitter
-//                    </Dropdown.Item>
-//                </DropdownButton>
-//                <Form.Control
-//                    type={props.data.type}
-//                    className="rounded-right"
-//                    onChange={(e) => props.updateEntry([{'value': e.target.value}])}
-//                />
-//                <InputGroup.Append>
-//                    <Button
-//                        variant="link"
-//                        onClick={() => props.deleteEntry()}
-//                    >
-//                        <FaTrash color="#ed6a5a"/>
-//                    </Button> 
-//                </InputGroup.Append>
-//            </InputGroup>
-//            </Form.Group>
-//        );
-//    }
-//    else if (props.section === 'estudios') {
-//        const entryNames = Object.getOwnPropertyNames(props.data);
-//        entryNames.sort();
-//        const rows = [];
-//        let row = [];
-//        let rowLength = 0;
-//        for (let i = 0; i < entryNames.length; i++) {
-//            if (props.data[entryNames[i]].show) {
-//                if (rowLength + props.data[entryNames[i]].length <= 12) {
-//                    row.push(
-//                            <Form.Group as={Col} md={props.data[entryNames[i]].length} key={i}>
-//                                <Form.Label>
-//                                    {props.data[entryNames[i]].displayName}
-//                                </Form.Label>
-//                                <Form.Control
-//                                    className="rounded"
-//                                    type={props.data[entryNames[i]].type}
-//                                    as={props.data[entryNames[i]].as}
-//                                    onChange={(e) => props.updateEntry([{[entryNames[i]]: e.target.value}])}
-//                                />
-//                            </Form.Group>
-//                    );
-//                    rowLength += props.data[entryNames[i]].length;
-//                }
-//                if (rowLength >=12) {
-//                    rows.push(
-//                        <Form.Row>
-//                            {row}
-//                        </Form.Row>
-//                    );
-//                    row = [];
-//                    rowLength = 0;
-//                }
-//            }
-//        }
-//        return (
-//            <>
-//            <Container className="degree-unit border rounded">
-//            <h3 className="text-center">{props.data.displayName}</h3>
-//                {rows}
-//            </Container>
-//            </>
-//        );
-//    }
-//    else if (props.section === 'experiencia') {
-//        const entryNames = Object.getOwnPropertyNames(props.data);
-//        entryNames.sort();
-//        const rows = [];
-//        let row = [];
-//        let rowLength = 0;
-//        for (let i = 0; i < entryNames.length; i++) {
-//            if (props.data[entryNames[i]].show) {
-//                if (rowLength + props.data[entryNames[i]].length <= 12) {
-//                    row.push(
-//                            <Form.Group as={Col} md={props.data[entryNames[i]].length} key={i}>
-//                                <Form.Label>
-//                                    {props.data[entryNames[i]].displayName}
-//                                </Form.Label>
-//                                <Form.Control
-//                                    className="rounded"
-//                                    type={props.data[entryNames[i]].type}
-//                                    as={props.data[entryNames[i]].as}
-//                                    onChange={(e) => props.updateEntry([{[entryNames[i]]: e.target.value}])}
-//                                />
-//                            </Form.Group>
-//                    );
-//                    rowLength += props.data[entryNames[i]].length;
-//                }
-//                if (rowLength >=12) {
-//                    rows.push(
-//                        <Form.Row>
-//                            {row}
-//                        </Form.Row>
-//                    );
-//                    row = [];
-//                    rowLength = 0;
-//                }
-//            }
-//        }
-//        return (
-//            <>
-//            <Container className="degree-unit border rounded">
-//            <h3 className="text-center">{props.data.displayName}</h3>
-//                {rows}
-//            </Container>
-//            </>
-//        );
-//    }
-//}
-//
 //function CVSection(props) {
 //    const entries = props.data.entries.map((entry, i) =>
 //        <CVEntry
@@ -380,5 +184,18 @@ import {CVEntry, DatosEntry, EstudiosEntry, EstudiosSubEntry} from './CVEntry.js
 //        );
 //    }
 //}
+function CVForm (props) {
+    return (
+        <>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <ExperienciaEntry />
+        </>
+    );
+}
 
 export default CVForm;

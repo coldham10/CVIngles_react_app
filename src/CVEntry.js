@@ -48,7 +48,6 @@ class CVEntry extends React.Component {
 class DatosEntry extends CVEntry {
     constructor(props) {
         super(props);
-        this.fixed = props.fixed || false;
         this.state = {
             'contactType' : props.contactType || 'phone',
             'type' : props.type || 'tel',
@@ -57,7 +56,7 @@ class DatosEntry extends CVEntry {
     }
 
     render() {  
-        if (this.fixed) {
+        if (this.props.fixed) {
             /*Some personal info fields cannot be deleted*/
             return (super.render());
         }
@@ -77,6 +76,14 @@ class DatosEntry extends CVEntry {
                     type={this.type}
                     onChange={(e) => this.setState({"value" : e.target.value})}
                 />
+                <InputGroup.Append>
+                    <Button
+                        variant="link"
+                        onClick={() => this.props.deleteEntry()}
+                    >
+                        <FaTrash color="#ed6a5a"/>
+                    </Button>
+                </InputGroup.Append>
                 </InputGroup>
                 </Form.Group>
 
@@ -110,6 +117,10 @@ class EstudiosSubEntry extends CVEntry {
                 />
             </Form.Group>
         );
+    }
+    toJSON() {
+        /*TODO for saving also a loadJSON function that can be passed as a prop JSONObject=""*/
+        return null;
     }
 }
 
@@ -165,6 +176,112 @@ class EstudiosEntry extends CVEntry {
         return ""
     }
 }
+
+class ExperienciaSubEntry extends CVEntry {
+    constructor(props) {
+        super(props);
+        this.state = {"value": this.props.flexList ? [] : null};
+    }
+
+    render() {
+        let control;
+        if (this.props.flexList) {
+            control = this.state.value.map((val, idx) => {
+                return (
+                    <Form.Group>
+                        <Form.Label>{`Logro ${idx}`}</Form.Label>
+                        <Form.Control
+                           className="rounded"
+                           type={this.props.type}
+                           as={this.props.as}
+                           onChange={e => this.setState({
+                               'value': this.state.value.slice(0,idx)
+                                    .concat(e.target.value)
+                                    .concat(this.state.value.slice(idx+1))
+                           })}
+                        />
+                    </Form.Group>
+                );
+            });
+            console.log(control);
+        } //TODO add remove option and rearrange
+        else {
+            control = 
+                <Form.Control
+                    className="rounded"
+                    type={this.props.type}
+                    as={this.props.as}
+                    onChange={e => this.setState({'value': e.target.value})}
+                />
+        }
+        return (
+            <Form.Group as={Col} md={this.length}>
+                <Form.Label>
+                    {this.props.displayName}
+                </Form.Label>
+                {control}
+            </Form.Group>
+        );
+    }
+    toJSON() {
+        /*TODO for saving also a loadJSON function that can be passed as a prop JSONObject=""*/
+        return null;
+    }
+}
+
+class ExperienciaEntry extends CVEntry {
+    constructor(props) {
+        super(props);
+        this.subEntries = props.subEntries || [
+            <ExperienciaSubEntry name="title" displayName="Título" type="text" as="input" length="12" key="1" />,
+            <ExperienciaSubEntry name="employer" displayName="Empleador" type="text" as="input" length="12" key="2" />,
+            <ExperienciaSubEntry name="startYear" displayName="Año de emezar" type="year" as="input" length="3" key="3" />,
+            <ExperienciaSubEntry name="endYear" displayName="Año de terminar" type="year" as="input" length="3" key="4" />,
+            <ExperienciaSubEntry name="location" displayName="Ciudad, País" type="text" as="input" length="6" key="5" />,
+            <ExperienciaSubEntry name="desc" displayName="Descripción" type="text" as="textarea" length="12" key="6" />,
+            <ExperienciaSubEntry name="achievements" displayName="Logros" type="text" flexList length="12" key="6" />,
+        ];
+    }
+
+    /*TODO: change header name depending on displayname, default if whitespace or empty*/
+
+    render() {
+        const rows = [];
+        let row = [];
+        let rowLength = 0;
+        for (let i = 0; i < this.subEntries.length; i++) {
+            console.log(rowLength);
+            if (rowLength + Number(this.subEntries[i].props.length) <= 12) {
+                row.push(
+                    this.subEntries[i]
+                );
+                rowLength += Number(this.subEntries[i].props.length);
+            }
+            if (rowLength >=12) {
+                rows.push(
+                    <Form.Row key={i}>
+                        {row}
+                    </Form.Row>
+                );
+                row = [];
+                rowLength = 0;
+            }
+        }
+        console.log(rows);
+        return (
+            <Container className="degree-unit border rounded">
+            <h3 className="text-center">{this.displayName}</h3>
+                {rows}
+            </Container>
+        );
+    }
+
+    toJSON () {
+        //TODO
+        return ""
+    }
+}
+
 
 function ContactDropdown(props) {
    return ( 
@@ -239,4 +356,4 @@ function shortenContactType(contactType) {
     }
 }
 
-export { CVEntry, DatosEntry, EstudiosEntry, EstudiosSubEntry};
+export {DatosEntry, EstudiosEntry, ExperienciaEntry};
