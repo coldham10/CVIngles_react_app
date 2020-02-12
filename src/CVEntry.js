@@ -11,7 +11,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Popover from 'react-bootstrap/Popover';
-import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 
 import PopoverStickOnHover from './PopoverStickOnHover.jsx';
@@ -145,7 +144,6 @@ class EstudiosEntry extends CVEntry {
         let row = [];
         let rowLength = 0;
         for (let i = 0; i < this.subEntries.length; i++) {
-            console.log(rowLength);
             if (rowLength + Number(this.subEntries[i].props.length) <= 12) {
                 row.push(
                     this.subEntries[i]
@@ -162,7 +160,6 @@ class EstudiosEntry extends CVEntry {
                 rowLength = 0;
             }
         }
-        console.log(rows);
         return (
             <Container className="degree-unit border rounded">
             <h3 className="text-center">{this.displayName}</h3>
@@ -180,30 +177,52 @@ class EstudiosEntry extends CVEntry {
 class ExperienciaSubEntry extends CVEntry {
     constructor(props) {
         super(props);
-        this.state = {"value": this.props.flexList ? [] : null};
+        this.state = {"value": this.props.flexList ? [null] : null};
     }
 
     render() {
         let control;
         if (this.props.flexList) {
-            control = this.state.value.map((val, idx) => {
+            control = 
+                <>
+                <Container>
+                {this.state.value.map((val, idx) => {
                 return (
-                    <Form.Group>
-                        <Form.Label>{`Logro ${idx}`}</Form.Label>
-                        <Form.Control
-                           className="rounded"
-                           type={this.props.type}
-                           as={this.props.as}
-                           onChange={e => this.setState({
-                               'value': this.state.value.slice(0,idx)
-                                    .concat(e.target.value)
-                                    .concat(this.state.value.slice(idx+1))
-                           })}
-                        />
+                    <Form.Group key={idx}>
+                        <Form.Label>{`Logro ${idx + 1}`}</Form.Label>
+                        <InputGroup>
+                            <Form.Control
+                               className="rounded"
+                               type={this.props.type}
+                               as={this.props.as}
+                               onChange={e => this.setState({
+                                   'value': this.state.value.slice(0,idx)
+                                        .concat(e.target.value)
+                                        .concat(this.state.value.slice(idx+1))
+                               })}
+                            />
+                            <InputGroup.Append>
+                                <Button
+                                     variant="link"
+                                     onClick={() => this.setState({'value': 
+                                     this.state.value.slice(0,idx)
+                                     .concat(this.state.value.slice(idx + 1))})}
+                                 >
+                                     <FaTrash color="#ed6a5a"/>
+                                 </Button>
+                            </InputGroup.Append>
+                        </InputGroup>
                     </Form.Group>
                 );
-            });
-            console.log(control);
+            })}
+            </Container>
+            <Button
+                variant="link"
+                onClick={() => this.setState({'value': this.state.value.concat([null])})}
+            >
+                Add
+            </Button>
+            </>
         } //TODO add remove option and rearrange
         else {
             control = 
@@ -239,7 +258,7 @@ class ExperienciaEntry extends CVEntry {
             <ExperienciaSubEntry name="endYear" displayName="Año de terminar" type="year" as="input" length="3" key="4" />,
             <ExperienciaSubEntry name="location" displayName="Ciudad, País" type="text" as="input" length="6" key="5" />,
             <ExperienciaSubEntry name="desc" displayName="Descripción" type="text" as="textarea" length="12" key="6" />,
-            <ExperienciaSubEntry name="achievements" displayName="Logros" type="text" flexList length="12" key="6" />,
+            <ExperienciaSubEntry name="achievements" displayName="Logros" type="text" as="textarea" flexList length="12" key="6" />,
         ];
     }
 
@@ -250,7 +269,6 @@ class ExperienciaEntry extends CVEntry {
         let row = [];
         let rowLength = 0;
         for (let i = 0; i < this.subEntries.length; i++) {
-            console.log(rowLength);
             if (rowLength + Number(this.subEntries[i].props.length) <= 12) {
                 row.push(
                     this.subEntries[i]
@@ -267,7 +285,6 @@ class ExperienciaEntry extends CVEntry {
                 rowLength = 0;
             }
         }
-        console.log(rows);
         return (
             <Container className="degree-unit border rounded">
             <h3 className="text-center">{this.displayName}</h3>
