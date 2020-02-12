@@ -42,30 +42,24 @@ function CVEntry(props) {
                     title={shortenContactType(props.data.contactType)}
                 >
                     {/*WhatsApp*/}
-                    <Dropdown.Item onClick={() => props.updateEntry([{
-                        'key': 'contactType',
-                        'val': 'wa'},
-                        {'key': 'type',
-                        'val': 'tel'}])}
-                    >
+                    <Dropdown.Item onClick={() => props.updateEntry([
+                        {'contactType' : 'wa'},
+                        {'type': 'tel'}
+                    ])}>
                         <FaWhatsapp color="green"/>{'  '}WhatsApp
                     </Dropdown.Item>
                     {/*Phone*/}
-                    <Dropdown.Item onClick={() => props.updateEntry([{
-                        'key': 'contactType',
-                        'val': 'phone'},
-                        {'key': 'type',
-                        'val': 'tel'}])}
-                    >
+                    <Dropdown.Item onClick={() => props.updateEntry([
+                        {'contactType' : 'phone'},
+                        {'type': 'tel'}
+                    ])}>
                         <FaPhone />{'  '}Telefono
                     </Dropdown.Item>
                     {/*Email*/}
-                    <Dropdown.Item onClick={() => props.updateEntry([{
-                        'key': 'contactType',
-                        'val': 'email'},
-                        {'key': 'type',
-                        'val': 'email'}])}
-                    >
+                    <Dropdown.Item onClick={() => props.updateEntry([
+                        {'contactType' : 'email'},
+                        {'type': 'email'}
+                    ])}>
                         <FaEnvelope />{'  '}Email
                     </Dropdown.Item>
                     {/*Linkedin has a helper popover for customizing url*/}
@@ -87,35 +81,33 @@ function CVEntry(props) {
                         onMouseEnter={() => { }}
                         delay={200}
                     >
-                        <Dropdown.Item onClick={() => props.updateEntry([{
-                            'key': 'contactType',
-                            'val': 'li'},
-                            {'key': 'type',
-                            'val': 'text'}])}
-                        >
+                        <Dropdown.Item onClick={() => props.updateEntry([
+                            {'contactType' : 'li'},
+                            {'type': 'text'}
+                        ])}>
                             <FaLinkedin color="#0072b1"/>{'  '}LinkedIn
                         </Dropdown.Item>
                     </PopoverStickOnHover>
-                    {/*website*/}
-                    <Dropdown.Item onClick={() => props.updateEntry([{
-                        'key': 'contactType',
-                        'val': 'web'},
-                        {'key': 'type',
-                        'val': 'url'}])}
-                    >
+                    {/*Website*/}
+                    <Dropdown.Item onClick={() => props.updateEntry([
+                        {'contactType' : 'web'},
+                        {'type': 'url'}
+                    ])}>
                         <FaGlobeAmericas />{'  '}Sitio Personal
                     </Dropdown.Item>
                     {/*Twitter*/}
-                    <Dropdown.Item onClick={() => props.updateEntry([{
-                        'key': 'contactType',
-                        'val': 'twitter'},
-                        {'key': 'type',
-                        'val': 'text'}])}
-                    >
+                    <Dropdown.Item onClick={() => props.updateEntry([
+                        {'contactType' : 'twitter'},
+                        {'type': 'text'}
+                    ])}>
                         <FaTwitter color="#00aced"/>{'  '}Twitter
                     </Dropdown.Item>
                 </DropdownButton>
-                <Form.Control type={props.data.type} className="rounded-right"/>
+                <Form.Control
+                    type={props.data.type}
+                    className="rounded-right"
+                    onChange={(e) => props.updateEntry([{'value': e.target.value}])}
+                />
                 <InputGroup.Append>
                     <Button
                         variant="link"
@@ -240,11 +232,16 @@ class CVForm extends React.Component {
 
         const newEntry = JSON.parse(JSON.stringify(ent)); //Deep copy
         changes.forEach(change => {
-            if (newEntry[change.key].hasOwnProperty("value")) {
-                newEntry[change.key].value = change.val;
+            /*Some elements are nested objects, therefore change with same api*/
+            const key = Object.keys(change)[0];
+            const val = Object.values(change)[0];
+            console.log(newEntry[key]);
+            if (typeof newEntry[key] === 'object' && newEntry[key] !== null) { //typeof null bug...
+                console.log('nested');
+                newEntry[key].value = val;
             }
             else {
-                newEntry[change.key] = change.val;
+                newEntry[key] = val;
             }
         });
         const newSection = JSON.parse(JSON.stringify(sec)); //Deep copy
