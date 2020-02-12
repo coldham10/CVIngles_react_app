@@ -122,28 +122,27 @@
             }
         },
         "experiencia": {
-            "id": null,
-            "title": {
+            "01-title": {
                 "displayName": "Titulo",
                 "type": "text",
                 "value": null
             },
-            "employer": {
+            "02-employer": {
                 "displayName": "Empleador",
                 "type": "text",
                 "value": null
             },
-            "location": {
+            "03-location": {
                 "displayName": "Ciudad, país",
                 "type": "text",
                 "value": null
             },
-            "description": {
+            "04-description": {
                 "displayName": "Descripción",
                 "type": "text",
                 "value": null
             },
-            "achievements": []
+            "05-achievements": []
         }
     }
 }
