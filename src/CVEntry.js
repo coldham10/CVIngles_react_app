@@ -16,51 +16,62 @@ import PopoverStickOnHover from './PopoverStickOnHover.jsx';
 class CVEntry extends React.Component {
     constructor(props) {
         super(props);
+        if (props.type === 'contact') {
+            this.state = {
+                'contactType': props.data.type,
+                'value': props.data.value,
+                'type': getContactInputType(props.data.type),
+            }
+        }
+        else {
+            this.state = {
+                'value': props.data
+            }
+        }
     }
 
     entryName(type, idx) {
         switch(type) {
-            case "name":        return "Nombre Completo";
-            case "dob":         return "Fecha de Nacimiento";
-            case "address":     return "Direccíon";
-            case "contact":     return `Modo de Contacto ${idx - 2}`;
-            case "degreeName":  return "Nombre Completo de Carrera o Curso";
-            case "startYear":   return "Año de Empezar";
-            case "endYear":     return "Año de Terminar";
-            case "grade":       return "Nota (x.x/x.x)";
-            case "university":  return "Universidad o Instituto";
-            case "location":    return "Ciudad, País";
-            case "desc":        return "Descripción";
-            case "title":       return "Título";
-            case "employer":    return "Empleador";
-                /*XXX should actually be a group*/
-            case "acievements": return "Logros";
-            default:            return "Unknown group";
+            case 'name':        return 'Nombre Completo';
+            case 'dob':         return 'Fecha de Nacimiento';
+            case 'address':     return 'Direccíon';
+            case 'contact':     return `Modo de Contacto ${idx - 2}`;
+            case 'degreeName':  return 'Nombre Completo de Carrera o Curso';
+            case 'startYear':   return 'Año de Empezar';
+            case 'endYear':     return 'Año de Terminar';
+            case 'grade':       return 'Nota (x.x/x.x)';
+            case 'university':  return 'Universidad o Instituto';
+            case 'location':    return 'Ciudad, País';
+            case 'desc':        return 'Descripción';
+            case 'title':       return 'Título';
+            case 'employer':    return 'Empleador';
+            case 'achievement': return `Logro ${idx +1}`;
+            default:            return 'Unknown group';
         }
     }
 
     dataType(entryType) {
         switch(entryType) {
-            case "name":        return ["text", "input"];
-            case "dob":         return ["date", "input"];
-            case "address":     return ["text", "input"];
-            case "contact":     return ["tel",  "input"];
-            case "degreeName":  return ["text", "input"];
-            case "startYear":   return ["year", "input"]; 
-            case "endYear":     return ["year", "input"]; 
-            case "grade":       return ["text", "input"]; 
-            case "university":  return ["text", "input"]; 
-            case "location":    return ["text", "input"]; 
-            case "desc":        return ["text", "textarea"]; 
-            case "title":       return ["text", "input"]; 
-            case "employer":    return ["text", "input"]; 
-            case "acievement":  return ["text", "input"]; 
-            default:            return ["text", "input"]; 
+            case 'name':        return ['text', 'input'];
+            case 'dob':         return ['date', 'input'];
+            case 'address':     return ['text', 'input'];
+            case 'contact':     return ['tel',  'input'];
+            case 'degreeName':  return ['text', 'input'];
+            case 'startYear':   return ['year', 'input']; 
+            case 'endYear':     return ['year', 'input']; 
+            case 'grade':       return ['text', 'input']; 
+            case 'university':  return ['text', 'input']; 
+            case 'location':    return ['text', 'input']; 
+            case 'desc':        return ['text', 'textarea']; 
+            case 'title':       return ['text', 'input']; 
+            case 'employer':    return ['text', 'input']; 
+            case 'achievement': return ['text', 'input']; 
+            default:            return ['text', 'input']; 
         }
     }
 
     render() {
-        if (this.props.type !== "contact") {
+        if (this.props.type !== 'contact') {
             return (
                 <Form.Group>
                     <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
@@ -79,11 +90,15 @@ class CVEntry extends React.Component {
                 <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
                 <InputGroup>
                     <ContactDropdown
-                        contactType={this.props.data.type}
+                        updateEntry={(contactType, type) => {
+                            this.setState({'contactType': contactType, 'type': type});
+                        }}
+                        contactType={this.state.contactType}
                     />
                 <Form.Control
-                    type={getContactInputType(this.props.data.type)}
-                    value={this.props.data.value}
+                    type={getContactInputType(this.state.type)}
+                    value={this.state.value}
+                    onChange={e => this.setState({'value': e.target.value})}
                 />
                 <InputGroup.Append>
                     <Button
