@@ -5,3 +5,4 @@ new branch:  more OOP:
     keeps entry objects -each extends of CVEntry
     state kept in lowest level. - not relying on JSON except for load/save
     saving: toJSON defined recursively, as well as parse methods
+remove all unnecessary arrow function handlers

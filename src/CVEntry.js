@@ -20,19 +20,15 @@ import PopoverStickOnHover from './PopoverStickOnHover.jsx';
 class CVEntry extends React.Component {
     constructor(props) {
         super(props);
-        this.displayName    = props.displayName || null;
-        this.length         = props.length      || 12;
-        this.as             = props.as          || 'input';
-        this.state          = {'value': props.value|| null, 'type': 'text'};
-
+        this.state = {'value': props.value|| null, 'type': 'text'};
     }
 
     render() {
         return (
             <Form.Group>
-                <Form.Label>{this.displayName}</Form.Label>
+                <Form.Label>{this.props.displayName}</Form.Label>
                 <Form.Control
-                    type={this.type}
+                    type={this.props.type}
                     onChange={(e) => this.setState({'value': e.target.value})}
                 />
             </Form.Group>
@@ -63,7 +59,7 @@ class DatosEntry extends CVEntry {
             /*Extensible personal data. Each field is a single InputGroup, with a dropdown for the type of info*/
             return (
                 <Form.Group>
-                <Form.Label>{this.displayName}</Form.Label>
+                <Form.Label>{this.props.displayName}</Form.Label>
                 <InputGroup>
                     <ContactDropdown
                         updateEntry={(contactType, type) => {
@@ -72,7 +68,7 @@ class DatosEntry extends CVEntry {
                         contactType={this.state.contactType}
                     />
                 <Form.Control
-                    type={this.type}
+                    type={this.props.type}
                     onChange={(e) => this.setState({"value" : e.target.value})}
                 />
                 <InputGroup.Append>
@@ -104,7 +100,7 @@ class EstudiosSubEntry extends CVEntry {
 
     render() {
         return (
-            <Form.Group as={Col} md={this.length}>
+            <Form.Group as={Col} md={this.props.length}>
                 <Form.Label>
                     {this.props.displayName}
                 </Form.Label>
@@ -126,6 +122,7 @@ class EstudiosSubEntry extends CVEntry {
 class EstudiosEntry extends CVEntry {
     constructor(props) {
         super(props);
+        //XXX state?
         this.subEntries = props.subEntries || [
             <EstudiosSubEntry name="degree" displayName="Nombre del estudio" type="text" as="input" length="12" key="1" />,
             <EstudiosSubEntry name="startYear" displayName="Año de emezar" type="year" as="input" length="4" key="2" />,
@@ -162,7 +159,7 @@ class EstudiosEntry extends CVEntry {
         }
         return (
             <Container className="degree-unit border rounded">
-            <h3 className="text-center">{this.displayName}</h3>
+            <h3 className="text-center">{this.props.displayName}</h3>
                 {rows}
             </Container>
         );
@@ -177,7 +174,7 @@ class EstudiosEntry extends CVEntry {
 class ExperienciaSubEntry extends CVEntry {
     constructor(props) {
         super(props);
-        this.state = {"value": this.props.flexList ? [null] : null};
+        this.state = {"value": props.flexList ? [null] : null};
     }
 
     render() {
@@ -234,7 +231,7 @@ class ExperienciaSubEntry extends CVEntry {
                 />
         }
         return (
-            <Form.Group as={Col} md={this.length}>
+            <Form.Group as={Col} md={this.props.length}>
                 <Form.Label>
                     {this.props.displayName}
                 </Form.Label>
@@ -287,7 +284,7 @@ class ExperienciaEntry extends CVEntry {
         }
         return (
             <Container className="degree-unit border rounded">
-            <h3 className="text-center">{this.displayName}</h3>
+            <h3 className="text-center">{this.props.displayName}</h3>
                 {rows}
             </Container>
         );
@@ -373,4 +370,4 @@ function shortenContactType(contactType) {
     }
 }
 
-export {DatosEntry, EstudiosEntry, ExperienciaEntry};
+export {CVEntry, DatosEntry, EstudiosEntry, ExperienciaEntry};

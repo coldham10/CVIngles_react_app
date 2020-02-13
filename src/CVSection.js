@@ -2,31 +2,71 @@ import React from 'react';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {CVEntry, DatosEntry} from './CVEntry.js';
+
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+
+class CVSection extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {'entries': [null]}
+        this.displayName = "Section"
+    }
+
+    addEntry() {
+        this.setState({'entries': this.state.entries.concat([<CVEntry />])});
+    }
+
+    deleteEntry(name) {
+        const idx = this.state.entries.findIndex(elem => elem.props.name === name);
+        const newEntries = this.state.entries.slice(0,idx);
+        newEntries.push(...this.state.entries.slice(idx + 1));
+        this.setState({'entries': newEntries});
+    }
+
+    render() {
+        return (
+            <Container className="cv-form-section border rounded">
+            <h2>{this.state.displayName}</h2>
+                {this.state.entries}
+            <Button variant="link" onClick={() => this.addEntry()}>Add</Button>
+            </Container>
+        );
+    }
+
+    toJSON() {
+        //TODO
+        return "";
+    }
+}
+
+class DatosSection extends CVSection {
+    constructor(props) {
+        super(props);
+        this.state = {'entries': [
+            <DatosEntry fixed displayName="Nombre Completo" name="name" type="text" key="0"/>,
+            <DatosEntry fixed displayName="Fecha de Nacimiento" name="dob" type="date" key="1"/>,
+            <DatosEntry fixed displayName="Dirreción" name="address" type="text" key="2"/>
+        ],
+        'displayName': 'Datos Personales'};
+        this.lastkey = 2;
+    }
+
+    addEntry() {
+        let replacementEntries = this.state.entries.slice();
+        replacementEntries.push(
+            <DatosEntry
+                name={`contact${this.state.entries.length - 3}`}
+                displayName={`Modo de Contacto ${this.state.entries.length - 2}`}
+                deleteEntry={this.deleteEntry.bind(this,(`contact${this.state.entries.length - 3}`))}
+                key={++this.lastkey}
+            />);
+        this.setState({'entries': replacementEntries});
+    }
+}
 
 
-import {DatosEntry, EstudiosEntry, ExperienciaEntry} from './CVEntry.js';
-import {DatosSection} from './CVSection.js';
-
-//function CVSection(props) {
-//    const entries = props.data.entries.map((entry, i) =>
-//        <CVEntry
-//            key={i}
-//            idx={i}
-//            section={props.data.id}
-//            data={entry}
-//            updateEntry={changes => props.updateEntry(entry.id, changes)}
-//            deleteEntry={() => props.deleteEntry(entry.id)}
-//        />
-//    );
-//    return (
-//        <Container className="cv-form-section border rounded">
-//        <h2>{props.data.fullName}</h2>
-//        {entries}
-//        <Button variant="link" onClick={props.addEntry}>Add</Button>
-//        </Container>
-//    );
-//}
-//
 //class CVForm extends React.Component {
 //    constructor(props) {
 //        super(props);
@@ -173,18 +213,4 @@ import {DatosSection} from './CVSection.js';
 //        );
 //    }
 //}
-function CVForm (props) {
-    return (
-        <>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <DatosSection />
-        </>
-    );
-}
-
-export default CVForm;
+export {CVSection, DatosSection};
