@@ -78,7 +78,8 @@ class CVEntry extends React.Component {
                     <Form.Control
                         type={this.dataType(this.props.type)[0]}
                         as={this.dataType(this.props.type)[1]}
-                        value={this.props.data}
+                        value={this.state.value}
+                        onChange={e => this.setState({'value': e.target.value})}
                     >
                     </Form.Control>
                 </Form.Group>
