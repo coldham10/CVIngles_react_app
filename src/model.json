@@ -1,0 +1,26 @@
+{ "options": {
+        "inputLanguage": "es",
+        "outputLanguage": "en"
+    },
+    "model": [
+        {
+            "type":"datos",
+            "value" : [
+                {"type": "name", "value": null},
+                {"type": "dob", "value": null},
+                {"type": "address", "value": null},
+                {"type": "contact", "value": {"type": "phone", "value": null}}
+            ]
+        },
+        {
+            "type": "estudios",
+            "value": []
+        },
+        {
+            "type": "experiencia",
+            "value": []
+        }
+    ]
+}
+
+        

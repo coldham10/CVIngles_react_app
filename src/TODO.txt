@@ -1,8 +1,5 @@
 form on 'hidden' page, have to click through from cards giving option types
 checkout page
-new branch:  more OOP:
-    each section a proper object
-    keeps entry objects -each extends of CVEntry
-    state kept in lowest level. - not relying on JSON except for load/save
-    saving: toJSON defined recursively, as well as parse methods
-remove all unnecessary arrow function handlers
+CVEntry(deletable, length, ?contact-selectable...)
+CVEntryGroup - e.g. degree, job - col and row
+a sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!

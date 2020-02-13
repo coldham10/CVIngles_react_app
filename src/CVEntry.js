@@ -2,79 +2,92 @@ import React from 'react';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Popover from 'react-bootstrap/Popover'
+
 import { FaWhatsapp, FaPhone, FaTrash, FaEnvelope, FaLinkedin, FaGlobeAmericas, FaTwitter} from 'react-icons/fa';
 
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Popover from 'react-bootstrap/Popover';
-import Col from 'react-bootstrap/Col';
-
 import PopoverStickOnHover from './PopoverStickOnHover.jsx';
-
-
 
 class CVEntry extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {'value': props.value|| null, 'type': 'text'};
+    }
+
+    entryName(type, idx) {
+        switch(type) {
+            case "name":        return "Nombre Completo";
+            case "dob":         return "Fecha de Nacimiento";
+            case "address":     return "Direccíon";
+            case "contact":     return `Modo de Contacto ${idx - 2}`;
+            case "degreeName":  return "Nombre Completo de Carrera o Curso";
+            case "startYear":   return "Año de Empezar";
+            case "endYear":     return "Año de Terminar";
+            case "grade":       return "Nota (x.x/x.x)";
+            case "university":  return "Universidad o Instituto";
+            case "location":    return "Ciudad, País";
+            case "desc":        return "Descripción";
+            case "title":       return "Título";
+            case "employer":    return "Empleador";
+                /*XXX should actually be a group*/
+            case "acievements": return "Logros";
+            default:            return "Unknown group";
+        }
+    }
+
+    dataType(entryType) {
+        switch(entryType) {
+            case "name":        return ["text", "input"];
+            case "dob":         return ["date", "input"];
+            case "address":     return ["text", "input"];
+            case "contact":     return ["tel",  "input"];
+            case "degreeName":  return ["text", "input"];
+            case "startYear":   return ["year", "input"]; 
+            case "endYear":     return ["year", "input"]; 
+            case "grade":       return ["text", "input"]; 
+            case "university":  return ["text", "input"]; 
+            case "location":    return ["text", "input"]; 
+            case "desc":        return ["text", "textarea"]; 
+            case "title":       return ["text", "input"]; 
+            case "employer":    return ["text", "input"]; 
+            case "acievement":  return ["text", "input"]; 
+            default:            return ["text", "input"]; 
+        }
     }
 
     render() {
-        return (
-            <Form.Group>
-                <Form.Label>{this.props.displayName}</Form.Label>
-                <Form.Control
-                    type={this.props.type}
-                    onChange={(e) => this.setState({'value': e.target.value})}
-                />
-            </Form.Group>
-        );
-    }
-
-    toJSON() {
-        return 'TODO';
-    }
-}
-
-class DatosEntry extends CVEntry {
-    constructor(props) {
-        super(props);
-        this.state = {
-            'contactType' : props.contactType || 'phone',
-            'type' : props.type || 'tel',
-            'value' : null
-        };
-    }
-
-    render() {  
-        if (this.props.fixed) {
-            /*Some personal info fields cannot be deleted*/
-            return (super.render());
-        }
-        else {
-            /*Extensible personal data. Each field is a single InputGroup, with a dropdown for the type of info*/
+        if (this.props.type !== "contact") {
             return (
                 <Form.Group>
-                <Form.Label>{this.props.displayName}</Form.Label>
+                    <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
+                    <Form.Control
+                        type={this.dataType(this.props.type)[0]}
+                        as={this.dataType(this.props.type)[1]}
+                        value={this.props.data}
+                    >
+                    </Form.Control>
+                </Form.Group>
+            );
+        }
+        else {
+            return (
+                <Form.Group>
+                <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
                 <InputGroup>
                     <ContactDropdown
-                        updateEntry={(contactType, type) => {
-                            this.setState({'contactType': contactType, 'type': type});
-                        }}
-                        contactType={this.state.contactType}
+                        contactType={this.props.data.type}
                     />
                 <Form.Control
-                    type={this.props.type}
-                    onChange={(e) => this.setState({"value" : e.target.value})}
+                    type={getContactInputType(this.props.data.type)}
+                    value={this.props.data.value}
                 />
                 <InputGroup.Append>
                     <Button
                         variant="link"
-                        onClick={() => this.props.deleteEntry()}
                     >
                         <FaTrash color="#ed6a5a"/>
                     </Button>
@@ -85,222 +98,12 @@ class DatosEntry extends CVEntry {
             );
         }
     }
-
-    toJSON() {
-        //TODO
-        return null;
-    }
 }
-
-class EstudiosSubEntry extends CVEntry {
-    constructor(props) {
-        super(props);
-        this.state = {"value": null};
-    }
-
-    render() {
-        return (
-            <Form.Group as={Col} md={this.props.length}>
-                <Form.Label>
-                    {this.props.displayName}
-                </Form.Label>
-                <Form.Control
-                    className="rounded"
-                    type={this.props.type}
-                    as={this.props.as}
-                    onChange={e => this.setState({'value': e.target.value})}
-                />
-            </Form.Group>
-        );
-    }
-    toJSON() {
-        /*TODO for saving also a loadJSON function that can be passed as a prop JSONObject=""*/
-        return null;
-    }
-}
-
-class EstudiosEntry extends CVEntry {
-    constructor(props) {
-        super(props);
-        //XXX state?
-        this.subEntries = props.subEntries || [
-            <EstudiosSubEntry name="degree" displayName="Nombre del estudio" type="text" as="input" length="12" key="1" />,
-            <EstudiosSubEntry name="startYear" displayName="Año de emezar" type="year" as="input" length="4" key="2" />,
-            <EstudiosSubEntry name="endYear" displayName="Año de terminar" type="year" as="input" length="4" key="3" />,
-            <EstudiosSubEntry name="grade" displayName="Nota (x.x/x.x)" type="text" as="input" length="4" key="4" />,
-            <EstudiosSubEntry name="university" displayName="Nombre del Universidad" type="text" as="input" length="6" key="5" />,
-            <EstudiosSubEntry name="location" displayName="Ciudad, País" type="text" as="input" length="6" key="6" />,
-            <EstudiosSubEntry name="desc" displayName="Descripción" type="text" as="textarea" length="12" key="7" />,
-        ];
-    }
-
-    /*TODO: change header name depending on displayname, default if whitespace or empty*/
-
-    render() {
-        const rows = [];
-        let row = [];
-        let rowLength = 0;
-        for (let i = 0; i < this.subEntries.length; i++) {
-            if (rowLength + Number(this.subEntries[i].props.length) <= 12) {
-                row.push(
-                    this.subEntries[i]
-                );
-                rowLength += Number(this.subEntries[i].props.length);
-            }
-            if (rowLength >=12) {
-                rows.push(
-                    <Form.Row key={i}>
-                        {row}
-                    </Form.Row>
-                );
-                row = [];
-                rowLength = 0;
-            }
-        }
-        return (
-            <Container className="degree-unit border rounded">
-            <h3 className="text-center">{this.props.displayName}</h3>
-                {rows}
-            </Container>
-        );
-    }
-
-    toJSON () {
-        //TODO
-        return ""
-    }
-}
-
-class ExperienciaSubEntry extends CVEntry {
-    constructor(props) {
-        super(props);
-        this.state = {"value": props.flexList ? [null] : null};
-    }
-
-    render() {
-        let control;
-        if (this.props.flexList) {
-            control = 
-                <>
-                <Container>
-                {this.state.value.map((val, idx) => {
-                return (
-                    <Form.Group key={idx}>
-                        <Form.Label>{`Logro ${idx + 1}`}</Form.Label>
-                        <InputGroup>
-                            <Form.Control
-                               className="rounded"
-                               type={this.props.type}
-                               as={this.props.as}
-                               onChange={e => this.setState({
-                                   'value': this.state.value.slice(0,idx)
-                                        .concat(e.target.value)
-                                        .concat(this.state.value.slice(idx+1))
-                               })}
-                            />
-                            <InputGroup.Append>
-                                <Button
-                                     variant="link"
-                                     onClick={() => this.setState({'value': 
-                                     this.state.value.slice(0,idx)
-                                     .concat(this.state.value.slice(idx + 1))})}
-                                 >
-                                     <FaTrash color="#ed6a5a"/>
-                                 </Button>
-                            </InputGroup.Append>
-                        </InputGroup>
-                    </Form.Group>
-                );
-            })}
-            </Container>
-            <Button
-                variant="link"
-                onClick={() => this.setState({'value': this.state.value.concat([null])})}
-            >
-                Add
-            </Button>
-            </>
-        } //TODO add remove option and rearrange
-        else {
-            control = 
-                <Form.Control
-                    className="rounded"
-                    type={this.props.type}
-                    as={this.props.as}
-                    onChange={e => this.setState({'value': e.target.value})}
-                />
-        }
-        return (
-            <Form.Group as={Col} md={this.props.length}>
-                <Form.Label>
-                    {this.props.displayName}
-                </Form.Label>
-                {control}
-            </Form.Group>
-        );
-    }
-    toJSON() {
-        /*TODO for saving also a loadJSON function that can be passed as a prop JSONObject=""*/
-        return null;
-    }
-}
-
-class ExperienciaEntry extends CVEntry {
-    constructor(props) {
-        super(props);
-        this.subEntries = props.subEntries || [
-            <ExperienciaSubEntry name="title" displayName="Título" type="text" as="input" length="12" key="1" />,
-            <ExperienciaSubEntry name="employer" displayName="Empleador" type="text" as="input" length="12" key="2" />,
-            <ExperienciaSubEntry name="startYear" displayName="Año de emezar" type="year" as="input" length="3" key="3" />,
-            <ExperienciaSubEntry name="endYear" displayName="Año de terminar" type="year" as="input" length="3" key="4" />,
-            <ExperienciaSubEntry name="location" displayName="Ciudad, País" type="text" as="input" length="6" key="5" />,
-            <ExperienciaSubEntry name="desc" displayName="Descripción" type="text" as="textarea" length="12" key="6" />,
-            <ExperienciaSubEntry name="achievements" displayName="Logros" type="text" as="textarea" flexList length="12" key="6" />,
-        ];
-    }
-
-    /*TODO: change header name depending on displayname, default if whitespace or empty*/
-
-    render() {
-        const rows = [];
-        let row = [];
-        let rowLength = 0;
-        for (let i = 0; i < this.subEntries.length; i++) {
-            if (rowLength + Number(this.subEntries[i].props.length) <= 12) {
-                row.push(
-                    this.subEntries[i]
-                );
-                rowLength += Number(this.subEntries[i].props.length);
-            }
-            if (rowLength >=12) {
-                rows.push(
-                    <Form.Row key={i}>
-                        {row}
-                    </Form.Row>
-                );
-                row = [];
-                rowLength = 0;
-            }
-        }
-        return (
-            <Container className="degree-unit border rounded">
-            <h3 className="text-center">{this.props.displayName}</h3>
-                {rows}
-            </Container>
-        );
-    }
-
-    toJSON () {
-        //TODO
-        return ""
-    }
-}
-
 
 function ContactDropdown(props) {
-   return ( 
+   return (
         <DropdownButton
-            as={InputGroup.Prepend} 
+            as={InputGroup.Prepend}
             variant="outline-secondary"
             title={shortenContactType(props.contactType)}
         >
@@ -322,7 +125,7 @@ function ContactDropdown(props) {
                     <>
                     <Popover.Title as="h3">{'¿Sabías?'}</Popover.Title>
                     <Popover.Content>
-                        Puedes personalizar tu URL de LinkedIn. Haga clic 
+                        Puedes personalizar tu URL de LinkedIn. Haga clic
                         <a target="_blank"
                             rel="noopener noreferrer"
                             href="https://www.linkedin.com/help/linkedin/answer/594/personalizar-la-url-de-tu-perfil-publico?lang=es"
@@ -370,4 +173,16 @@ function shortenContactType(contactType) {
     }
 }
 
-export {CVEntry, DatosEntry, EstudiosEntry, ExperienciaEntry};
+function getContactInputType(contactType) {
+    switch (contactType) {
+        case 'phone': return 'tel';
+        case 'wa': return 'tel';
+        case 'email': return 'email';
+        case 'li': return 'text';
+        case 'web': return 'url';
+        case 'twitter': return 'text';
+        default: return 'tel';
+    }
+}
+
+export default CVEntry;

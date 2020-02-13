@@ -39,6 +39,8 @@ function MainNavBar(props) {
 
 
 function App() {
+    //TODO make a class so persists
+    let formData = require('./example.json');
     return (
         <div className="App">
             <MainNavBar />
@@ -52,7 +54,7 @@ function App() {
             put in tag
           </Route>
           <Route path="/enviar">
-            <CVForm /> 
+            <CVForm data={formData.model}/> 
           </Route>
         </Switch>
       </div>

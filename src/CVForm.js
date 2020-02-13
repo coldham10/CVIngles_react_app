@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import CVSection from './CVSection.js'
+
 
 class CVForm extends React.Component {
     constructor(props) {
@@ -14,6 +16,16 @@ class CVForm extends React.Component {
     }
 
     render() {
+        /*Map section data to section objects*/
+        let inner = this.props.data.map((section, idx) => {
+            return (
+                <CVSection
+                type={section.type}
+                data={section.value}
+                key={idx}
+            />
+            );
+        });
         return (
             <Container>
             <Form
@@ -23,6 +35,7 @@ class CVForm extends React.Component {
                 }}
             >
                 <h1>Crea Tu Hoja de Vida</h1>
+                    {inner}
                 <Button variant="primary" type="submit">
                   Submit
                 </Button>
