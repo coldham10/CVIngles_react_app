@@ -3,9 +3,13 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Collapse from 'react-bootstrap/Collapse';
+
+import {MdClose, MdExpandLess, MdExpandMore} from "react-icons/md";
 
 import CVEntry from './CVEntry.js';
 
@@ -13,7 +17,8 @@ class CVEntryGroup extends React.Component {
     constructor(props) {
         super(props);
         this.uid = -1;
-        this.state = {'entries': this.props.data.map(entry => {
+        this.state = {'expanded': true,
+            'entries': this.props.data.map(entry => {
             entry.key = ++this.uid;
             return entry;
         })};
@@ -32,6 +37,7 @@ class CVEntryGroup extends React.Component {
     }
 
     addEntry() {
+        this.setState({'expanded': true}); //If adding entry to group, should expand so not adding 'in secret'
         const egEntry = this.state.entries[0];
         const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy first obj
         newEntry.value = "";
@@ -63,7 +69,6 @@ class CVEntryGroup extends React.Component {
     render() {
         const rows = [];
         let row = [];
-        let nextRow = [];
         let rowLength = 0;
         this.state.entries.forEach((entry, idx) => {
             if (entry.type === "achievements")  {
@@ -89,6 +94,7 @@ class CVEntryGroup extends React.Component {
                             idx={idx}
                             deleteEntry={this.deleteEntry.bind(this)}
                             setVal={this.setVal.bind(this)}
+                            deletable={this.state.entries.length > 1 /*Achievements*/}
                         />
                     </Form.Group>
                 );
@@ -104,11 +110,40 @@ class CVEntryGroup extends React.Component {
                 rowLength = 0;
             }
         });
+        const buttons = this.props.deletable ?
+            <>
+                <Button variant="link"
+                    className="ml-auto"
+                    onClick={() => this.setState({'expanded': !this.state.expanded})}
+                >
+                    {this.state.expanded ? <MdExpandLess /> : <MdExpandMore />}
+                </Button>
+                <Button variant="link"
+                    onClick={() => this.props.deleteEntry(this.props.idx)}
+                >
+                    <MdClose />
+                </Button>
+            </> :
+            <Button variant="link"
+                    className="ml-auto"
+                    onClick={() => this.setState({'expanded': !this.state.expanded})}
+                >
+                    {this.state.expanded ? <MdExpandLess /> : <MdExpandMore />}
+            </Button> ;
         const footer = this.props.extensible ? <Button variant="link" onMouseUp={this.addEntry.bind(this)}>Más</Button> : null;
         return (
             <Container className="entry-group border rounded">
-            <h3>{this.groupName(this.props.type, this.props.idx)}</h3>
-                {rows}
+            <Container>
+            <Row>
+                <h3>{this.groupName(this.props.type, this.props.idx)}</h3>
+                {buttons}
+            </Row>
+            </Container>
+                <Collapse in={this.state.expanded}>
+                <Container>
+                    {rows}
+                </Container>
+                </Collapse>
                 {footer}
             </Container>
         );

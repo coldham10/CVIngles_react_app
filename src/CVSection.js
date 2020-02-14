@@ -31,12 +31,44 @@ class CVSection extends React.Component {
         }
     }
 
+    cleanValues(element) {
+        if (element.type === 'contact') {
+            element.value = {'type': 'phone', 'value': ""};
+            return element;
+        }
+        if (element.type === 'achievements') {
+            element.value = [{'type': 'achievement', 'value': ""}];
+            return element;
+        }
+        if (typeof element.value !== 'object') {
+            element.value = "";
+            return element;
+        }
+        if (Array.isArray(element.value)) {
+            element.value = element.value.map(i => this.cleanValues(i));
+            return element;
+        }
+        element.value = this.cleanValues(element.value);
+        return element;
+    }
+
     addEntry() {
         const egEntry = this.state.entries[this.state.entries.length-1];
-        const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy last obj data
-        newEntry.value = "";
+        const newEntry = this.cleanValues(JSON.parse(JSON.stringify(egEntry))); //Deep copy last obj data, values set to ""
         newEntry.key = ++this.uid;
         const entries = this.state.entries.concat([newEntry]);
+        this.setState({'entries': entries});
+    }
+
+    deleteEntry(idx) {
+        const entries = this.state.entries.slice(0,idx)
+            .concat(this.state.entries.slice(idx + 1));
+        this.setState({'entries': entries});
+    }
+
+    setVal(idx, val) {
+        const entries = this.state.entries.slice();
+        entries[idx].value = val;
         this.setState({'entries': entries});
     }
 
@@ -49,6 +81,9 @@ class CVSection extends React.Component {
                         data={entry.value}
                         key={entry.key}
                         idx={idx}
+                        deleteEntry={this.deleteEntry.bind(this)}
+                        setVal={this.setVal.bind(this)}
+                        deletable={this.state.entries.length > 4 /*Contacts*/}
                     />
                 );
             }
@@ -58,6 +93,8 @@ class CVSection extends React.Component {
                     data={entry.value}
                     key={entry.key}
                     idx={idx}
+                    deleteEntry={this.deleteEntry.bind(this)}
+                    deletable={this.state.entries.length > 1}
                 />
             );
         });
@@ -65,7 +102,12 @@ class CVSection extends React.Component {
             <Container className="cv-form-section border rounded">
                 <h2>{this.sectionName()}</h2>
                 {inner}
-            <Button variant="link">Más</Button>
+            <Button
+                variant="link"
+                onClick={this.addEntry.bind(this)}
+            >
+                Más
+            </Button>
             </Container>
         );
     }
