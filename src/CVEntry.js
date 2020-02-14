@@ -71,21 +71,7 @@ class CVEntry extends React.Component {
     }
 
     render() {
-        if (this.props.type !== 'contact') {
-            return (
-                <Form.Group>
-                    <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
-                    <Form.Control
-                        type={this.dataType(this.props.type)[0]}
-                        as={this.dataType(this.props.type)[1]}
-                        value={this.state.value}
-                        onChange={e => this.setState({'value': e.target.value})}
-                    >
-                    </Form.Control>
-                </Form.Group>
-            );
-        }
-        else {
+        if (this.props.type === 'contact') {
             return (
                 <Form.Group>
                 <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
@@ -104,6 +90,7 @@ class CVEntry extends React.Component {
                 <InputGroup.Append>
                     <Button
                         variant="link"
+                        onClick={() => this.props.deleteEntry(this.props.idx)}
                     >
                         <FaTrash color="#ed6a5a"/>
                     </Button>
@@ -111,6 +98,44 @@ class CVEntry extends React.Component {
                 </InputGroup>
                 </Form.Group>
 
+            );
+        }
+        else if (this.props.type === 'achievement') {
+            return (
+                <Form.Group>
+                    <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
+                    <InputGroup>
+                    <Form.Control
+                        type={this.dataType(this.props.type)[0]}
+                        as={this.dataType(this.props.type)[1]}
+                        value={this.state.value}
+                        onChange={e => this.setState({'value': e.target.value})}
+                    >
+                    </Form.Control>
+                    <InputGroup.Append>
+                        <Button
+                            variant="link"
+                            onClick={() => this.props.deleteEntry(this.props.idx)}
+                        >
+                            <FaTrash color="#ed6a5a"/>
+                        </Button>
+                    </InputGroup.Append>
+                    </InputGroup>
+                </Form.Group>
+            );
+        }
+        else {
+            return (
+                <Form.Group>
+                    <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
+                    <Form.Control
+                        type={this.dataType(this.props.type)[0]}
+                        as={this.dataType(this.props.type)[1]}
+                        value={this.state.value}
+                        onChange={e => this.setState({'value': e.target.value})}
+                    >
+                    </Form.Control>
+                </Form.Group>
             );
         }
     }
