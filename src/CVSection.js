@@ -12,7 +12,10 @@ class CVSection extends React.Component {
     constructor(props) {
         super(props);
         this.uid = -1;
-        this.state = {'entries': this.props.data};
+        this.state = {'entries': this.props.data.map(entry => {
+            entry.key = ++this.uid;
+            return entry;
+        })};
     }
     
     sectionName() {
@@ -28,6 +31,15 @@ class CVSection extends React.Component {
         }
     }
 
+    addEntry() {
+        const egEntry = this.state.entries[this.state.entries.length-1];
+        const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy last obj data
+        newEntry.value = "";
+        newEntry.key = ++this.uid;
+        const entries = this.state.entries.concat([newEntry]);
+        this.setState({'entries': entries});
+    }
+
     render() {
         let inner = this.state.entries.map((entry, idx) => {
             if (this.props.type === "datos") {
@@ -35,7 +47,7 @@ class CVSection extends React.Component {
                     <CVEntry
                         type={entry.type}
                         data={entry.value}
-                        key={idx}
+                        key={entry.key}
                         idx={idx}
                     />
                 );
@@ -44,7 +56,7 @@ class CVSection extends React.Component {
                 <CVEntryGroup
                     type={entry.type}
                     data={entry.value}
-                    key={idx}
+                    key={entry.key}
                     idx={idx}
                 />
             );
