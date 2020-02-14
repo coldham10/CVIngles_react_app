@@ -22,9 +22,18 @@ class CVEntryGroup extends React.Component {
         this.setState({'entries': entries});
     }
 
-    addEntry() {
-        const newEntry = JSON.parse(JSON.stringify(this.state.entries[0])); //Deep copy first obj
+    setVal(idx, val) {
+        const entries = this.state.entries.slice();
+        entries[idx].value = val;
+        this.setState({'entries': entries});
+    }
 
+    addEntry() {
+        const egEntry = this.state.entries[0];
+        const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy first obj
+        newEntry.value = null;
+        const entries = this.state.entries.concat([newEntry]);
+        this.setState({'entries': entries});
     }
 
     getLength(type) {
@@ -75,6 +84,7 @@ class CVEntryGroup extends React.Component {
                             key={++this.uid}
                             idx={idx}
                             deleteEntry={this.deleteEntry.bind(this)}
+                            setVal={this.setVal.bind(this)}
                         />
                     </Form.Group>
                 );
@@ -90,7 +100,7 @@ class CVEntryGroup extends React.Component {
                 rowLength = 0;
             }
         });
-        const footer = this.props.extensible ? <Button variant="link">Más</Button> : null;
+        const footer = this.props.extensible ? <Button variant="link" onMouseUp={this.addEntry.bind(this)}>Más</Button> : null;
         return (
             <Container className="entry-group border rounded">
             <h3>{this.groupName(this.props.type, this.props.idx)}</h3>

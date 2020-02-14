@@ -86,11 +86,13 @@ class CVEntry extends React.Component {
                     type={getContactInputType(this.state.type)}
                     value={this.state.value}
                     onChange={e => this.setState({'value': e.target.value})}
+                    onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
+                    onMouseUp={e => e.target.focus()}
                 />
                 <InputGroup.Append>
                     <Button
                         variant="link"
-                        onClick={() => this.props.deleteEntry(this.props.idx)}
+                        onMouseUp={() => this.props.deleteEntry(this.props.idx)/*MouseUp lets a previously edited entry blur and save first before deleting*/}
                     >
                         <FaTrash color="#ed6a5a"/>
                     </Button>
@@ -106,16 +108,19 @@ class CVEntry extends React.Component {
                     <Form.Label>{this.entryName(this.props.type, this.props.idx)}</Form.Label>
                     <InputGroup>
                     <Form.Control
+                        className="rounded"
                         type={this.dataType(this.props.type)[0]}
                         as={this.dataType(this.props.type)[1]}
                         value={this.state.value}
                         onChange={e => this.setState({'value': e.target.value})}
+                        onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
+                        onMouseUp={e => e.target.focus()}
                     >
                     </Form.Control>
                     <InputGroup.Append>
                         <Button
                             variant="link"
-                            onClick={() => this.props.deleteEntry(this.props.idx)}
+                            onMouseUp={() => this.props.deleteEntry(this.props.idx)}
                         >
                             <FaTrash color="#ed6a5a"/>
                         </Button>
@@ -133,6 +138,8 @@ class CVEntry extends React.Component {
                         as={this.dataType(this.props.type)[1]}
                         value={this.state.value}
                         onChange={e => this.setState({'value': e.target.value})}
+                        onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
+                        onMouseUp={e => e.target.focus()}
                     >
                     </Form.Control>
                 </Form.Group>
