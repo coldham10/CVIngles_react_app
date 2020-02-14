@@ -12,7 +12,6 @@ import CVEntry from './CVEntry.js';
 class CVEntryGroup extends React.Component {
     constructor(props) {
         super(props);
-        console.log('group made');
         this.uid = -1;
         this.state = {'entries': this.props.data.map(entry => {
             entry.key = ++this.uid;
