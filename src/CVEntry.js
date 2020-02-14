@@ -86,7 +86,7 @@ class CVEntry extends React.Component {
                     type={getContactInputType(this.state.type)}
                     value={this.state.value}
                     onChange={e => this.setState({'value': e.target.value})}
-                    onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
+                    onBlur={() => this.props.setVal(this.props.idx, this.state.value) /*push up to level above - TODO keep everything local*/}
                     onMouseUp={e => e.target.focus()}
                 />
                 <InputGroup.Append>

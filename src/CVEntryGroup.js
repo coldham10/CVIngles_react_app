@@ -12,8 +12,12 @@ import CVEntry from './CVEntry.js';
 class CVEntryGroup extends React.Component {
     constructor(props) {
         super(props);
+        console.log('group made');
         this.uid = -1;
-        this.state = {'entries': this.props.data};
+        this.state = {'entries': this.props.data.map(entry => {
+            entry.key = ++this.uid;
+            return entry;
+        })};
     }
     
     deleteEntry(idx) {
@@ -31,7 +35,8 @@ class CVEntryGroup extends React.Component {
     addEntry() {
         const egEntry = this.state.entries[0];
         const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy first obj
-        newEntry.value = null;
+        newEntry.value = "";
+        newEntry.key = ++this.uid;
         const entries = this.state.entries.concat([newEntry]);
         this.setState({'entries': entries});
     }
@@ -64,11 +69,11 @@ class CVEntryGroup extends React.Component {
         this.state.entries.forEach((entry, idx) => {
             if (entry.type === "achievements")  {
                 row.push(
-                    <Form.Group as={Col} md={this.getLength(entry.type)} key={idx}>
+                    <Form.Group as={Col} md={this.getLength(entry.type)} key={entry.key}>
                         <CVEntryGroup
                             type={entry.type}
                             data={entry.value}
-                            key={++this.uid}
+                            key={entry.key}
                             idx={idx}
                             extensible
                         />
@@ -77,11 +82,11 @@ class CVEntryGroup extends React.Component {
             }
             else {
                 row.push(
-                    <Form.Group as={Col} md={this.getLength(entry.type)} key={idx}>
+                    <Form.Group as={Col} md={this.getLength(entry.type)} key={entry.key}>
                         <CVEntry
                             type={entry.type}
                             data={entry.value}
-                            key={++this.uid}
+                            key={entry.key}
                             idx={idx}
                             deleteEntry={this.deleteEntry.bind(this)}
                             setVal={this.setVal.bind(this)}

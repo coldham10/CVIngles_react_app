@@ -11,6 +11,8 @@ import CVEntryGroup from './CVEntryGroup.js'
 class CVSection extends React.Component {
     constructor(props) {
         super(props);
+        this.uid = -1;
+        this.state = {'entries': this.props.data};
     }
     
     sectionName() {
@@ -27,9 +29,8 @@ class CVSection extends React.Component {
     }
 
     render() {
-        let inner = this.props.data.map((entry, idx) => {
+        let inner = this.state.entries.map((entry, idx) => {
             if (this.props.type === "datos") {
-                //XXX could also be extra category that uses ungrouped data...
                 return (
                     <CVEntry
                         type={entry.type}
