@@ -1,25 +1,61 @@
-{ "options": {
-        "inputLanguage": "es",
-        "outputLanguage": "en"
-    },
-    "model": [
+{ "options":
         {
-            "type":"datos",
-            "value" : [
-                {"type": "name", "value": null},
-                {"type": "dob", "value": null},
-                {"type": "address", "value": null},
-                {"type": "contact", "value": {"type": "phone", "value": null}}
-            ]
+            "inputLanguage": "es",
+            "outputLanguage": "en"
         },
-        {
-            "type": "estudios",
-            "value": []
-        },
-        {
-            "type": "experiencia",
-            "value": []
-        }
+    "model":
+        [
+            {
+                "type": "datos",
+                "value" :
+                    [
+                        {"type": "name", "value": ""},
+                        {"type": "dob", "value": ""},
+                        {"type": "address", "value": ""},
+                        {"type": "contact", "value": {"type": "phone", "value": ""}}
+                    ]
+            },
+            {
+                "type": "estudios",
+                "value":
+                    [
+                        {
+                            "type": "degree",
+                            "value": [
+                                {"type": "degreeName",  "value": ""},
+                                {"type": "startYear",   "value": ""},
+                                {"type": "endYear",     "value": ""},
+                                {"type": "grade",       "value": ""},
+                                {"type": "university",  "value": ""},
+                                {"type": "location",    "value": ""},
+                                {"type": "desc",        "value": ""}
+                            ]
+                        }
+                    ]
+            },
+            {
+                "type": "experiencia",
+                "value":
+                    [
+                        {
+                            "type": "job",
+                            "value":
+                                [
+                                    {"type": "title", "value":  ""},
+                                    {"type": "employer", "value":  ""},
+                                    {"type": "location", "value":  ""},
+                                    {"type": "startYear",   "value": ""},
+                                    {"type": "endYear",     "value": ""},
+                                    {"type": "desc", "value":  ""},
+                                    {"type": "achievements", "value":
+                                        [
+                                            {"type": "achievement", "value": ""}
+                                        ]
+                                    }
+                                ]
+                        }
+                    ]
+            }
     ]
 }
 

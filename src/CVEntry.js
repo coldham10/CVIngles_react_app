@@ -37,8 +37,8 @@ class CVEntry extends React.Component {
             case 'address':     return 'Direccíon';
             case 'contact':     return `Modo de Contacto ${idx - 2}`;
             case 'degreeName':  return 'Nombre Completo de Carrera o Curso';
-            case 'startYear':   return 'Año de Empezar';
-            case 'endYear':     return 'Año de Terminar';
+            case 'startYear':   return 'Año de Comienzo';
+            case 'endYear':     return 'Año de Terminación';
             case 'grade':       return 'Nota (x.x/x.x)';
             case 'university':  return 'Universidad o Instituto';
             case 'location':    return 'Ciudad, País';

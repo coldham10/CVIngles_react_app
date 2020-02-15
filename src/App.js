@@ -40,7 +40,7 @@ function MainNavBar(props) {
 
 function App() {
     //TODO make a class so persists
-    let formData = require('./example.json');
+    let formData = require('./model.json');
     return (
         <div className="App">
             <MainNavBar />

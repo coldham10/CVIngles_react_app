@@ -45,6 +45,8 @@
                                     {"type": "title", "value":  "CEO"},
                                     {"type": "employer", "value":  "General Dynamics"},
                                     {"type": "location", "value":  "Boston, USA"},
+                                    {"type": "startYear",   "value": 1990},
+                                    {"type": "endYear",     "value": 1994},
                                     {"type": "desc", "value":  "Muy aburrido, nada que hacer la verdad."},
                                     {"type": "achievements", "value":
                                         [

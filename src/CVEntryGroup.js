@@ -59,7 +59,7 @@ class CVEntryGroup extends React.Component {
 
     groupName(type, idx) {
         switch(type) {
-            case "degree": return `Carrera ${idx + 1}`;
+            case "degree": return `Estudio ${idx + 1}`;
             case "job": return `Trabajo ${idx + 1}`;
             case "achievements": return `Logros`;
             default: return "Unknown group";

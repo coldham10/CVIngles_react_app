@@ -1,5 +1,7 @@
 form on 'hidden' page, have to click through from cards giving option types
 checkout page
-CVEntry(deletable, length, ?contact-selectable...)
-CVEntryGroup - e.g. degree, job - col and row
 a sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!
+Ability to add sections
+Fix UX - responsive margins & less ugly
+Submit works and creates JSON element
+

@@ -26,9 +26,10 @@
 }
 
 .cv-form {
+    margin-bottom: 40px;
     margin-top: 80px;
-    padding: 20px;
     background-color: var(--cadet);
+    padding: 10px;
 }
 
 .cv-form-section {

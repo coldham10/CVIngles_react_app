@@ -34,10 +34,14 @@ class CVForm extends React.Component {
                     if (event.which === 13 && event.target.type !== 'textarea'  /* Enter */) event.preventDefault();
                 }}
             >
+                <Container>
                 <h1>Crea Tu Hoja de Vida</h1>
+                </Container>
+                <Container>
                     {inner}
+                </Container>
                 <Button variant="primary" type="submit">
-                  Submit
+                  Enviar
                 </Button>
             </Form>
             </Container>
