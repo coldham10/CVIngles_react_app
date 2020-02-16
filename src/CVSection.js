@@ -99,9 +99,13 @@ class CVSection extends React.Component {
             );
         });
         return (
-            <Container className="cv-form-section border rounded">
+            <Container className="cv-form-section border rounded mt-0 mb-3 py-2 px-2 mt-md-4 mb-md-4 p-md-4">
+                <Container className="mx-auto px-auto my-2 py-2">
                 <h2>{this.sectionName()}</h2>
+                </Container> 
+                <Container className="px-0 px-md-2">
                 {inner}
+                </Container>
             <Button
                 variant="link"
                 onClick={this.addEntry.bind(this)}

@@ -132,15 +132,15 @@ class CVEntryGroup extends React.Component {
             </Button> ;
         const footer = this.props.extensible ? <Button variant="link" onMouseUp={this.addEntry.bind(this)}>Más</Button> : null;
         return (
-            <Container className="entry-group border rounded">
-            <Container>
-            <Row>
-                <h3>{this.groupName(this.props.type, this.props.idx)}</h3>
-                {buttons}
-            </Row>
-            </Container>
+            <Container className="entry-group border rounded py-3 px-2 px-md-3">
+                <Container className="ml-1 ml-md-3 my-1 py-1 my-md-3">
+                <Row>
+                    <h3>{this.groupName(this.props.type, this.props.idx)}</h3>
+                    {buttons}
+                </Row>
+                </Container>
                 <Collapse in={this.state.expanded}>
-                <Container>
+                <Container className="px-0 px-md-2">
                     {rows}
                 </Container>
                 </Collapse>

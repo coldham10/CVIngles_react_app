@@ -15,31 +15,20 @@
     background-color: var(--terra);
 }
 
-.main-header {
-    margin-top: 70px;
-    max-width: 100%;
-}
-
-.header-image {
-    width: 100%;
-    overflow: hidden;
+.carousel-image{
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 .cv-form {
-    margin-bottom: 40px;
-    margin-top: 80px;
+    margin-top: 100px;
     background-color: var(--cadet);
-    padding: 10px;
 }
 
 .cv-form-section {
     background-color: var(--platinum);
-    padding: 20px;
-    margin: 15px;
 }
 
 .entry-group {
     background-color: rgba(155, 193, 188, 0.3);
-    padding: 20px;
-    margin: 20px;
 }

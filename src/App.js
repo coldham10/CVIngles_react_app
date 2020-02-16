@@ -16,7 +16,7 @@ import Nav from 'react-bootstrap/Nav';
 
 function MainNavBar(props) {
     return (
-        <Navbar fixed="top" expand="md" className="custom-nav">
+        <Navbar fixed="top" expand="md" className="custom-nav mb-4">
             <Navbar.Brand href="/">
                 <img
                     alt=""
