@@ -15,7 +15,7 @@ function Home() {
         <Carousel className>
         <Carousel.Item>
         <Card>
-        <Card.Body>
+        <Card.Body className="pt-0">
         <Image as={Card.Image}
            className="vh-100 carousel-image"
            src="suit-pro.jpg"
