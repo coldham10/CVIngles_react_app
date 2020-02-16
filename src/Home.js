@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
 
 function Home() {
     return (
@@ -13,12 +14,20 @@ function Home() {
         <Container fluid className="mx-0 px-0 ">
         <Carousel className>
         <Carousel.Item>
-        <Image
+        <Card>
+        <Card.Body>
+        <Image as={Card.Image}
            className="vh-100 carousel-image"
            src="suit-pro.jpg"
            alt="First slide"
         />
-        <h1>Test</h1>
+        <Card.ImgOverlay>
+            <Card.Title className="text-center">
+            <h1 className="overlay-h1">Profesional</h1>
+            </Card.Title>
+        </Card.ImgOverlay>
+        </Card.Body>
+        </Card>
         <Carousel.Caption>
         <h3>Deja que su próximo empleador vea lo mejor de usted</h3>
         </Carousel.Caption>

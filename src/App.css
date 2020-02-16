@@ -15,6 +15,15 @@
     background-color: var(--terra);
 }
 
+.overlay-h1 {
+    color: var(--platinum);
+    margin-top: calc(100px + 30vh);
+    font-size: 10vw;
+    font-family: 'Manuale', serif;
+    font-weight: bold;
+    letter-spacing: 1vw;
+}
+
 .carousel-image{
     margin-left: 50%;
     transform: translateX(-50%);
