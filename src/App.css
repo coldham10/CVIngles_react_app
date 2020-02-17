@@ -17,7 +17,7 @@
 
 .overlay-h1 {
     color: var(--platinum);
-    margin-top: calc(100px + 30vh);
+    margin-top: calc((48vh - 6vw) - 15px);
     font-size: 10vw;
     font-family: 'Manuale', serif;
     font-weight: bold;

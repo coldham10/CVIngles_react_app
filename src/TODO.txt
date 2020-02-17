@@ -4,3 +4,6 @@ a sabias que on front page about shorter CVs being better english speakers... pl
 Ability to add sections
 Fix UX - responsive margins & less ugly
 Submit works and creates JSON element
+image upload
+swipe
+explore altacv and other options
