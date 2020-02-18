@@ -7,3 +7,8 @@ Submit works and creates JSON element
 image upload
 swipe
 explore altacv and other options
+Cover Letter - nativo = 5c/word
+surge pricing - expected delay calculator and expedite?
+freeform extra datos personales with 
+Variables from Home that influence Form - option selected & translation
+Form - language selectors at top, plan selector cards at bottom. If en-es selected disable basic. if es-es selected, disable other two

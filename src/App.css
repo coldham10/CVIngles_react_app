@@ -6,27 +6,62 @@
     --blond : #f4f1bb;
 }
 
-.custom-nav {
+.App {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.navbar {
     background-color: var(--cadet);
     border-bottom: 2px solid var(--terra);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
 }
+
 
 .btn-primary {
     background-color: var(--terra);
 }
 
+.btn-secondary {
+    background-color: var(--cadet) !important;
+    border-width: 0px !important;
+    color: black !important;
+}
+
 .overlay-h1 {
     color: var(--platinum);
     margin-top: calc((48vh - 6vw) - 15px);
-    font-size: 10vw;
+    font-size: calc(10vw + 0.7em);
     font-family: 'Manuale', serif;
     font-weight: bold;
     letter-spacing: 1vw;
 }
 
+.carousel-subtitle {
+    font-size: calc(1.7vw + 0.6em);
+}
+
 .carousel-image{
     margin-left: 50%;
     transform: translateX(-50%);
+}
+
+@keyframes indicator-flow {
+    0%   { transform: translateY(-50%); color: rgba(255,255,255,0.2);}
+    75%  { transform: translateY(50%);  color: rgb(255,255,255,1);}
+    100% { transform: translateY(50%);  color: rgba(0,0,0,0);}
+}
+
+.scroll-indicator {
+    position: absolute;
+    animation-name: indicator-flow;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.main-c2 {
+    background-color: rgba(155, 193, 188, 0.5);
 }
 
 .cv-form {
