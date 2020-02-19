@@ -83,14 +83,14 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem' }}
+                style={{ width: '18rem', height: '14rem' }}
                 bg="light"
             >
                 <Card.Body>
                     <Card.Title><Row><Col>Todo inglés</Col><Col xs={4}>$0</Col></Row></Card.Title>
-                    <Card.Text>
-                        Lorem ipsum dolor amet organic vaporware next level iPhone cliche vinyl.
-                        Readymade flannel aliqua ennui normcore adaptogen.
+                    <Card.Text className="py-3">
+                        Escribe todo en inglés y el CV está en inglés.
+                        Usted tiene control mas directo con el sentido del producto final.
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -99,14 +99,14 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem' }}
+                style={{ width: '18rem', height: '14rem' }}
                 bg="light"
             >
                 <Card.Body>
-                    <Card.Title><Row><Col>Traducido</Col><Col xs={4}>$5</Col></Row></Card.Title>
+                    <Card.Title><Row><Col>Traducido</Col><Col xs={4}>$8</Col></Row></Card.Title>
                     <Card.Text>
-                        Lorem ipsum dolor amet organic vaporware next level iPhone cliche vinyl.
-                        Gluten-free occaecat microdosing post-ironic cred hammock succulents kombucha sriracha roof party ut forage est synth subway tile.
+                        Usted puede escribir algunas o todas partes en español, y nosotros lo traduciremos a ingles nativo.{' '} 
+                        <strong>Con traducion es necesario incluir el servicio Nativo o Profesional</strong>.
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -115,14 +115,13 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem' }}
+                style={{ width: '18rem', height: '14rem' }}
                 bg="light"
             >
                 <Card.Body>
-                    <Card.Title><Row><Col>Todo Español</Col><Col xs={4}>$0</Col></Row></Card.Title>
-                    <Card.Text>
-                        Quis selfies edison bulb scenester godard lorem.
-                        Viral 8-bit four dollar toast, woke pariatur lomo raw denim labore. Bitters ugh 90's typewriter offal jianbing, est iceland cold-pressed ad scenester heirloom.
+                    <Card.Title><Row><Col>Todo español</Col><Col xs={4}>$0</Col></Row></Card.Title>
+                    <Card.Text className="py-3">
+                        Escribe todo en español y el CV está en español. Si el CV final está en español, <strong>no podemos hacer el servicio Nativo ni Profesional</strong>.
                     </Card.Text>
                 </Card.Body>
             </Card>

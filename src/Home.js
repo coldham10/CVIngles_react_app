@@ -94,7 +94,7 @@ function Home() {
                 <p className="p-2">
                 <strong>Incluye también formato Impesionante y el servicio Nativo.</strong>
                 </p>
-                <Button variant="secondary">Empiece</Button>
+                <Button variant="secondary" href="/empiece">Empiece</Button>
             </Card.Body>
         </Card>
         </Container>
@@ -115,7 +115,7 @@ function Home() {
                 <p className="p-2">
                 <strong>Incluye también formato Impesionante.</strong>
                 </p>
-                <Button variant="secondary">Empiece</Button>
+                <Button variant="secondary" href="/empiece">Empiece</Button>
             </Card.Body>
         </Card>
         </Container>
@@ -133,7 +133,7 @@ function Home() {
                     No areglamos problemas de gramatica y fluidez.
                 </p>
                 <p className="p-2">
-                    <Button variant="secondary">Empiece</Button>
+                    <Button variant="secondary" href="/empiece">Empiece</Button>
                 </p>
             </Card.Body>
         </Card>
@@ -149,13 +149,13 @@ function Home() {
                     Si prefiere escrbir en español, podemos traducir su hoja de vida a inglés por un cargo adicional con los servcios Nativo y Profesional. 
                 </p>
                 <p className="p-2">
-                    <Button variant="secondary">Empiece</Button>
+                    <Button variant="secondary" href="/empiece">Empiece</Button>
                 </p>
                 <p className="p-2">
                     Todos nuestros servicios puden ser aplicados a una carta de presentacion también, cargado por palabra.
                 </p>
                 <p className="p-2">
-                    <Button variant="secondary">Empiece</Button>
+                    <Button variant="secondary" href="/empiece">Empiece</Button>
                 </p>
             </Card.Body>
         </Card>

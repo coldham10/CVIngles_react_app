@@ -35,7 +35,7 @@ function MainNavBar(props) {
             <Nav className="mr-auto">
                 <Nav.Link href="/">Servicios</Nav.Link>
                 <Nav.Link href="/testimonios">Testimonios</Nav.Link>
-                <Nav.Link href="/enviar">Empiece</Nav.Link>
+                <Nav.Link href="/empiece">Empiece</Nav.Link>
             </Nav>
         </Navbar.Collapse>
         </Container>
@@ -83,7 +83,7 @@ function App() {
                       <Route path="/testimonio">
                       put in tag
                       </Route>
-                      <Route path="/enviar">
+                      <Route path="/empiece">
                       <Choice />
                       </Route>
                     </Switch>
