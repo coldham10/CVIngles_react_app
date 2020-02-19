@@ -1,14 +1,13 @@
 form on 'hidden' page, have to click through from cards giving option types
-checkout page
-a sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!
-Ability to add sections
-Fix UX - responsive margins & less ugly
+Form - language selectors at top, plan selector cards at bottom. If en-es selected disable basic. if es-es selected, disable other two
 Submit works and creates JSON element
+checkout page - swipe
 image upload
-swipe
-explore altacv and other options
+Variables from Home that influence Form - option selected & translation
+Form validation
+freeform extra datos personales with text input type
+Ability to add sections
+a sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!
 Cover Letter - nativo = 5c/word
 surge pricing - expected delay calculator and expedite?
-freeform extra datos personales with 
-Variables from Home that influence Form - option selected & translation
-Form - language selectors at top, plan selector cards at bottom. If en-es selected disable basic. if es-es selected, disable other two
+explore altacv and other options

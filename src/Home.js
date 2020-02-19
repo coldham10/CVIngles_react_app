@@ -59,7 +59,7 @@ function Home() {
             </Carousel.Item>
         </Carousel>
         </Container>
-        <Container className="my-3 p-3">
+        <Container className="my-3 p-3" id="servicios">
         <h1 className="my-3">Que hacemos?</h1>
         <p className="p-2">
         Incluso si usted ha trabajado en inglés durante años y habla muy bien, aún escribir como nativo angloparlante queda muy dificil.
@@ -75,7 +75,7 @@ function Home() {
         </Container>
 
         <Container fluid className="m-0 main-c2">
-        <Container className="my-3 p-3 ">
+        <Container className="mt-3 p-3 ">
         <h1 className="my-3">Nuestros opciones</h1>
 
         <Container className="py-3 px-1">

@@ -18,6 +18,10 @@
     font-size: 1.2em;
 }
 
+.footer {
+    background-color: var(--cadet);
+}
+
 
 .btn-primary {
     background-color: var(--terra);
@@ -28,6 +32,8 @@
     border-width: 0px !important;
     color: black !important;
 }
+
+/*Home page*/
 
 .overlay-h1 {
     color: var(--platinum);
@@ -63,6 +69,18 @@
 .main-c2 {
     background-color: rgba(155, 193, 188, 0.5);
 }
+
+/*Choice*/
+
+.choice {
+    margin-top: 100px;
+}
+
+.choice-group {
+    background-color: rgba(155, 193, 188, 0.3);
+}
+
+/*Form*/
 
 .cv-form {
     margin-top: 100px;
