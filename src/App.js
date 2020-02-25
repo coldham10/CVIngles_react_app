@@ -68,31 +68,47 @@ function Footer() {
 }
 
 
-function App() {
-    //TODO make a class so persists options and can pass between pages
-    let formData = require('./model.json');
-    return (
-        <div className="App">
-            <MainNavBar />
-            <Router>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        let template = require('./model.json');
+        this.state = {'formData': template.model, 'options': template.options};
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <MainNavBar />
+                <Router>
                 <div>
-                    <Switch>
-                      <Route exact path="/">
-                      <Home />
-                      </Route>
-                      <Route path="/testimonio">
-                      put in tag
-                      </Route>
-                      <Route path="/empiece">
-                      <Choice />
-                      </Route>
-                    </Switch>
+                <Switch>
+                    <Route exact path="/">
+                        <Home
+                            options={this.state.options}
+                            setOptions={opts => this.setState({'options': opts})}
+                        />
+                    </Route>
+                    <Route path="/empiece">
+                        <Choice
+                            options={this.state.options}
+                            setOptions={opts => this.setState({'options': opts})}
+                        />
+                    </Route>
+                    <Route path="/enviar">
+                        <CVForm
+                            data={this.state.formData}
+                            options={this.state.options}
+                            setOptions={opts => this.setState({'options': opts})}
+                            setData={data => this.setState({'formData': data})}
+                        />
+                    </Route>
+                </Switch>
                 </div>
-            </Router>
-            <Footer />
-        </div>
-    );
+                </Router>
+                <Footer />
+            </div>
+        );
+    }
 }
-//<CVForm data={formData.model}/> 
 
 export default App;

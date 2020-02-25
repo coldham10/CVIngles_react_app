@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import { IoIosArrowDown } from 'react-icons/io';
@@ -15,11 +14,11 @@ import { IoIosArrowDown } from 'react-icons/io';
 function Home() {
     return (
         <>
-        <Container fluid className="m-0 p-0 ">
+        <Container fluid className="m-0 p-0">
         <Carousel className="mb-0 pb-0" pauseOnHover={false} interval={6000} indicators={false} controls={false}>
             <Carousel.Item className="mb-0 pb-0">
                 <Card style={{border: 'none'}}>
-                    <Card.Body className="py-0 overflow-hidden">
+                    <Card.Body className="py-0 overflow-hidden carousel-card">
                         <Image as={Card.Image}
                            className="vh-100 carousel-image"
                            src="suit-pro.jpg"
@@ -37,9 +36,10 @@ function Home() {
                     <IoIosArrowDown className="scroll-indicator"/>
                 </Carousel.Caption>
             </Carousel.Item>
+
             <Carousel.Item className="mb-0 pb-0">
                 <Card style={{border: 'none'}}>
-                    <Card.Body className="py-0 overflow-hidden">
+                    <Card.Body className="py-0 overflow-hidden carousel-card">
                         <Image as={Card.Image}
                            className="vh-100 carousel-image"
                            src="dark-english.jpg"
@@ -53,6 +53,27 @@ function Home() {
                 </Card>
                 <Carousel.Caption>
                     <h3 className="carousel-subtitle">Su hoja de vida revisada por un profesional nativo agloparlante</h3>
+                    <br />
+                    <IoIosArrowDown className="scroll-indicator"/>
+                </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item className="mb-0 pb-0">
+                <Card style={{border: 'none'}}>
+                    <Card.Body className="py-0 overflow-hidden carousel-card">
+                        <Image as={Card.Image}
+                           className="vh-100 carousel-image"
+                           src="splash.jpg"
+                        />
+                        <Card.ImgOverlay className="mb-0 pb-0">
+                            <Card.Title className="text-center">
+                            <h1 className="overlay-h1">Impresionante</h1>
+                            </Card.Title>
+                        </Card.ImgOverlay>
+                    </Card.Body>
+                </Card>
+                <Carousel.Caption>
+                    <h3 className="carousel-subtitle">Formato muy profesional y elegante</h3>
                     <br />
                     <IoIosArrowDown className="scroll-indicator"/>
                 </Carousel.Caption>

@@ -53,6 +53,10 @@
     transform: translateX(-50%);
 }
 
+.carousel-card{
+    background-color: black !important;
+}
+
 @keyframes indicator-flow {
     0%   { transform: translateY(-50%); color: rgba(255,255,255,0.2);}
     75%  { transform: translateY(50%);  color: rgb(255,255,255,1);}

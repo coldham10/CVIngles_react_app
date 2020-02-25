@@ -1,13 +1,16 @@
-form on 'hidden' page, have to click through from cards giving option types
-Form - language selectors at top, plan selector cards at bottom. If en-es selected disable basic. if es-es selected, disable other two
+New product scheme: Native english: 10, professional trans. 20, cosulting & content editing: 40
+Impresionante image darkened
+Make example CVs in each style, use pics for selector on options page
+Form - plan and format selection cards
 Submit works and creates JSON element
 checkout page - swipe
 image upload
-Variables from Home that influence Form - option selected & translation
+Variables from Home that influence Form - service selected
 Form validation
 freeform extra datos personales with text input type
-Ability to add sections
-a sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!
+Ability to add section(s)
+A sabias que on front page about shorter CVs being better english speakers... place of birth etc irrelevant!
 Cover Letter - nativo = 5c/word
-surge pricing - expected delay calculator and expedite?
+
 explore altacv and other options
+

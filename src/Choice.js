@@ -7,11 +7,13 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 class Choice extends React.Component{
     constructor(props) {
         super(props);
-        /*TODO: update settings from App for selected options such as package, languages*/
+        this.state = {'options': props.options};
+        this.sendOptions = props.setOptions;
     }
     /*TODO: update state in such a way that disables excluded combos;
     * highlight selected with bg="primary"
@@ -26,9 +28,9 @@ class Choice extends React.Component{
             <Row>
             <Col>
             <Card
-                className="mx-auto my-4"
-                style={{ width: '18rem' , height: '25rem'}}
-                bg="light"
+                className={'mx-auto my-4'}
+                style={{ width: '18rem' , height: '25rem', backgroundColor: (this.state.options.service === 'p' ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperty({...this.state.options}, 'service', {'value': 'p'})})}
             >
                 <Card.Img variant="top" src="./shrink-suit.jpg" />
                 <Card.Body>
@@ -44,8 +46,8 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem' , height: '25rem'}}
-                bg="light"
+                style={{ width: '18rem' , height: '25rem', backgroundColor: (this.state.options.service === 'n' ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperty({...this.state.options}, 'service', {'value': 'n'})})}
             >
                 <Card.Img variant="top" src="./shrink-english.jpg" />
                 <Card.Body>
@@ -61,10 +63,10 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem' , height: '25rem'}}
-                bg="light"
+                style={{ width: '18rem' , height: '25rem', backgroundColor: (this.state.options.service === 'i' ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperty({...this.state.options}, 'service', {'value': 'i'})})}
             >
-                <Card.Img variant="top" src="./shrink-suit.jpg" />
+                <Card.Img variant="top" src="./shrink-splash.jpg" />
                 <Card.Body>
                     <Card.Title><Row><Col>Impresionante</Col><Col xs={4}>$8</Col></Row></Card.Title>
                     <Card.Text>
@@ -83,8 +85,8 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem', height: '14rem' }}
-                bg="light"
+                style={{ width: '18rem' , height: '14rem', backgroundColor: ((this.state.options.inLang === 'en' && this.state.options.outLang === 'en') ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperties({...this.state.options}, {'inLang': {'value': 'en'}, 'outLang': {'value':'en'}})})}
             >
                 <Card.Body>
                     <Card.Title><Row><Col>Todo inglés</Col><Col xs={4}>$0</Col></Row></Card.Title>
@@ -99,8 +101,8 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem', height: '14rem' }}
-                bg="light"
+                style={{ width: '18rem' , height: '14rem', backgroundColor: ((this.state.options.inLang === 'es' && this.state.options.outLang === 'en') ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperties({...this.state.options}, {'inLang': {'value': 'es'}, 'outLang': {'value':'en'}})})}
             >
                 <Card.Body>
                     <Card.Title><Row><Col>Traducido</Col><Col xs={4}>$8</Col></Row></Card.Title>
@@ -115,8 +117,8 @@ class Choice extends React.Component{
             <Col>
             <Card
                 className="mx-auto my-4"
-                style={{ width: '18rem', height: '14rem' }}
-                bg="light"
+                style={{ width: '18rem' , height: '14rem', backgroundColor: ((this.state.options.inLang === 'es' && this.state.options.outLang === 'es') ? "#5ca4a9" : "white")}}
+                onClick={() => this.setState({'options': Object.defineProperties({...this.state.options}, {'inLang': {'value': 'es'}, 'outLang': {'value':'es'}})})}
             >
                 <Card.Body>
                     <Card.Title><Row><Col>Todo español</Col><Col xs={4}>$0</Col></Row></Card.Title>
@@ -128,6 +130,10 @@ class Choice extends React.Component{
             </Col>
             </Row>
 
+            </Container>
+
+            <Container className="pb-5">
+            <Button variant="secondary" className="mx-auto">¡Cree su CV!</Button>
             </Container>
             </Container>
         );
