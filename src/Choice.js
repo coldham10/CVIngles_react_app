@@ -55,7 +55,7 @@ class Choice extends React.Component{
             >
                 <Card.Img variant="top" src="./shrink-english.jpg" />
                 <Card.Body>
-                    <Card.Title><Row><Col>Traducción Profesional</Col><Col xs={4}>$15</Col></Row></Card.Title>
+                    <Card.Title><Row><Col>Traducción Profesional</Col><Col xs={4}>$20</Col></Row></Card.Title>
                     <Card.Text>
                         <p>
                         Su hoja de vida es traducido de español por nuestro equipo de hispanohablantes bilingües y luego editado por nuestro equipo angloparlante.
@@ -76,7 +76,7 @@ class Choice extends React.Component{
             >
                 <Card.Img variant="top" src="./shrink-splash.jpg" />
                 <Card.Body>
-                    <Card.Title><Row><Col>Inglés Nativo</Col><Col xs={4}>$10</Col></Row></Card.Title>
+                    <Card.Title><Row><Col>Inglés Nativo</Col><Col xs={4}>$15</Col></Row></Card.Title>
                     <Card.Text>
                         <p>
                         Nuestro equipo de editores nativos angloparlantes modifica su hoja de vida hasta que el inglés está fluido y nativo.
