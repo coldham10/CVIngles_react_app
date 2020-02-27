@@ -80,6 +80,7 @@ class CVEntryGroup extends React.Component {
                             key={entry.key}
                             idx={idx}
                             extensible
+                            name={this.props.name + '_' + entry.type}
                         />
                     </Form.Group>
                 );
@@ -95,6 +96,7 @@ class CVEntryGroup extends React.Component {
                             deleteEntry={this.deleteEntry.bind(this)}
                             setVal={this.setVal.bind(this)}
                             deletable={this.state.entries.length > 1 /*Achievements*/}
+                            name={this.props.name + '_' + entry.type}
                         />
                     </Form.Group>
                 );

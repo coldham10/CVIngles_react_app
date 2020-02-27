@@ -84,6 +84,7 @@ class CVSection extends React.Component {
                         deleteEntry={this.deleteEntry.bind(this)}
                         setVal={this.setVal.bind(this)}
                         deletable={this.state.entries.length > 4 /*Contacts*/}
+                        name={this.props.type + '_' + entry.type}
                     />
                 );
             }
@@ -95,6 +96,7 @@ class CVSection extends React.Component {
                     idx={idx}
                     deleteEntry={this.deleteEntry.bind(this)}
                     deletable={this.state.entries.length > 1}
+                    name={this.props.type + '_' + entry.type + idx}
                 />
             );
         });

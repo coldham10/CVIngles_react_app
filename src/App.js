@@ -4,6 +4,7 @@ import './App.css';
 import Home from './Home.js';
 import CVForm from './CVForm.js';
 import Choice from './Choice.js';
+import Checkout from './Checkout.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -71,7 +72,7 @@ function Footer() {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let template = require('./model.json');
+        let template = require('./example.json');
         this.state = {'formData': template.model, 'options': template.options};
     }
 
@@ -101,6 +102,9 @@ class App extends React.Component {
                             setOptions={opts => this.setState({'options': opts})}
                             setData={data => this.setState({'formData': data})}
                         />
+                    </Route>
+                    <Route path='/caja'>
+                        <Checkout />
                     </Route>
                 </Switch>
                 </div>

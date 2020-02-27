@@ -3,6 +3,8 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { withRouter } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -13,6 +15,9 @@ import CVSection from './CVSection.js'
 class CVForm extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {'options': props.options, 'data': ''};
+        this.sendOptions = props.setOptions;
+        this.sendData = props.setData;
     }
 
     render() {
@@ -30,6 +35,7 @@ class CVForm extends React.Component {
             <Container className="mb-5">
             <Form
                 className="cv-form border rounded px-2 px-md-4 py-3"
+                onSubmit={e => this.handleSubmit(e)}
                 onKeyPress={event => {
                     if (event.which === 13 && event.target.type !== 'textarea'  /* Enter */) event.preventDefault();
                 }}
@@ -47,6 +53,34 @@ class CVForm extends React.Component {
             </Container>
         );
     }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        let formData = {}
+        for (let i = 0; i < event.target.elements.length; i++) { // All form elements at time of submit
+            const elem = event.target.elements[i];
+            if (elem.outerHTML.split(' ')[0] !== '<input' && elem.outerHTML.split(' ')[0] !== '<textarea') continue; //skip over non-control elements
+            formData = this.addElementToDataObject(formData, elem.name, elem.value);
+        }
+        console.log(JSON.stringify(formData, null, 2))
+        
+
+        //this.props.history.push('/caja');
+        //window.scrollTo(0,0);
+    }
+
+    addElementToDataObject(obj, name, value) {
+        /*Using the element name creates/assigns the value to the relevant part of the data object*/
+        const tokens = name.split('_');
+        const category = tokens.shift();
+        if (tokens.length < 1) { //final depth reached, add value
+            obj[category] = value;
+        }
+        else {
+            obj[category] = this.addElementToDataObject(obj[category] || {}, tokens.join('_'), value);
+        }
+        return obj;
+    }
 }
 
-export default CVForm;
+export default withRouter(CVForm);
