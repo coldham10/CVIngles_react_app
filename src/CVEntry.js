@@ -102,7 +102,7 @@ class CVEntry extends React.Component {
                     onChange={e => this.setState({'value': e.target.value})}
                     onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
                     onMouseUp={e => e.target.focus()}
-                    name={this.props.name + (this.props.idx - 3) + '_'  + this.state.contactType}
+                    name={this.props.name + '_' + (this.props.idx - 3) + '_'  + this.state.contactType}
                 />
                 <InputGroup.Append>
                     {deleteButton}
@@ -125,7 +125,7 @@ class CVEntry extends React.Component {
                         onChange={e => this.setState({'value': e.target.value})}
                         onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
                         onMouseUp={e => e.target.focus()}
-                        name={this.props.name + this.props.idx}
+                        name={this.props.name}
                     >
                     </Form.Control>
                     <InputGroup.Append>

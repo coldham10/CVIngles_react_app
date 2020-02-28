@@ -96,7 +96,7 @@ class CVEntryGroup extends React.Component {
                             deleteEntry={this.deleteEntry.bind(this)}
                             setVal={this.setVal.bind(this)}
                             deletable={this.state.entries.length > 1 /*Achievements*/}
-                            name={this.props.name + '_' + entry.type}
+                            name={this.props.name + (entry.type === 'achievement' ? '_' + idx : '') + '_' +  entry.type}
                         />
                     </Form.Group>
                 );

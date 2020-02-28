@@ -96,7 +96,7 @@ class CVSection extends React.Component {
                     idx={idx}
                     deleteEntry={this.deleteEntry.bind(this)}
                     deletable={this.state.entries.length > 1}
-                    name={this.props.type + '_' + entry.type + idx}
+                    name={this.props.type + '_' + idx }
                 />
             );
         });

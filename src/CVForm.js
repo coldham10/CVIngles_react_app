@@ -15,22 +15,26 @@ import CVSection from './CVSection.js'
 class CVForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {'options': props.options, 'data': ''};
+        this.state = {'options': props.options, 'data': this.props.data} 
         this.sendOptions = props.setOptions;
         this.sendData = props.setData;
+        this.sectionOrder = {'datos': 0, 'estudios': 1, 'experiencia': 2};
     }
 
     render() {
         /*Map section data to section objects*/
-        let inner = this.props.data.map((section, idx) => {
-            return (
-                <CVSection
-                type={section.type}
-                data={section.value}
-                key={idx}
-            />
-            );
-        });
+        //let inner =  Object.keys(this.state.data)
+            //.sort((a,b) => this.sectionOrder[a] - this.sectionOrder[b])
+        let inner = this.state.data.map((section, idx) => {
+                return (
+                    <CVSection
+                    type={section.type}
+                    data={section.value}
+                    key={idx}
+                />
+                );
+            }
+        );
         return (
             <Container className="mb-5">
             <Form
@@ -59,10 +63,12 @@ class CVForm extends React.Component {
         let formData = {}
         for (let i = 0; i < event.target.elements.length; i++) { // All form elements at time of submit
             const elem = event.target.elements[i];
+            console.log(elem.name + ', ' + elem.value);
             if (elem.outerHTML.split(' ')[0] !== '<input' && elem.outerHTML.split(' ')[0] !== '<textarea') continue; //skip over non-control elements
             formData = this.addElementToDataObject(formData, elem.name, elem.value);
         }
-        console.log(JSON.stringify(formData, null, 2))
+        console.log(JSON.stringify(formData, null, 2));
+        //console.log(formData);
         
 
         //this.props.history.push('/caja');
@@ -77,7 +83,24 @@ class CVForm extends React.Component {
             obj[category] = value;
         }
         else {
-            obj[category] = this.addElementToDataObject(obj[category] || {}, tokens.join('_'), value);
+            if (!Number.isNaN(Number(tokens[0]))) { //Number token next indicates this should be an array
+                if (obj[category] === undefined) {
+                    obj[category] = [];
+                }
+                let idx = tokens.shift();
+                if (obj[category][idx] === undefined) { //make new array element
+                    obj[category][idx] = this.addElementToDataObject({}, tokens.join('_'), value);
+                }
+                else {
+                    obj[category][idx] = this.addElementToDataObject(obj[category][idx], tokens.join('_'), value);
+                }
+            }
+            else { //regular object
+                if (obj[category] === undefined) {
+                    obj[category] = {};
+                }
+                obj[category] = this.addElementToDataObject(obj[category], tokens.join('_'), value);
+            }
         }
         return obj;
     }
