@@ -72,7 +72,8 @@ function Footer() {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        let template = require('./example.json');
+        /*TODO load from local save*/
+        let template = require('./example3.json');
         this.state = {'formData': template.model, 'options': template.options};
     }
 

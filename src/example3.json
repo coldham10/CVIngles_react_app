@@ -1,0 +1,332 @@
+{
+  "options": {
+    "inputLanguage": "es",
+    "outputLanguage": "en"
+  },
+  "model": [
+    {
+      "name": "datos",
+      "CVtype": "section",
+      "displayName": "Datos Personales",
+      "data": [
+        {
+          "name": "name",
+          "CVtype": "entry",
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "text",
+          "data": "Joaquin Phoenix"
+        },
+        {
+          "name": "dob",
+          "CVtype": "entry",
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "date",
+          "data": "1980-07-07"
+        },
+        {
+          "name": "address",
+          "CVtype": "entry",
+          "width": 12,
+          "displayName": "Direccíon",
+          "type": "text",
+          "data": "557 Calle 13, Medellin, Colombia"
+        },
+        {
+          "name": "contact0",
+          "CVtype": "entry",
+          "width": 12,
+          "displayName": "Modo de Contacto 1",
+          "type": "contact",
+          "contactType": "wa",
+          "data": 123456789
+        },
+        {
+          "name": "contact1",
+          "CVtype": "entry",
+          "width": 12,
+          "displayName": "Modo de Contacto 2",
+          "type": "contact",
+          "contactType": "li",
+          "data": "joaquin-phoenix-33"
+        }
+      ],
+      "default": {
+        "name": "contact",
+        "CVtype": "entry",
+        "width": 12,
+        "displayName": "Modo de Contacto ",
+        "type": "contact",
+        "contactType": "tel",
+        "data": ""
+      }
+    },
+    {
+      "name": "estudios",
+      "CVtype": "section",
+      "displayName": "Estudios",
+      "data": [
+        {
+          "name": "degree0",
+          "CVtype": "group",
+          "displayName": "Estudio 1",
+          "data": [
+            {
+              "name": "degreeName",
+              "CVtype": "entry",
+              "width": 12,
+              "displayName": "Nombre Completo de Carrera o Curso",
+              "type": "text",
+              "data": "BSc. Phisica applicada"
+            },
+            {
+              "name": "startYear",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Año de Comienzo",
+              "type": "year",
+              "data": "1990"
+            },
+            {
+              "name": "endYear",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Año de Terminación",
+              "type": "year",
+              "data": "1994"
+            },
+            {
+              "name": "grade",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Nota (x.x/x.x)",
+              "type": "text",
+              "data": "4.4/5.0"
+            },
+            {
+              "name": "university",
+              "CVtype": "entry",
+              "width": 6,
+              "displayName": "Universidad o Instituto",
+              "type": "text",
+              "data": "Universidad de Medellín"
+            },
+            {
+              "name": "location",
+              "CVtype": "entry",
+              "width": 6,
+              "displayName": "Ciudad, País",
+              "type": "text",
+              "data": "Medellín, Colombia"
+            },
+            {
+              "name": "desc",
+              "CVtype": "entry",
+              "width": 12,
+              "displayName": "Descripción",
+              "type": "textarea",
+              "data": "Nada interesante, de veras"
+            }
+          ]
+        }
+      ],
+      "default": {
+        "name": "degree",
+        "CVtype": "group",
+        "displayName": "Estudio ",
+        "data": [
+          {
+            "name": "name",
+            "CVtype": "entry",
+            "width": 12,
+            "displayName": "Nombre Completo de Carrera o Curso",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "grade",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Nota (x.x/x.x)",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "university",
+            "CVtype": "entry",
+            "width": 6,
+            "displayName": "Universidad o Instituto",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "experiencia",
+      "CVtype": "section",
+      "displayName": "Experiencia Laboral",
+      "data": [
+        {
+          "name": "job0",
+          "CVtype": "group",
+          "displayName": "Trabajo 1",
+          "data": [
+            {
+              "name": "name",
+              "CVtype": "entry",
+              "width": 12,
+              "displayName": "Nombre Completo de Carrera o Curso",
+              "type": "text",
+              "data": "BSc. Phisica applicada"
+            },
+            {
+              "name": "startYear",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Año de Comienzo",
+              "type": "year",
+              "data": "1990"
+            },
+            {
+              "name": "endYear",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Año de Terminación",
+              "type": "year",
+              "data": "1994"
+            },
+            {
+              "name": "grade",
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Nota (x.x/x.x)",
+              "type": "text",
+              "data": "4.4/5.0"
+            },
+            {
+              "name": "university",
+              "CVtype": "entry",
+              "width": 6,
+              "displayName": "Universidad o Instituto",
+              "type": "text",
+              "data": "Universidad de Medellín"
+            },
+            {
+              "name": "location",
+              "CVtype": "entry",
+              "width": 6,
+              "displayName": "Ciudad, País",
+              "type": "text",
+              "data": "Medellín, Colombia"
+            },
+            {
+              "name": "desc",
+              "CVtype": "entry",
+              "width": 12,
+              "displayName": "Descripción",
+              "type": "textarea",
+              "data": "Nada interesante, de veras"
+            }
+          ]
+        }
+      ],
+      "default": {
+        "name": "degree",
+        "CVtype": "group",
+        "displayName": "Estudio ",
+        "data": [
+          {
+            "name": "degreeName",
+            "CVtype": "entry",
+            "width": 12,
+            "displayName": "Nombre Completo de Carrera o Curso",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "grade",
+            "CVtype": "entry",
+            "width": 4,
+            "displayName": "Nota (x.x/x.x)",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "university",
+            "CVtype": "entry",
+            "width": 6,
+            "displayName": "Universidad o Instituto",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          }
+        ]
+      }
+    }
+  ]
+}

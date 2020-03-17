@@ -12,7 +12,9 @@ class CVSection extends React.Component {
     constructor(props) {
         super(props);
         this.uid = -1;
-        this.state = {'entries': this.props.data.map(entry => {
+        this.state = (this.props.type === 'datos') ? //datos is an object, others are flexible arrays
+            {'entries':  null} : //XXX
+            {'entries': this.props.data.map(entry => {
             entry.key = ++this.uid;
             return entry;
         })};
@@ -20,10 +22,6 @@ class CVSection extends React.Component {
     
     sectionName() {
         switch (this.props.type) {
-            case "datos":
-                return "Datos Personales";
-            case "estudios":
-                return "Estudios";
             case "experiencia":
                 return "Experiencia Laboral";
             default:

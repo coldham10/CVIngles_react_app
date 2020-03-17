@@ -16,6 +16,7 @@ class CVForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {'options': props.options, 'data': this.props.data} 
+        console.log(props.options);
         this.sendOptions = props.setOptions;
         this.sendData = props.setData;
         this.sectionOrder = {'datos': 0, 'estudios': 1, 'experiencia': 2};
@@ -23,13 +24,14 @@ class CVForm extends React.Component {
 
     render() {
         /*Map section data to section objects*/
-        //let inner =  Object.keys(this.state.data)
-            //.sort((a,b) => this.sectionOrder[a] - this.sectionOrder[b])
-        let inner = this.state.data.map((section, idx) => {
+        let inner =  Object.keys(this.state.data)
+            .sort((a,b) => this.sectionOrder[a] - this.sectionOrder[b])
+            .map((section, idx) => {
+                console.log(this.state.data[section])
                 return (
                     <CVSection
-                    type={section.type}
-                    data={section.value}
+                    type={section}
+                    data={this.state.data[section]}
                     key={idx}
                 />
                 );
