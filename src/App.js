@@ -98,7 +98,7 @@ class App extends React.Component {
                   data={this.state.formData}
                   options={this.state.options}
                   setOptions={opts => this.setState({ options: opts })}
-                  setData={data => this.setState({ formData: data })}
+                  formCRUD={this.formCRUD.bind(this)}
                 />
               </Route>
               <Route path="/caja">
@@ -110,6 +110,10 @@ class App extends React.Component {
         <Footer />
       </div>
     );
+  }
+
+  formCRUD() {
+    console.log(arguments);
   }
 }
 

@@ -25,12 +25,7 @@ function CVEntry(props) {
   const deleteButton = props.deletable ? (
     <Button
       variant="link"
-      onMouseUp={
-        () =>
-          this.props.deleteEntry(
-            this.props.idx
-          ) /*MouseUp lets a previously edited entry blur and save first before deleting*/
-      }
+      onMouseUp={() => props.formCRUD("DELETE", null, null)}
     >
       <FaTrash color="#ed6a5a" />
     </Button>
@@ -45,14 +40,17 @@ function CVEntry(props) {
         <Form.Label>{props.displayName}</Form.Label>
         <InputGroup>
           <ContactDropdown
-            updateEntry={() => console.log("TODO: updateEntry")}
+            updateEntry={(contactType, inputType) => {
+              props.formCRUD("UPDATE", "contactType", contactType);
+              props.formCRUD("UPDATE", "inputType", inputType);
+            }}
             contactType={props.contactType}
           />
           <Form.Control
             className="rounded-right"
             type={getContactInputType(props.contactType)}
             value={props.data}
-            onChange={e => console.log("TODO: onchange")}
+            onChange={e => props.formCRUD("UPDATE", "val", e.target.value)}
           />
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -67,7 +65,7 @@ function CVEntry(props) {
             className="rounded"
             type="text"
             value={props.data}
-            onChange={e => console.log("TODO: onchange")}
+            onChange={e => props.formCRUD("UPDATE", "val", e.target.value)}
           ></Form.Control>
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -82,7 +80,7 @@ function CVEntry(props) {
           type={props.type === "textarea" ? "text" : props.type}
           as={props.type === "textarea" ? "textarea" : "input"}
           value={props.data}
-          onChange={e => console.log("TODO: onchange")}
+          onChange={e => props.formCRUD("UPDATE", "val", e.target.value)}
         ></Form.Control>
       </Form.Group>
     );
@@ -101,7 +99,7 @@ function ContactDropdown(props) {
         {"  "}WhatsApp
       </Dropdown.Item>
       {/*Phone*/}
-      <Dropdown.Item onClick={() => props.updateEntry("phone", "te")}>
+      <Dropdown.Item onClick={() => props.updateEntry("phone", "tel")}>
         <FaPhone />
         {"  "}Telefono
       </Dropdown.Item>

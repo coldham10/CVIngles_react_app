@@ -32,6 +32,7 @@ class CVEntryGroup extends React.Component {
               type={entry.type}
               data={entry.data}
               key={entry.name}
+              formCRUD={this.props.formCRUD.bind(null, entry.name)}
               extensible
             />
           </Form.Group>
@@ -45,6 +46,7 @@ class CVEntryGroup extends React.Component {
               key={entry.name}
               displayName={entry.displayName}
               deletable={entry.deletable}
+              formCRUD={this.props.formCRUD.bind(null, entry.name)}
             />
           </Form.Group>
         );
@@ -65,7 +67,10 @@ class CVEntryGroup extends React.Component {
         >
           {this.state.expanded ? <MdExpandLess /> : <MdExpandMore />}
         </Button>
-        <Button variant="link" onClick={() => console.log("TODO: delete")}>
+        <Button
+          variant="link"
+          onClick={() => this.props.formCRUD("DELETE", null, null)}
+        >
           <MdClose />
         </Button>
       </>
@@ -79,7 +84,10 @@ class CVEntryGroup extends React.Component {
       </Button>
     );
     const footer = this.props.extensible ? (
-      <Button variant="link" onMouseUp={() => console.log("TODO: add")}>
+      <Button
+        variant="link"
+        onMouseUp={() => this.props.formCRUD("CREATE", null, null)}
+      >
         Más
       </Button>
     ) : null;

@@ -21,6 +21,7 @@ function CVSection(props) {
           displayName={entry.displayName}
           type={entry.type}
           contactType={entry.contactType}
+          formCRUD={props.formCRUD.bind(null, entry.name)}
         />
       );
     } else if (entry.CVtype === "group") {
@@ -30,6 +31,7 @@ function CVSection(props) {
           key={entry.name}
           deletable={entry.deletable}
           displayName={entry.displayName}
+          formCRUD={props.formCRUD.bind(null, entry.name)}
         />
       );
     } else {
@@ -45,9 +47,7 @@ function CVSection(props) {
       <Container className="px-0 px-md-2">{inner}</Container>
       <Button
         variant="link"
-        onClick={
-          /*this.addEntry.bind(this)*/ e => console.log("todo add button")
-        }
+        onClick={() => props.formCRUD("CREATE", null, null)}
       >
         Más
       </Button>
