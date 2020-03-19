@@ -21,155 +21,73 @@ import {
 
 import PopoverStickOnHover from "./PopoverStickOnHover.jsx";
 
-class CVEntry extends React.Component {
-  constructor(props) {
-    super(props);
-    if (props.type === "contact") {
-      this.state = {
-        contactType: props.data.type,
-        value: props.data.value,
-        type: getContactInputType(props.data.type)
-      };
-    } else {
-      this.state = {
-        value: props.data
-      };
-    }
-  }
-
-  entryName(type, idx) {
-    return null;
-    //TODO remove
-  }
-
-  dataType(entryType) {
-    switch (entryType) {
-      case "name":
-        return ["text", "input"];
-      case "dob":
-        return ["date", "input"];
-      case "address":
-        return ["text", "input"];
-      case "contact":
-        return ["tel", "input"];
-      case "degreeName":
-        return ["text", "input"];
-      case "startYear":
-        return ["year", "input"];
-      case "endYear":
-        return ["year", "input"];
-      case "grade":
-        return ["text", "input"];
-      case "university":
-        return ["text", "input"];
-      case "location":
-        return ["text", "input"];
-      case "desc":
-        return ["text", "textarea"];
-      case "title":
-        return ["text", "input"];
-      case "employer":
-        return ["text", "input"];
-      case "achievement":
-        return ["text", "input"];
-      default:
-        return ["text", "input"];
-    }
-  }
-
-  render() {
-    const deleteButton = this.props.deletable ? (
-      <Button
-        variant="link"
-        onMouseUp={
-          () =>
-            this.props.deleteEntry(
-              this.props.idx
-            ) /*MouseUp lets a previously edited entry blur and save first before deleting*/
-        }
-      >
-        <FaTrash color="#ed6a5a" />
-      </Button>
-    ) : (
-      <Button variant="link" onMouseUp={() => null}>
-        <FaTrash color="#606060" />
-      </Button>
+function CVEntry(props) {
+  const deleteButton = props.deletable ? (
+    <Button
+      variant="link"
+      onMouseUp={
+        () =>
+          this.props.deleteEntry(
+            this.props.idx
+          ) /*MouseUp lets a previously edited entry blur and save first before deleting*/
+      }
+    >
+      <FaTrash color="#ed6a5a" />
+    </Button>
+  ) : (
+    <Button variant="link" onMouseUp={() => null}>
+      <FaTrash color="#606060" />
+    </Button>
+  );
+  if (props.type === "contact") {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <InputGroup>
+          <ContactDropdown
+            updateEntry={() => console.log("TODO: updateEntry")}
+            contactType={props.contactType}
+          />
+          <Form.Control
+            className="rounded-right"
+            type={getContactInputType(props.contactType)}
+            value={props.data}
+            onChange={e => console.log("TODO: onchange")}
+          />
+          <InputGroup.Append>{deleteButton}</InputGroup.Append>
+        </InputGroup>
+      </Form.Group>
     );
-    if (this.props.type === "contact") {
-      return (
-        <Form.Group>
-          <Form.Label>
-            {this.entryName(this.props.type, this.props.idx)}
-          </Form.Label>
-          <InputGroup>
-            <ContactDropdown
-              updateEntry={(contactType, type) => {
-                this.setState({ contactType: contactType, type: type });
-              }}
-              contactType={this.state.contactType}
-            />
-            <Form.Control
-              className="rounded-right"
-              type={getContactInputType(this.state.type)}
-              value={this.state.value}
-              onChange={e => this.setState({ value: e.target.value })}
-              onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
-              onMouseUp={e => e.target.focus()}
-              name={
-                this.props.name +
-                "_" +
-                (this.props.idx - 3) +
-                "_" +
-                this.state.contactType
-              }
-            />
-            <InputGroup.Append>{deleteButton}</InputGroup.Append>
-          </InputGroup>
-        </Form.Group>
-      );
-    } else if (this.props.type === "achievement") {
-      return (
-        <Form.Group>
-          <Form.Label>
-            {this.entryName(this.props.type, this.props.idx)}
-          </Form.Label>
-          <InputGroup>
-            <Form.Control
-              className="rounded"
-              type={this.dataType(this.props.type)[0]}
-              as={this.dataType(this.props.type)[1]}
-              value={this.state.value}
-              onChange={e => this.setState({ value: e.target.value })}
-              onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
-              onMouseUp={e => e.target.focus()}
-              name={this.props.name}
-            ></Form.Control>
-            <InputGroup.Append>{deleteButton}</InputGroup.Append>
-          </InputGroup>
-        </Form.Group>
-      );
-    } else {
-      return (
-        <Form.Group>
-          <Form.Label>
-            {this.entryName(this.props.type, this.props.idx)}
-          </Form.Label>
+  } else if (props.type === "achievement") {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <InputGroup>
           <Form.Control
             className="rounded"
-            type={this.dataType(this.props.type)[0]}
-            as={this.dataType(this.props.type)[1]}
-            value={this.state.value}
-            onChange={e => this.setState({ value: e.target.value })}
-            onBlur={() => this.props.setVal(this.props.idx, this.state.value)}
-            onMouseUp={e => e.target.focus()}
-            name={this.props.name}
+            type="text"
+            value={props.data}
+            onChange={e => console.log("TODO: onchange")}
           ></Form.Control>
-        </Form.Group>
-      );
-    }
+          <InputGroup.Append>{deleteButton}</InputGroup.Append>
+        </InputGroup>
+      </Form.Group>
+    );
+  } else {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <Form.Control
+          className="rounded"
+          type={props.type === "textarea" ? "text" : props.type}
+          as={props.type === "textarea" ? "textarea" : "input"}
+          value={props.data}
+          onChange={e => console.log("TODO: onchange")}
+        ></Form.Control>
+      </Form.Group>
+    );
   }
 }
-
 function ContactDropdown(props) {
   return (
     <DropdownButton

@@ -16,91 +16,42 @@ import CVEntry from "./CVEntry.js";
 class CVEntryGroup extends React.Component {
   constructor(props) {
     super(props);
-    this.uid = -1;
-    this.state = {
-      expanded: true,
-      entries: this.props.data.map(entry => {
-        entry.key = ++this.uid;
-        return entry;
-      })
-    };
-  }
-
-  deleteEntry(idx) {
-    const entries = this.state.entries
-      .slice(0, idx)
-      .concat(this.state.entries.slice(idx + 1));
-    this.setState({ entries: entries });
-  }
-
-  setVal(idx, val) {
-    const entries = this.state.entries.slice();
-    entries[idx].value = val;
-    this.setState({ entries: entries });
-  }
-
-  addEntry() {
-    this.setState({ expanded: true }); //If adding entry to group, should expand so not adding 'in secret'
-    const egEntry = this.state.entries[0];
-    const newEntry = JSON.parse(JSON.stringify(egEntry)); //Deep copy first obj
-    newEntry.value = "";
-    newEntry.key = ++this.uid;
-    const entries = this.state.entries.concat([newEntry]);
-    this.setState({ entries: entries });
-  }
-
-  getLength(type) {
-    return null;
-    //TODO remove
-  }
-
-  groupName(type, idx) {
-    return null;
-    //TODO remove
+    this.state = { expanded: true };
   }
 
   render() {
     const rows = [];
     let row = [];
     let rowLength = 0;
-    this.state.entries.forEach((entry, idx) => {
-      if (entry.type === "achievements") {
+    this.props.data.forEach(entry => {
+      if (entry.name === "achievements") {
         row.push(
-          <Form.Group as={Col} md={this.getLength(entry.type)} key={entry.key}>
+          <Form.Group as={Col} md={entry.width} key={entry.name}>
             <CVEntryGroup
+              displayName={entry.displayName}
               type={entry.type}
-              data={entry.value}
-              key={entry.key}
-              idx={idx}
+              data={entry.data}
+              key={entry.name}
               extensible
-              name={this.props.name + "_" + entry.type}
             />
           </Form.Group>
         );
       } else {
         row.push(
-          <Form.Group as={Col} md={this.getLength(entry.type)} key={entry.key}>
+          <Form.Group as={Col} md={entry.width} key={entry.name}>
             <CVEntry
               type={entry.type}
-              data={entry.value}
-              key={entry.key}
-              idx={idx}
-              deleteEntry={this.deleteEntry.bind(this)}
-              setVal={this.setVal.bind(this)}
-              deletable={this.state.entries.length > 1 /*Achievements*/}
-              name={
-                this.props.name +
-                (entry.type === "achievement" ? "_" + idx : "") +
-                "_" +
-                entry.type
-              }
+              data={entry.data}
+              key={entry.name}
+              displayName={entry.displayName}
+              deletable={entry.deletable}
             />
           </Form.Group>
         );
       }
-      rowLength += this.getLength(entry.type);
+      rowLength += entry.width;
       if (rowLength >= 12) {
-        rows.push(<Form.Row key={idx}>{row}</Form.Row>);
+        rows.push(<Form.Row key={rows.length}>{row}</Form.Row>);
         row = [];
         rowLength = 0;
       }
@@ -114,10 +65,7 @@ class CVEntryGroup extends React.Component {
         >
           {this.state.expanded ? <MdExpandLess /> : <MdExpandMore />}
         </Button>
-        <Button
-          variant="link"
-          onClick={() => this.props.deleteEntry(this.props.idx)}
-        >
+        <Button variant="link" onClick={() => console.log("TODO: delete")}>
           <MdClose />
         </Button>
       </>
@@ -131,7 +79,7 @@ class CVEntryGroup extends React.Component {
       </Button>
     );
     const footer = this.props.extensible ? (
-      <Button variant="link" onMouseUp={this.addEntry.bind(this)}>
+      <Button variant="link" onMouseUp={() => console.log("TODO: add")}>
         Más
       </Button>
     ) : null;
@@ -139,7 +87,7 @@ class CVEntryGroup extends React.Component {
       <Container className="entry-group border rounded py-3 px-2 px-md-3">
         <Container className="ml-1 ml-md-3 my-1 py-1 my-md-3">
           <Row>
-            <h3>{this.groupName(this.props.type, this.props.idx)}</h3>
+            <h3>{this.props.displayName}</h3>
             {buttons}
           </Row>
         </Container>

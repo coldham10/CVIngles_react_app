@@ -7,11 +7,13 @@
     {
       "name": "datos",
       "CVtype": "section",
+      "deletable": false,
       "displayName": "Datos Personales",
       "data": [
         {
           "name": "name",
           "CVtype": "entry",
+          "deletable": false,
           "width": 12,
           "displayName": "Nombre Completo",
           "type": "text",
@@ -20,6 +22,7 @@
         {
           "name": "dob",
           "CVtype": "entry",
+          "deletable": false,
           "width": 12,
           "displayName": "Nombre Completo",
           "type": "date",
@@ -28,6 +31,7 @@
         {
           "name": "address",
           "CVtype": "entry",
+          "deletable": false,
           "width": 12,
           "displayName": "Direccíon",
           "type": "text",
@@ -36,6 +40,7 @@
         {
           "name": "contact0",
           "CVtype": "entry",
+          "deletable": true,
           "width": 12,
           "displayName": "Modo de Contacto 1",
           "type": "contact",
@@ -45,6 +50,7 @@
         {
           "name": "contact1",
           "CVtype": "entry",
+          "deletable": true,
           "width": 12,
           "displayName": "Modo de Contacto 2",
           "type": "contact",
@@ -55,6 +61,7 @@
       "default": {
         "name": "contact",
         "CVtype": "entry",
+        "deletable": true,
         "width": 12,
         "displayName": "Modo de Contacto ",
         "type": "contact",
@@ -65,16 +72,19 @@
     {
       "name": "estudios",
       "CVtype": "section",
+      "deletable": false,
       "displayName": "Estudios",
       "data": [
         {
           "name": "degree0",
           "CVtype": "group",
+          "deletable": true,
           "displayName": "Estudio 1",
           "data": [
             {
               "name": "degreeName",
               "CVtype": "entry",
+              "deletable": false,
               "width": 12,
               "displayName": "Nombre Completo de Carrera o Curso",
               "type": "text",
@@ -83,6 +93,7 @@
             {
               "name": "startYear",
               "CVtype": "entry",
+              "deletable": false,
               "width": 4,
               "displayName": "Año de Comienzo",
               "type": "year",
@@ -90,6 +101,7 @@
             },
             {
               "name": "endYear",
+              "deletable": false,
               "CVtype": "entry",
               "width": 4,
               "displayName": "Año de Terminación",
@@ -99,6 +111,7 @@
             {
               "name": "grade",
               "CVtype": "entry",
+              "deletable": false,
               "width": 4,
               "displayName": "Nota (x.x/x.x)",
               "type": "text",
@@ -107,6 +120,7 @@
             {
               "name": "university",
               "CVtype": "entry",
+              "deletable": false,
               "width": 6,
               "displayName": "Universidad o Instituto",
               "type": "text",
@@ -115,6 +129,7 @@
             {
               "name": "location",
               "CVtype": "entry",
+              "deletable": false,
               "width": 6,
               "displayName": "Ciudad, País",
               "type": "text",
@@ -123,6 +138,7 @@
             {
               "name": "desc",
               "CVtype": "entry",
+              "deletable": false,
               "width": 12,
               "displayName": "Descripción",
               "type": "textarea",
@@ -134,11 +150,13 @@
       "default": {
         "name": "degree",
         "CVtype": "group",
+        "deletable": true,
         "displayName": "Estudio ",
         "data": [
           {
             "name": "name",
             "CVtype": "entry",
+            "deletable": false,
             "width": 12,
             "displayName": "Nombre Completo de Carrera o Curso",
             "type": "text",
@@ -147,6 +165,7 @@
           {
             "name": "startYear",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Año de Comienzo",
             "type": "year",
@@ -155,6 +174,7 @@
           {
             "name": "endYear",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Año de Terminación",
             "type": "year",
@@ -163,6 +183,7 @@
           {
             "name": "grade",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Nota (x.x/x.x)",
             "type": "text",
@@ -171,6 +192,7 @@
           {
             "name": "university",
             "CVtype": "entry",
+            "deletable": false,
             "width": 6,
             "displayName": "Universidad o Instituto",
             "type": "text",
@@ -179,6 +201,7 @@
           {
             "name": "location",
             "CVtype": "entry",
+            "deletable": false,
             "width": 6,
             "displayName": "Ciudad, País",
             "type": "text",
@@ -187,6 +210,7 @@
           {
             "name": "desc",
             "CVtype": "entry",
+            "deletable": false,
             "width": 12,
             "displayName": "Descripción",
             "type": "textarea",
@@ -198,16 +222,19 @@
     {
       "name": "experiencia",
       "CVtype": "section",
+      "deletable": false,
       "displayName": "Experiencia Laboral",
       "data": [
         {
           "name": "job0",
           "CVtype": "group",
+          "deletable": true,
           "displayName": "Trabajo 1",
           "data": [
             {
               "name": "title",
               "CVtype": "entry",
+              "deletable": false,
               "width": 12,
               "displayName": "Título",
               "type": "text",
@@ -216,6 +243,7 @@
             {
               "name": "employer",
               "CVtype": "entry",
+              "deletable": false,
               "width": 6,
               "displayName": "Empleador",
               "type": "text",
@@ -224,6 +252,7 @@
             {
               "name": "location",
               "CVtype": "entry",
+              "deletable": false,
               "width": 6,
               "displayName": "Ciudad, País",
               "type": "text",
@@ -232,6 +261,7 @@
             {
               "name": "startYear",
               "CVtype": "entry",
+              "deletable": false,
               "width": 4,
               "displayName": "Año de Comienzo",
               "type": "year",
@@ -240,6 +270,7 @@
             {
               "name": "endYear",
               "CVtype": "entry",
+              "deletable": false,
               "width": 4,
               "displayName": "Año de Terminación",
               "type": "year",
@@ -248,6 +279,7 @@
             {
               "name": "desc",
               "CVtype": "entry",
+              "deletable": false,
               "width": 12,
               "displayName": "Descripción",
               "type": "textarea",
@@ -256,40 +288,45 @@
             {
               "name": "achievements",
               "CVtype": "group",
+              "deletable": false,
               "displayName": "Logros",
               "width": 12,
               "data": [
                 {
                   "name": "achievement0",
                   "CVtype": "entry",
+                  "deletable": true,
                   "displayName": "Logro 1",
                   "width": 12,
-                  "type": "text",
+                  "type": "achievement",
                   "data": "Gane mucha plata"
                 },
                 {
-                  "name": "achievement0",
+                  "name": "achievement1",
                   "CVtype": "entry",
-                  "displayName": "Logro 1",
+                  "deletable": true,
+                  "displayName": "Logro 2",
                   "width": 12,
-                  "type": "text",
+                  "type": "achievement",
                   "data": "Hizo amigos"
                 },
                 {
-                  "name": "achievement0",
+                  "name": "achievement2",
                   "CVtype": "entry",
-                  "displayName": "Logro 1",
+                  "deletable": true,
+                  "displayName": "Logro 3",
                   "width": 12,
-                  "type": "text",
+                  "type": "achievement",
                   "data": "Organize fiestas ricas para toda la empreza"
                 }
               ],
               "default": {
                 "name": "achievement",
                 "CVtype": "entry",
+                "deletable": true,
                 "displayName": "Logro",
                 "width": 12,
-                "type": "text",
+                "type": "achievement",
                 "data": ""
               }
             }
@@ -299,11 +336,13 @@
       "default": {
         "name": "job",
         "CVtype": "group",
+        "deletable": true,
         "displayName": "Trabajo ",
         "data": [
           {
             "name": "degreeName",
             "CVtype": "entry",
+            "deletable": false,
             "width": 12,
             "displayName": "Nombre Completo de Carrera o Curso",
             "type": "text",
@@ -312,6 +351,7 @@
           {
             "name": "startYear",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Año de Comienzo",
             "type": "year",
@@ -320,6 +360,7 @@
           {
             "name": "endYear",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Año de Terminación",
             "type": "year",
@@ -328,6 +369,7 @@
           {
             "name": "grade",
             "CVtype": "entry",
+            "deletable": false,
             "width": 4,
             "displayName": "Nota (x.x/x.x)",
             "type": "text",
@@ -336,6 +378,7 @@
           {
             "name": "university",
             "CVtype": "entry",
+            "deletable": false,
             "width": 6,
             "displayName": "Universidad o Instituto",
             "type": "text",
@@ -344,6 +387,7 @@
           {
             "name": "location",
             "CVtype": "entry",
+            "deletable": false,
             "width": 6,
             "displayName": "Ciudad, País",
             "type": "text",
@@ -352,6 +396,7 @@
           {
             "name": "desc",
             "CVtype": "entry",
+            "deletable": false,
             "width": 12,
             "displayName": "Descripción",
             "type": "textarea",
