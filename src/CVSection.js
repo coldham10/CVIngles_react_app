@@ -9,7 +9,6 @@ import CVEntry from "./CVEntry.js";
 import CVEntryGroup from "./CVEntryGroup.js";
 
 function CVSection(props) {
-  console.log(props.data);
   let inner = props.data.map(entry => {
     if (entry.CVtype === "entry") {
       return (

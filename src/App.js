@@ -113,7 +113,43 @@ class App extends React.Component {
   }
 
   formCRUD() {
-    console.log(arguments);
+    /*arguments: first n-3 guide to relevant section
+    third to last is CREATE, UPDATE or DELETE
+    last two are arguments (prop, val) or null*/
+    const n = arguments.length;
+    const modelCopy = JSON.parse(JSON.stringify(this.state.formData)); //Deep Copy
+    let modelObj = { data: modelCopy };
+    let parent = null;
+    for (let i = 0; i < n - 3; i++) {
+      parent = modelObj;
+      modelObj = parent.data.find(element => element.name === arguments[i]);
+    }
+    switch (arguments[n - 3]) {
+      case "CREATE":
+        //TODO change name for adjustables
+        modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+        break;
+      case "UPDATE":
+        //TODO change name for adjustables
+        modelObj[arguments[n - 2]] = arguments[n - 1];
+        break;
+      case "DELETE":
+        parent.data = parent.data.filter(obj => obj !== modelObj);
+        break;
+      default:
+        console.log("Error unkown CRUD argument");
+    }
+    let idx = 0; //Renaming variable entries
+    parent.data.forEach(elem => {
+      if (elem.type === "contact") {
+        elem.name = "contact" + idx++;
+        elem.displayName = "Modo de Contacto " + idx;
+      } else if (elem.type === "achievement") {
+        elem.name = "achievement" + idx++;
+        elem.displayName = "Logro " + idx;
+      }
+    });
+    this.setState({ formData: modelCopy });
   }
 }
 
