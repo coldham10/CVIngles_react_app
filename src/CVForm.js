@@ -25,6 +25,10 @@ function CVForm(props) {
         />
       );
     }
+    else {
+      console.error("CVForm recieved non-section item at top level");
+      return null;
+    }
   });
   return (
     <Container className="mb-5">

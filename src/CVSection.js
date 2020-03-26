@@ -18,7 +18,6 @@ function CVSection(props) {
           key={entry.name}
           deletable={entry.deletable}
           displayName={entry.displayName}
-          type={entry.type}
           contactType={entry.contactType}
           formCRUD={props.formCRUD.bind(null, entry.name)}
         />
@@ -52,7 +51,6 @@ function CVSection(props) {
       </Button>
     </Container>
   );
-  return null;
 }
 
 export default CVSection;

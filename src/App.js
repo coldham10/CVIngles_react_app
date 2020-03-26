@@ -8,7 +8,7 @@ import Checkout from "./Checkout.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -19,7 +19,7 @@ function MainNavBar(props) {
   return (
     <Navbar fixed="top" expand="md" className="custom-nav mb-4">
       <Container className="p-0">
-        <Navbar.Brand href="/">
+        <Navbar.Brand as={Link} to="/">
           <img
             alt=""
             src="/draft_logo_long.svg"
@@ -30,9 +30,9 @@ function MainNavBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link href="/">Servicios</Nav.Link>
-            <Nav.Link href="/testimonios">Testimonios</Nav.Link>
-            <Nav.Link href="/empiece">Empiece</Nav.Link>
+            <Nav.Link as={NavLink} exact to="/">Servicios</Nav.Link>
+            <Nav.Link as={NavLink} to="/testimonios">Testimonios</Nav.Link>
+            <Nav.Link as={NavLink} to="/empiece">Empiece</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -70,15 +70,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     /*TODO load from local save*/
+    // FIXME: reloads from file on route
     let template = require("./example3.json");
     this.state = { formData: template.model, options: template.options };
+    console.log("Top constructor called")
   }
 
   render() {
     return (
       <div className="App">
+      <Router>
         <MainNavBar />
-        <Router>
           <div>
             <Switch>
               <Route exact path="/">
@@ -106,8 +108,8 @@ class App extends React.Component {
               </Route>
             </Switch>
           </div>
-        </Router>
         <Footer />
+        </Router>
       </div>
     );
   }
