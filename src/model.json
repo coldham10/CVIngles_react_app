@@ -1,63 +1,55 @@
-{ "options":
+{
+  "options": {
+    "service": "",
+    "cv-format": "",
+    "cv-color": ""
+  },
+  "model": [
+    {
+      "type": "datos",
+      "value": [
+        { "type": "name", "value": "" },
+        { "type": "dob", "value": "" },
+        { "type": "address", "value": "" },
+        { "type": "contact", "value": { "type": "phone", "value": "" } }
+      ]
+    },
+    {
+      "type": "estudios",
+      "value": [
         {
-            "service":      "",
-            "cv-format":    "",
-            "cv-color":     ""
-        },
-    "model":
-        [
+          "type": "degree",
+          "value": [
+            { "type": "degreeName", "value": "" },
+            { "type": "startYear", "value": "" },
+            { "type": "endYear", "value": "" },
+            { "type": "grade", "value": "" },
+            { "type": "university", "value": "" },
+            { "type": "location", "value": "" },
+            { "type": "desc", "value": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "experiencia",
+      "value": [
+        {
+          "type": "job",
+          "value": [
+            { "type": "title", "value": "" },
+            { "type": "employer", "value": "" },
+            { "type": "location", "value": "" },
+            { "type": "startYear", "value": "" },
+            { "type": "endYear", "value": "" },
+            { "type": "desc", "value": "" },
             {
-                "type": "datos",
-                "value" :
-                    [
-                        {"type": "name", "value": ""},
-                        {"type": "dob", "value": ""},
-                        {"type": "address", "value": ""},
-                        {"type": "contact", "value": {"type": "phone", "value": ""}}
-                    ]
-            },
-            {
-                "type": "estudios",
-                "value":
-                    [
-                        {
-                            "type": "degree",
-                            "value": [
-                                {"type": "degreeName",  "value": ""},
-                                {"type": "startYear",   "value": ""},
-                                {"type": "endYear",     "value": ""},
-                                {"type": "grade",       "value": ""},
-                                {"type": "university",  "value": ""},
-                                {"type": "location",    "value": ""},
-                                {"type": "desc",        "value": ""}
-                            ]
-                        }
-                    ]
-            },
-            {
-                "type": "experiencia",
-                "value":
-                    [
-                        {
-                            "type": "job",
-                            "value":
-                                [
-                                    {"type": "title", "value":  ""},
-                                    {"type": "employer", "value":  ""},
-                                    {"type": "location", "value":  ""},
-                                    {"type": "startYear",   "value": ""},
-                                    {"type": "endYear",     "value": ""},
-                                    {"type": "desc", "value":  ""},
-                                    {"type": "achievements", "value":
-                                        [
-                                            {"type": "achievement", "value": ""}
-                                        ]
-                                    }
-                                ]
-                        }
-                    ]
+              "type": "achievements",
+              "value": [{ "type": "achievement", "value": "" }]
             }
-    ]
+          ]
+        }
+      ]
+    }
+  ]
 }
-
-        

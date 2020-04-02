@@ -1,65 +1,68 @@
-{ "options":
+{
+  "options": {
+    "inputLanguage": "es",
+    "outputLanguage": "en"
+  },
+  "model": [
+    {
+      "type": "datos",
+      "value": [
+        { "type": "name", "value": "Joaquin Phoenix" },
+        { "type": "dob", "value": "1980-07-07" },
+        { "type": "address", "value": "557 Calle 13, Medellin, Colombia" },
+        { "type": "contact", "value": { "type": "wa", "value": "123456789" } },
         {
-            "inputLanguage": "es",
-            "outputLanguage": "en"
-        },
-    "model":
-        [
+          "type": "contact",
+          "value": { "type": "li", "value": "joaquin-phoenix-33" }
+        }
+      ]
+    },
+    {
+      "type": "estudios",
+      "value": [
+        {
+          "type": "degree",
+          "value": [
+            { "type": "degreeName", "value": "BSc. Phisica applicada" },
+            { "type": "startYear", "value": 1990 },
+            { "type": "endYear", "value": 1994 },
+            { "type": "grade", "value": "4.4/5.0" },
+            { "type": "university", "value": "Univesidad de Medellin" },
+            { "type": "location", "value": "Medellin, Colombia" },
+            { "type": "desc", "value": "Nada interesante, de veras" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "experiencia",
+      "value": [
+        {
+          "type": "job",
+          "value": [
+            { "type": "title", "value": "CEO" },
+            { "type": "employer", "value": "General Dynamics" },
+            { "type": "location", "value": "Boston, USA" },
+            { "type": "startYear", "value": 1990 },
+            { "type": "endYear", "value": 1994 },
             {
-                "type": "datos",
-                "value" :
-                    [
-                        {"type": "name", "value": "Joaquin Phoenix"},
-                        {"type": "dob", "value": "1980-07-07"},
-                        {"type": "address", "value": "557 Calle 13, Medellin, Colombia"},
-                        {"type": "contact", "value": {"type": "wa", "value": "123456789"}},
-                        {"type": "contact", "value": {"type": "li", "value": "joaquin-phoenix-33"}}
-                    ]
+              "type": "desc",
+              "value": "Muy aburrido, nada que hacer la verdad."
             },
             {
-                "type": "estudios",
-                "value":
-                    [
-                        {
-                            "type": "degree",
-                            "value": [
-                                {"type": "degreeName",  "value": "BSc. Phisica applicada"},
-                                {"type": "startYear",   "value": 1990},
-                                {"type": "endYear",     "value": 1994},
-                                {"type": "grade",       "value": "4.4/5.0"},
-                                {"type": "university",  "value": "Univesidad de Medellin"},
-                                {"type": "location",    "value": "Medellin, Colombia"},
-                                {"type": "desc",        "value": "Nada interesante, de veras"}
-                            ]
-                        }
-                    ]
-            },
-            {
-                "type": "experiencia",
-                "value":
-                    [
-                        {
-                            "type": "job",
-                            "value":
-                                [
-                                    {"type": "title", "value":  "CEO"},
-                                    {"type": "employer", "value":  "General Dynamics"},
-                                    {"type": "location", "value":  "Boston, USA"},
-                                    {"type": "startYear",   "value": 1990},
-                                    {"type": "endYear",     "value": 1994},
-                                    {"type": "desc", "value":  "Muy aburrido, nada que hacer la verdad."},
-                                    {"type": "achievements", "value":
-                                        [
-                                            {"type": "achievement", "value": "Gane mucha plata"},
-                                            {"type": "achievement", "value": "Hizo amigos"},
-                                            {"type": "achievement", "value": "Organize fiestas ricas para toda la empreza"}
-                                        ]
-                                    }
-                                ]
-                        }
-                    ]
+              "type": "achievements",
+              "value": [
+                { "type": "achievement", "value": "Gane mucha plata" },
+                { "type": "achievement", "value": "Hizo amigos" },
+                {
+                  "type": "achievement",
+                  "value": "Organize fiestas ricas para toda la empreza"
+                }
+              ]
             }
-    ]
+          ]
+        }
+      ]
+    }
+  ]
 }
-
-        

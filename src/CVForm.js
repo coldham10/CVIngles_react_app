@@ -24,8 +24,7 @@ function CVForm(props) {
           formCRUD={props.formCRUD.bind(null, section.name)}
         />
       );
-    }
-    else {
+    } else {
       console.error("CVForm recieved non-section item at top level");
       return null;
     }

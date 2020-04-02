@@ -8,7 +8,13 @@ import Checkout from "./Checkout.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { BrowserRouter as Router, Switch, Route, Link, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -30,9 +36,15 @@ function MainNavBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} exact to="/">Servicios</Nav.Link>
-            <Nav.Link as={NavLink} to="/testimonios">Testimonios</Nav.Link>
-            <Nav.Link as={NavLink} to="/empiece">Empiece</Nav.Link>
+            <Nav.Link as={NavLink} exact to="/">
+              Servicios
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/testimonios">
+              Testimonios
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/empiece">
+              Empiece
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -77,8 +89,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <Router>
-        <MainNavBar />
+        <Router>
+          <MainNavBar />
           <div>
             <Switch>
               <Route exact path="/">
@@ -106,7 +118,7 @@ class App extends React.Component {
               </Route>
             </Switch>
           </div>
-        <Footer />
+          <Footer />
         </Router>
       </div>
     );

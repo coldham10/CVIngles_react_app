@@ -1,10 +1,9 @@
-{ "options":
-    {
-      "inputLanguage": "es",
-      "outputLanguage": "en"
-    },
-  "model":
-    {
+{
+  "options": {
+    "inputLanguage": "es",
+    "outputLanguage": "en"
+  },
+  "model": {
     "datos": {
       "name": "Joaquin Phoenix",
       "dob": "1980-07-07",
