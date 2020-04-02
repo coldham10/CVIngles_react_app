@@ -70,10 +70,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     /*TODO load from local save*/
-    // FIXME: reloads from file on route
     let template = require("./example3.json");
     this.state = { formData: template.model, options: template.options };
-    console.log("Top constructor called")
   }
 
   render() {

@@ -31,7 +31,7 @@ function CVForm(props) {
     }
   });
   return (
-    <Container className="mb-5">
+    <Container className="mb-5 px-0 px-md-3">
       <Form
         className="cv-form border rounded px-2 px-md-4 py-3"
         onSubmit={e => this.handleSubmit(e)}
