@@ -96,17 +96,15 @@
   background-color: rgba(50, 50, 50, 0.4);
 }
 
+.choice-style-overlay-button-container {
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
 @media (hover: hover) {
   .style-choice:hover .choice-style-overlay {
     visibility: visible;
   }
-}
-
-/* @media (hover: none) { for touch devices*/
-
-.choice-style-overlay-button-container {
-  margin-top: 50%;
-  transform: translateY(-50%);
 }
 
 /*Form*/
