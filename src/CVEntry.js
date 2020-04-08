@@ -23,10 +23,7 @@ import PopoverStickOnHover from "./PopoverStickOnHover.jsx";
 
 function CVEntry(props) {
   const deleteButton = props.deletable ? (
-    <Button
-      variant="link"
-      onMouseUp={() => props.formCRUD("DELETE", null, null)}
-    >
+    <Button variant="link" onMouseUp={() => props.formCRUD("DELETE", {})}>
       <FaTrash color="#ed6a5a" />
     </Button>
   ) : (
@@ -41,8 +38,10 @@ function CVEntry(props) {
         <InputGroup>
           <ContactDropdown
             updateEntry={(contactType, inputType) => {
-              props.formCRUD("UPDATE", "contactType", contactType);
-              props.formCRUD("UPDATE", "inputType", inputType);
+              props.formCRUD("UPDATE", {
+                contactType: contactType,
+                inputType: inputType
+              });
             }}
             contactType={props.contactType}
           />
@@ -50,7 +49,7 @@ function CVEntry(props) {
             className="rounded-right"
             type={getContactInputType(props.contactType)}
             value={props.data}
-            onChange={e => props.formCRUD("UPDATE", "data", e.target.value)}
+            onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
           />
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -65,7 +64,7 @@ function CVEntry(props) {
             className="rounded"
             type="text"
             value={props.data}
-            onChange={e => props.formCRUD("UPDATE", "data", e.target.value)}
+            onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
           ></Form.Control>
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -80,7 +79,7 @@ function CVEntry(props) {
           type={props.type === "textarea" ? "text" : props.type}
           as={props.type === "textarea" ? "textarea" : "input"}
           value={props.data}
-          onChange={e => props.formCRUD("UPDATE", "data", e.target.value)}
+          onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
         ></Form.Control>
       </Form.Group>
     );

@@ -69,7 +69,7 @@ class CVEntryGroup extends React.Component {
         </Button>
         <Button
           variant="link"
-          onClick={() => this.props.formCRUD("DELETE", null, null)}
+          onClick={() => this.props.formCRUD("DELETE", {})}
         >
           <MdClose />
         </Button>
@@ -86,7 +86,7 @@ class CVEntryGroup extends React.Component {
     const footer = this.props.extensible ? (
       <Button
         variant="link"
-        onMouseUp={() => this.props.formCRUD("CREATE", null, null)}
+        onMouseUp={() => this.props.formCRUD("CREATE", {})}
       >
         Más
       </Button>

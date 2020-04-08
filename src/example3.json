@@ -67,7 +67,7 @@
         "width": 12,
         "displayName": "Modo de Contacto ",
         "type": "contact",
-        "contactType": "tel",
+        "contactType": "phone",
         "inputType": "tel",
         "data": ""
       }
@@ -80,6 +80,7 @@
       "data": [
         {
           "name": "job0",
+          "type": "job",
           "CVtype": "group",
           "deletable": true,
           "displayName": "Trabajo 1",
@@ -189,51 +190,25 @@
       "default": {
         "name": "job",
         "CVtype": "group",
+        "type": "job",
         "deletable": true,
-        "displayName": "Trabajo ",
+        "displayName": "Trabajo",
         "data": [
           {
-            "name": "degreeName",
+            "name": "title",
             "CVtype": "entry",
             "deletable": false,
             "width": 12,
-            "displayName": "Nombre Completo de Carrera o Curso",
+            "displayName": "Título",
             "type": "text",
             "data": ""
           },
           {
-            "name": "startYear",
-            "CVtype": "entry",
-            "deletable": false,
-            "width": 4,
-            "displayName": "Año de Comienzo",
-            "type": "year",
-            "data": ""
-          },
-          {
-            "name": "endYear",
-            "CVtype": "entry",
-            "deletable": false,
-            "width": 4,
-            "displayName": "Año de Terminación",
-            "type": "year",
-            "data": ""
-          },
-          {
-            "name": "grade",
-            "CVtype": "entry",
-            "deletable": false,
-            "width": 4,
-            "displayName": "Nota (x.x/x.x)",
-            "type": "text",
-            "data": ""
-          },
-          {
-            "name": "university",
+            "name": "employer",
             "CVtype": "entry",
             "deletable": false,
             "width": 6,
-            "displayName": "Universidad o Instituto",
+            "displayName": "Empleador",
             "type": "text",
             "data": ""
           },
@@ -247,6 +222,24 @@
             "data": ""
           },
           {
+            "name": "startYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
             "name": "desc",
             "CVtype": "entry",
             "deletable": false,
@@ -254,6 +247,33 @@
             "displayName": "Descripción",
             "type": "textarea",
             "data": ""
+          },
+          {
+            "name": "achievements",
+            "CVtype": "group",
+            "deletable": false,
+            "displayName": "Logros",
+            "width": 12,
+            "data": [
+              {
+                "name": "achievement0",
+                "CVtype": "entry",
+                "deletable": true,
+                "displayName": "Logro 1",
+                "width": 12,
+                "type": "achievement",
+                "data": ""
+              }
+            ],
+            "default": {
+              "name": "achievement",
+              "CVtype": "entry",
+              "deletable": true,
+              "displayName": "Logro",
+              "width": 12,
+              "type": "achievement",
+              "data": ""
+            }
           }
         ]
       }
@@ -267,6 +287,7 @@
         {
           "name": "degree0",
           "CVtype": "group",
+          "type": "degree",
           "deletable": true,
           "displayName": "Estudio 1",
           "data": [
@@ -339,6 +360,7 @@
       "default": {
         "name": "degree",
         "CVtype": "group",
+        "type": "degree",
         "deletable": true,
         "displayName": "Estudio ",
         "data": [

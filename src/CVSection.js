@@ -43,10 +43,7 @@ function CVSection(props) {
         <h2>{props.displayName}</h2>
       </Container>
       <Container className="px-0 px-md-2">{inner}</Container>
-      <Button
-        variant="link"
-        onClick={() => props.formCRUD("CREATE", null, null)}
-      >
+      <Button variant="link" onClick={() => props.formCRUD("CREATE", {})}>
         Más
       </Button>
     </Container>

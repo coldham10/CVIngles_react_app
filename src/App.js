@@ -125,25 +125,27 @@ class App extends React.Component {
   }
 
   formCRUD() {
-    /*arguments: first n-3 guide to relevant section
-    third to last is CREATE, UPDATE or DELETE
-    last two are arguments (prop, val) or null*/
+    console.log(arguments);
+    /*arguments: first n-2 guide to relevant section
+    second to last is CREATE, UPDATE or DELETE
+    last argument = {prop: val} or {}*/
     const n = arguments.length;
     const modelCopy = JSON.parse(JSON.stringify(this.state.formData)); //Deep Copy
     let modelObj = { data: modelCopy };
     let parent = null;
-    for (let i = 0; i < n - 3; i++) {
+    for (let i = 0; i < n - 2; i++) {
       parent = modelObj;
       modelObj = parent.data.find(element => element.name === arguments[i]);
     }
-    switch (arguments[n - 3]) {
+    switch (arguments[n - 2]) {
       case "CREATE":
-        //TODO change name for adjustables
         modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+        parent = modelObj; //allow renaming traversal of recently added-to modelObj
         break;
       case "UPDATE":
-        //TODO change name for adjustables
-        modelObj[arguments[n - 2]] = arguments[n - 1];
+        for (var key in arguments[n - 1]) {
+          modelObj[key] = arguments[n - 1][key];
+        }
         break;
       case "DELETE":
         parent.data = parent.data.filter(obj => obj !== modelObj);
@@ -159,6 +161,12 @@ class App extends React.Component {
       } else if (elem.type === "achievement") {
         elem.name = "achievement" + idx++;
         elem.displayName = "Logro " + idx;
+      } else if (elem.type === "job") {
+        elem.name = "job" + idx++;
+        elem.displayName = "Trabajo " + idx;
+      } else if (elem.type === "degree") {
+        elem.name = "degree" + idx++;
+        elem.displayName = "Estudio " + idx;
       }
     });
     this.setState({ formData: modelCopy });
