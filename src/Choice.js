@@ -181,34 +181,29 @@ class Choice extends React.Component {
               <Card.Img variant="top" src="./fancy-sample.jpg" />
               {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 0) { return(
               <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
+                  <ButtonGroup vertical size="lg" className="p-0 m-0" as={Container} fluid>
                     <Button
                       block
                       variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
+                      className="p-3 py-3 m-0"
+                      onClick={() =>
                         that.setState({
                           options: Object.assign({}, that.state.options, {
                             format: 0
-                            })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
-                              touchOverlayShow: null
                           })
+                        })
                       }
                     >
                       Seleccione
                     </Button>
+                    <hr />
                     <Button
                       block
                       variant="light"
-                      className="h-50 w-100"
+                      className="p-3 py-3 m-0"
                       onClick={() => that.setState({ showExample: 0 })}
                     >
-                      Agrandalo
+                      Agrandaloo
                     </Button>
                   </ButtonGroup>
               </Card.ImgOverlay>
@@ -254,45 +249,8 @@ class Choice extends React.Component {
                 backgroundColor:
                   this.state.options.format === 1 ? "#5ca4a9" : "white"
               }}
-              onMouseEnter={() => window.setTimeout(() => {if(this.state.touchOverlayShow !== 1) {this.setState({ touchOverlayEnabled: false })}}, 200)}
-              onMouseLeave={() => this.setState({ touchOverlayEnabled: true, touchOverlayShow : null })}
-              onClick={() => this.setState({touchOverlayShow : 1})}
             >
               <Card.Img variant="top" src="./banking-sample.jpg" />
-              {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 1) { return(
-              <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 1
-                            })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
-                              touchOverlayShow: null
-                          })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      onClick={() => that.setState({ showExample: 1 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </ButtonGroup>
-              </Card.ImgOverlay>
-              );} else { return(
               <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
                 <Container className="choice-style-overlay-button-container">
                   <Row>
@@ -300,8 +258,8 @@ class Choice extends React.Component {
                       variant="light"
                       className="mx-auto"
                       onClick={() =>
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
+                        this.setState({
+                          options: Object.assign({}, this.state.options, {
                             format: 1
                           })
                         })
@@ -315,13 +273,13 @@ class Choice extends React.Component {
                     <Button
                       variant="light"
                       className="mx-auto"
-                      onClick={() => that.setState({ showExample: 1 })}
+                      onClick={() => this.setState({ showExample: 1 })}
                     >
                       Agrandalo
                     </Button>
                   </Row>
                 </Container>
-              </Card.ImgOverlay>);}})(this)}
+              </Card.ImgOverlay>
             </Card>
           </Col>
 
@@ -334,45 +292,8 @@ class Choice extends React.Component {
                 backgroundColor:
                   this.state.options.format === 2 ? "#5ca4a9" : "white"
               }}
-              onMouseEnter={() => window.setTimeout(() => {if(this.state.touchOverlayShow !== 2) {this.setState({ touchOverlayEnabled: false })}}, 200)}
-              onMouseLeave={() => this.setState({ touchOverlayEnabled: true, touchOverlayShow : null })}
-              onClick={() => this.setState({touchOverlayShow : 2})}
             >
               <Card.Img variant="top" src="./casual-sample.jpg" />
-              {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 2) { return(
-              <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 2
-                            })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
-                              touchOverlayShow: null
-                          })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      onClick={() => that.setState({ showExample: 2 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </ButtonGroup>
-              </Card.ImgOverlay>
-              );} else { return(
               <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
                 <Container className="choice-style-overlay-button-container">
                   <Row>
@@ -380,8 +301,8 @@ class Choice extends React.Component {
                       variant="light"
                       className="mx-auto"
                       onClick={() =>
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
+                        this.setState({
+                          options: Object.assign({}, this.state.options, {
                             format: 2
                           })
                         })
@@ -395,13 +316,13 @@ class Choice extends React.Component {
                     <Button
                       variant="light"
                       className="mx-auto"
-                      onClick={() => that.setState({ showExample: 2 })}
+                      onClick={() => this.setState({ showExample: 2 })}
                     >
                       Agrandalo
                     </Button>
                   </Row>
                 </Container>
-              </Card.ImgOverlay>);}})(this)}
+              </Card.ImgOverlay>
             </Card>
           </Col>
         </Row>
