@@ -80,7 +80,7 @@ class Home extends React.Component {
               <Carousel.Caption>
                 <h3 className="carousel-subtitle">
                   Su hoja de vida revisada por un profesional nativo
-                  agloparlante
+                  angloparlante
                 </h3>
                 <br />
                 <IoIosArrowDown className="scroll-indicator" />
@@ -118,7 +118,7 @@ class Home extends React.Component {
           <p className="p-2">
             Incluso si usted ha trabajado en inglés durante años y habla muy
             bien, aún escribir como nativo angloparlante queda muy dificil.
-            Perceptiblemente no nativo, y no acostumbrado a las costubres
+            Perceptiblemente no nativo, y no acostumbrado a las costumbres
             angloparlantes de escribir CVs o résumés, muchas veces empleadores{" "}
             <strong>no ven quien es usted, sino solo que es extranjero</strong>.
           </p>

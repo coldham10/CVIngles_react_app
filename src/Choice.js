@@ -157,6 +157,9 @@ class Choice extends React.Component {
             </Card>
           </Col>
         </Row>
+        <Container className="fluid">
+          <p className="text-right">*Precios en USD</p>
+        </Container>
       </Container>
     );
 
@@ -174,74 +177,105 @@ class Choice extends React.Component {
                 backgroundColor:
                   this.state.options.format === 0 ? "#5ca4a9" : "white"
               }}
-              onMouseEnter={() => window.setTimeout(() => {if(this.state.touchOverlayShow !== 0) {this.setState({ touchOverlayEnabled: false })}}, 200)}
-              onMouseLeave={() => this.setState({ touchOverlayEnabled: true, touchOverlayShow : null })}
-              onClick={() => this.setState({touchOverlayShow : 0})}
+              onMouseEnter={() =>
+                window.setTimeout(() => {
+                  if (this.state.touchOverlayShow !== 0) {
+                    this.setState({ touchOverlayEnabled: false });
+                  }
+                }, 200)
+              }
+              onMouseLeave={() =>
+                this.setState({
+                  touchOverlayEnabled: true,
+                  touchOverlayShow: null
+                })
+              }
+              onClick={() => this.setState({ touchOverlayShow: 0 })}
             >
-              <Card.Img variant="top" src="./fancy-sample.jpg" />
-              {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 0) { return(
-              <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 0
+              <Card.Img variant="top" src="./eg0-sample.jpg" />
+              {(function(that) {
+                if (
+                  that.state.touchOverlayEnabled &&
+                  that.state.touchOverlayShow === 0
+                ) {
+                  return (
+                    <Card.ImgOverlay className="m-0 p-0">
+                      <ButtonGroup
+                        vertical
+                        size="lg"
+                        className="h-100 m-0 p-0"
+                        as={Container}
+                        fluid
+                      >
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          style={{
+                            borderBottomWidth: "2px",
+                            borderBottomColor: "rgb(100,100,100)",
+                            borderBottomStyle: "solid"
+                          }}
+                          onMouseDown={() =>
+                            that.setState({
+                              options: Object.assign({}, that.state.options, {
+                                format: 0
+                              })
                             })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
+                          }
+                          onMouseUp={() =>
+                            that.setState({
                               touchOverlayShow: null
-                          })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      onClick={() => that.setState({ showExample: 0 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </ButtonGroup>
-              </Card.ImgOverlay>
-              );} else { return(
-              <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
-                <Container className="choice-style-overlay-button-container">
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() =>
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 0
-                          })
-                        })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() => that.setState({ showExample: 0 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </Row>
-                </Container>
-              </Card.ImgOverlay>);}})(this)}
+                            })
+                          }
+                        >
+                          Seleccione
+                        </Button>
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          onClick={() => that.setState({ showExample: 0 })}
+                        >
+                          Agrandalo
+                        </Button>
+                      </ButtonGroup>
+                    </Card.ImgOverlay>
+                  );
+                } else {
+                  return (
+                    <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
+                      <Container className="choice-style-overlay-button-container">
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() =>
+                              that.setState({
+                                options: Object.assign({}, that.state.options, {
+                                  format: 0
+                                })
+                              })
+                            }
+                          >
+                            Seleccione
+                          </Button>
+                        </Row>
+                        <hr />
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() => that.setState({ showExample: 0 })}
+                          >
+                            Agrandalo
+                          </Button>
+                        </Row>
+                      </Container>
+                    </Card.ImgOverlay>
+                  );
+                }
+              })(this)}
             </Card>
           </Col>
 
@@ -254,74 +288,105 @@ class Choice extends React.Component {
                 backgroundColor:
                   this.state.options.format === 1 ? "#5ca4a9" : "white"
               }}
-              onMouseEnter={() => window.setTimeout(() => {if(this.state.touchOverlayShow !== 1) {this.setState({ touchOverlayEnabled: false })}}, 200)}
-              onMouseLeave={() => this.setState({ touchOverlayEnabled: true, touchOverlayShow : null })}
-              onClick={() => this.setState({touchOverlayShow : 1})}
+              onMouseEnter={() =>
+                window.setTimeout(() => {
+                  if (this.state.touchOverlayShow !== 1) {
+                    this.setState({ touchOverlayEnabled: false });
+                  }
+                }, 200)
+              }
+              onMouseLeave={() =>
+                this.setState({
+                  touchOverlayEnabled: true,
+                  touchOverlayShow: null
+                })
+              }
+              onClick={() => this.setState({ touchOverlayShow: 1 })}
             >
-              <Card.Img variant="top" src="./banking-sample.jpg" />
-              {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 1) { return(
-              <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 1
+              <Card.Img variant="top" src="./eg1-sample.jpg" />
+              {(function(that) {
+                if (
+                  that.state.touchOverlayEnabled &&
+                  that.state.touchOverlayShow === 1
+                ) {
+                  return (
+                    <Card.ImgOverlay className="m-0 p-0">
+                      <ButtonGroup
+                        vertical
+                        size="lg"
+                        className="h-100 m-0 p-0"
+                        as={Container}
+                        fluid
+                      >
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          style={{
+                            borderBottomWidth: "2px",
+                            borderBottomColor: "rgb(100,100,100)",
+                            borderBottomStyle: "solid"
+                          }}
+                          onMouseDown={() =>
+                            that.setState({
+                              options: Object.assign({}, that.state.options, {
+                                format: 1
+                              })
                             })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
+                          }
+                          onMouseUp={() =>
+                            that.setState({
                               touchOverlayShow: null
-                          })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      onClick={() => that.setState({ showExample: 1 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </ButtonGroup>
-              </Card.ImgOverlay>
-              );} else { return(
-              <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
-                <Container className="choice-style-overlay-button-container">
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() =>
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 1
-                          })
-                        })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() => that.setState({ showExample: 1 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </Row>
-                </Container>
-              </Card.ImgOverlay>);}})(this)}
+                            })
+                          }
+                        >
+                          Seleccione
+                        </Button>
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          onClick={() => that.setState({ showExample: 1 })}
+                        >
+                          Agrandalo
+                        </Button>
+                      </ButtonGroup>
+                    </Card.ImgOverlay>
+                  );
+                } else {
+                  return (
+                    <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
+                      <Container className="choice-style-overlay-button-container">
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() =>
+                              that.setState({
+                                options: Object.assign({}, that.state.options, {
+                                  format: 1
+                                })
+                              })
+                            }
+                          >
+                            Seleccione
+                          </Button>
+                        </Row>
+                        <hr />
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() => that.setState({ showExample: 1 })}
+                          >
+                            Agrandalo
+                          </Button>
+                        </Row>
+                      </Container>
+                    </Card.ImgOverlay>
+                  );
+                }
+              })(this)}
             </Card>
           </Col>
 
@@ -334,74 +399,105 @@ class Choice extends React.Component {
                 backgroundColor:
                   this.state.options.format === 2 ? "#5ca4a9" : "white"
               }}
-              onMouseEnter={() => window.setTimeout(() => {if(this.state.touchOverlayShow !== 2) {this.setState({ touchOverlayEnabled: false })}}, 200)}
-              onMouseLeave={() => this.setState({ touchOverlayEnabled: true, touchOverlayShow : null })}
-              onClick={() => this.setState({touchOverlayShow : 2})}
+              onMouseEnter={() =>
+                window.setTimeout(() => {
+                  if (this.state.touchOverlayShow !== 2) {
+                    this.setState({ touchOverlayEnabled: false });
+                  }
+                }, 200)
+              }
+              onMouseLeave={() =>
+                this.setState({
+                  touchOverlayEnabled: true,
+                  touchOverlayShow: null
+                })
+              }
+              onClick={() => this.setState({ touchOverlayShow: 2 })}
             >
-              <Card.Img variant="top" src="./casual-sample.jpg" />
-              {(function (that) { if (that.state.touchOverlayEnabled && that.state.touchOverlayShow === 2) { return(
-              <Card.ImgOverlay className="m-0 p-0">
-                  <ButtonGroup vertical size="lg" className="h-100 m-0 p-0" as={Container} fluid>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      style={{borderBottomWidth: "2px", borderBottomColor: "rgb(100,100,100)", borderBottomStyle: "solid"}}
-                      onMouseDown={() => 
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 2
+              <Card.Img variant="top" src="./eg2-sample.jpg" />
+              {(function(that) {
+                if (
+                  that.state.touchOverlayEnabled &&
+                  that.state.touchOverlayShow === 2
+                ) {
+                  return (
+                    <Card.ImgOverlay className="m-0 p-0">
+                      <ButtonGroup
+                        vertical
+                        size="lg"
+                        className="h-100 m-0 p-0"
+                        as={Container}
+                        fluid
+                      >
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          style={{
+                            borderBottomWidth: "2px",
+                            borderBottomColor: "rgb(100,100,100)",
+                            borderBottomStyle: "solid"
+                          }}
+                          onMouseDown={() =>
+                            that.setState({
+                              options: Object.assign({}, that.state.options, {
+                                format: 2
+                              })
                             })
-                        })
-                      }
-                      onMouseUp={() => 
-                          that.setState({
+                          }
+                          onMouseUp={() =>
+                            that.setState({
                               touchOverlayShow: null
-                          })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                    <Button
-                      block
-                      variant="light"
-                      className="h-50 w-100"
-                      onClick={() => that.setState({ showExample: 2 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </ButtonGroup>
-              </Card.ImgOverlay>
-              );} else { return(
-              <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
-                <Container className="choice-style-overlay-button-container">
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() =>
-                        that.setState({
-                          options: Object.assign({}, that.state.options, {
-                            format: 2
-                          })
-                        })
-                      }
-                    >
-                      Seleccione
-                    </Button>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Button
-                      variant="light"
-                      className="mx-auto"
-                      onClick={() => that.setState({ showExample: 2 })}
-                    >
-                      Agrandalo
-                    </Button>
-                  </Row>
-                </Container>
-              </Card.ImgOverlay>);}})(this)}
+                            })
+                          }
+                        >
+                          Seleccione
+                        </Button>
+                        <Button
+                          block
+                          variant="light"
+                          className="h-50 w-100"
+                          onClick={() => that.setState({ showExample: 2 })}
+                        >
+                          Agrandalo
+                        </Button>
+                      </ButtonGroup>
+                    </Card.ImgOverlay>
+                  );
+                } else {
+                  return (
+                    <Card.ImgOverlay className="mb-0 pb-0 choice-style-overlay">
+                      <Container className="choice-style-overlay-button-container">
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() =>
+                              that.setState({
+                                options: Object.assign({}, that.state.options, {
+                                  format: 2
+                                })
+                              })
+                            }
+                          >
+                            Seleccione
+                          </Button>
+                        </Row>
+                        <hr />
+                        <Row>
+                          <Button
+                            variant="light"
+                            className="mx-auto"
+                            onClick={() => that.setState({ showExample: 2 })}
+                          >
+                            Agrandalo
+                          </Button>
+                        </Row>
+                      </Container>
+                    </Card.ImgOverlay>
+                  );
+                }
+              })(this)}
             </Card>
           </Col>
         </Row>
@@ -434,11 +530,11 @@ class Choice extends React.Component {
                 src={(function(that) {
                   switch (that.state.showExample) {
                     case 0:
-                      return "fancy-0.jpg";
+                      return "eg0-0.jpg";
                     case 1:
-                      return "banking-0.jpg";
+                      return "eg1-0.jpg";
                     case 2:
-                      return "casual-0.jpg";
+                      return "eg2-0.jpg";
                   }
                 })(this)}
               />
@@ -449,11 +545,11 @@ class Choice extends React.Component {
                 src={(function(that) {
                   switch (that.state.showExample) {
                     case 0:
-                      return "fancy-1.jpg";
+                      return "eg0-1.jpg";
                     case 1:
-                      return "banking-1.jpg";
+                      return "eg1-1.jpg";
                     case 2:
-                      return "casual-1.jpg";
+                      return "eg2-1.jpg";
                   }
                 })(this)}
               />
