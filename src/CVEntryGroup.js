@@ -92,7 +92,7 @@ class CVEntryGroup extends React.Component {
       </Button>
     ) : null;
     return (
-      <Container className="entry-group border rounded py-3 px-2 px-md-3">
+      <Container className="entry-group border rounded py-3 px-2 px-md-3 mb-3">
         <Container className="ml-1 ml-md-3 my-1 py-1 my-md-3">
           <Row>
             <h3>{this.props.displayName}</h3>

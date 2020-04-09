@@ -42,6 +42,11 @@
   letter-spacing: 1vw;
 }
 
+.overlay-h1-long {
+  font-size: calc(9vw + 0.5em);
+  letter-spacing: 0.5vw;
+}
+
 .carousel-subtitle {
   font-size: calc(1.7vw + 0.6em);
 }
@@ -57,24 +62,35 @@
 
 @keyframes indicator-flow {
   0% {
-    transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-60%);
+    color: rgba(255, 255, 255, 0.1);
+  }
+  25% {
+    transform: translateY(-35%);
+    color: rgba(255, 255, 255, 1);
   }
   75% {
-    transform: translateY(50%);
+    transform: translateY(15%);
     color: rgb(255, 255, 255, 1);
   }
   100% {
-    transform: translateY(50%);
-    color: rgba(0, 0, 0, 0);
+    transform: translateY(40%);
+    color: rgba(255, 255, 255, 0.1);
   }
 }
 
 .scroll-indicator {
+  font-size: calc(1.8em + 1vh);
   position: absolute;
   animation-name: indicator-flow;
   animation-duration: 3s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.delayed-15 {
+  animation-delay: 1.5s;
+  color: rgb(255, 255, 255, 0);
 }
 
 .main-c2 {

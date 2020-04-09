@@ -14,6 +14,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
+import Alert from "react-bootstrap/Alert";
 
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
@@ -25,15 +26,27 @@ class Choice extends React.Component {
       showExample: null,
       examplePage: 1,
       touchOverlayEnabled: true,
-      touchOverlayShow: null
+      touchOverlayShow: null,
+      serviceWarning: false,
+      styleWarning: false
     };
     this.sendOptions = props.setOptions;
   }
 
   submit() {
     this.sendOptions(this.state.options);
-    this.props.history.push("/enviar");
-    window.scrollTo(0, 0);
+    if (
+      this.state.options.service === undefined ||
+      this.state.options.format === undefined
+    ) {
+      this.setState({
+        serviceWarning: this.state.options.service === undefined,
+        styleWarning: this.state.options.format === undefined
+      });
+    } else {
+      this.props.history.push("/enviar");
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {
@@ -585,6 +598,22 @@ class Choice extends React.Component {
       </Modal>
     );
 
+    let warnings = [];
+    if (this.state.serviceWarning) {
+      warnings.push(
+        <Alert key={0} variant="warning">
+          Por favor seleccione el tipo de servicio.
+        </Alert>
+      );
+    }
+    if (this.state.styleWarning) {
+      warnings.push(
+        <Alert key={1} variant="warning">
+          Por favor seleccione un estilo.
+        </Alert>
+      );
+    }
+
     return (
       <Container className="choice px-0 px-md-3">
         <h1 className="px-3 pb-2">Seleccione sus opciones</h1>
@@ -594,11 +623,12 @@ class Choice extends React.Component {
         <Container className="pb-5">
           <Button
             variant="secondary"
-            className="mx-auto"
+            className="mx-auto mb-3"
             onClick={() => this.submit()}
           >
             ¡Cree su CV!
           </Button>
+          {warnings}
         </Container>
       </Container>
     );

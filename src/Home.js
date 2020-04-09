@@ -59,6 +59,7 @@ class Home extends React.Component {
                 </h3>
                 <br />
                 <IoIosArrowDown className="scroll-indicator" />
+                <IoIosArrowDown className="scroll-indicator delayed-15" />
               </Carousel.Caption>
             </Carousel.Item>
 
@@ -84,6 +85,7 @@ class Home extends React.Component {
                 </h3>
                 <br />
                 <IoIosArrowDown className="scroll-indicator" />
+                <IoIosArrowDown className="scroll-indicator delayed-15" />
               </Carousel.Caption>
             </Carousel.Item>
 
@@ -97,7 +99,9 @@ class Home extends React.Component {
                   />
                   <Card.ImgOverlay className="mb-0 pb-0">
                     <Card.Title className="text-center">
-                      <h1 className="overlay-h1">Impresionante</h1>
+                      <h1 className="overlay-h1 overlay-h1-long">
+                        Impresionante
+                      </h1>
                     </Card.Title>
                   </Card.ImgOverlay>
                 </Card.Body>
@@ -108,6 +112,7 @@ class Home extends React.Component {
                 </h3>
                 <br />
                 <IoIosArrowDown className="scroll-indicator" />
+                <IoIosArrowDown className="scroll-indicator delayed-15" />
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>

@@ -23,7 +23,12 @@ import Col from "react-bootstrap/Col";
 
 function MainNavBar(props) {
   return (
-    <Navbar fixed="top" expand="md" className="custom-nav mb-4">
+    <Navbar
+      collapseOnSelect
+      fixed="top"
+      expand="md"
+      className="custom-nav mb-4"
+    >
       <Container className="p-0">
         <Navbar.Brand as={Link} to="/">
           <img
@@ -36,13 +41,13 @@ function MainNavBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} exact to="/">
+            <Nav.Link as={NavLink} exact eventKey="1" to="/">
               Servicios
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/testimonios">
+            <Nav.Link as={NavLink} eventKey="2" to="/testimonios">
               Testimonios
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/empiece">
+            <Nav.Link as={NavLink} eventKey="3" to="/empiece">
               Empiece
             </Nav.Link>
           </Nav>
@@ -170,6 +175,23 @@ class App extends React.Component {
       }
     });
     this.setState({ formData: modelCopy });
+  }
+
+  getAppData() {
+    let copyRelevant = function(original) {
+      //Recursively extract only name and data from full model
+      let newObj = {};
+      let key = original.name;
+      if (typeof original.data !== "object") {
+        newObj[key] = original.data;
+      } else {
+        let children = original.data.map(item => copyRelevant(item));
+        newObj[key] = Object.assign({}, ...children);
+      }
+      return newObj;
+    };
+
+    return copyRelevant({ name: "model", data: this.state.formData });
   }
 }
 
