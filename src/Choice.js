@@ -518,7 +518,6 @@ class Choice extends React.Component {
     );
 
     /*---Modal for zooming in on CV examples---*/
-    //TODO
     let cvModal = (
       <Modal
         centered
@@ -535,6 +534,7 @@ class Choice extends React.Component {
             slide={false}
             nextIcon={<MdNavigateNext color="black" size="2rem" />}
             prevIcon={<MdNavigateBefore color="black" size="2rem" />}
+            activeIndex={this.state.examplePage - 1}
             onSelect={page => this.setState({ examplePage: page + 1 })}
           >
             <Carousel.Item>
@@ -548,6 +548,8 @@ class Choice extends React.Component {
                       return "eg1-0.jpg";
                     case 2:
                       return "eg2-0.jpg";
+                    default:
+                      return null;
                   }
                 })(this)}
               />
@@ -563,6 +565,8 @@ class Choice extends React.Component {
                       return "eg1-1.jpg";
                     case 2:
                       return "eg2-1.jpg";
+                    default:
+                      return null;
                   }
                 })(this)}
               />
@@ -579,6 +583,7 @@ class Choice extends React.Component {
                     ? "1px solid black"
                     : "0px solid black"
               }}
+              onClick={() => this.setState({ examplePage: 1 })}
             >
               1
             </Col>
@@ -590,6 +595,7 @@ class Choice extends React.Component {
                     ? "1px solid black"
                     : "0px solid black"
               }}
+              onClick={() => this.setState({ examplePage: 2 })}
             >
               2
             </Col>
