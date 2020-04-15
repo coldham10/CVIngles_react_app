@@ -286,17 +286,17 @@ function CVForm(props) {
       centered
       show={showChoiceModal}
       onHide={() => setShowChoiceModal(false)}
-      size="lg"
+      size="xl"
     >
       <Modal.Header closeButton className="py-1" />
       <Modal.Body className="p-0">
-        <Row>
+        <Row xs={1} md={3}>
           <Col>
             <Card
               className={"mx-auto my-4 p-1 style-choice"}
               style={{
-                width: "18rem",
-                height: "18rem",
+                width: "16rem",
+                height: "16rem",
                 backgroundColor:
                   props.options.format === 0 ? "#5ca4a9" : "white"
               }}
@@ -313,8 +313,8 @@ function CVForm(props) {
             <Card
               className={"mx-auto my-4 p-1 style-choice"}
               style={{
-                width: "18rem",
-                height: "18rem",
+                width: "16rem",
+                height: "16rem",
                 backgroundColor:
                   props.options.format === 1 ? "#5ca4a9" : "white"
               }}
@@ -331,8 +331,8 @@ function CVForm(props) {
             <Card
               className={"mx-auto my-4 p-1 style-choice"}
               style={{
-                width: "18rem",
-                height: "18rem",
+                width: "16rem",
+                height: "16rem",
                 backgroundColor:
                   props.options.format === 2 ? "#5ca4a9" : "white"
               }}
