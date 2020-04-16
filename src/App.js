@@ -87,8 +87,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     /*TODO load from local save*/
-    let template = require("./example3.json");
-    this.state = { formData: template.model, options: template.options };
+    this.template = require("./example.json");
+    this.state = {
+      formData: this.template.model,
+      options: this.template.options,
+      toSend: null
+    };
   }
 
   render() {
@@ -116,6 +120,10 @@ class App extends React.Component {
                   options={this.state.options}
                   setOptions={opts => this.setState({ options: opts })}
                   formCRUD={this.formCRUD.bind(this)}
+                  handleSubmit={e => {
+                    this.setState({ toSend: this.getAppData() });
+                    e.preventDefault();
+                  }}
                 />
               </Route>
               <Route path="/caja">
@@ -144,7 +152,12 @@ class App extends React.Component {
     }
     switch (arguments[n - 2]) {
       case "CREATE":
-        modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+        if (n > 2) {
+          //Not adding new section
+          modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+        } else {
+          modelObj.data.push(this.template.default[arguments[n - 1].name]);
+        }
         parent = modelObj; //allow renaming traversal of recently added-to modelObj
         break;
       case "UPDATE":
@@ -159,6 +172,7 @@ class App extends React.Component {
         console.log("Error unkown CRUD argument");
     }
     let idx = 0; //Renaming variable entries
+    // TODO: extra sections rename with variable extra
     parent.data.forEach(elem => {
       if (elem.type === "contact") {
         elem.name = "contact" + idx++;
@@ -183,7 +197,9 @@ class App extends React.Component {
       let newObj = {};
       let key = original.name;
       if (typeof original.data !== "object") {
-        newObj[key] = original.data;
+        newObj[key] = original.contactType
+          ? original.contactType + "_" + original.data
+          : original.data;
       } else {
         let children = original.data.map(item => copyRelevant(item));
         newObj[key] = Object.assign({}, ...children);
@@ -191,7 +207,10 @@ class App extends React.Component {
       return newObj;
     };
 
-    return copyRelevant({ name: "model", data: this.state.formData });
+    return {
+      options: this.state.options,
+      model: copyRelevant({ name: "model", data: this.state.formData })
+    };
   }
 }
 

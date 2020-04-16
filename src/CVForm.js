@@ -24,7 +24,7 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import CVSection from "./CVSection.js";
 
 function CVForm(props) {
-  /*Map section data to section objects*/
+  /*Map section data to section objects -- the body of the form*/
   let inner = props.data.map(section => {
     if (section.CVtype === "section") {
       return (
@@ -42,15 +42,17 @@ function CVForm(props) {
     }
   });
 
-  const [showEgModal, setShowEgModal] = useState(false);
-  const [modalPage, setPage] = useState(0);
-  const [showChoiceModal, setShowChoiceModal] = useState(false);
+  //Hooks to manage modal display state
+  const [showEgModal, setShowEgModal] = useState(false); //Format example modal displayed?
+  const [modalPage, setPage] = useState(0); //Format example page number
+  const [showChoiceModal, setShowChoiceModal] = useState(false); //Format choice modal displayed?
 
+  //Accordion options to change format and service type
   let options = (
     <Container className="mx-0 px-1 my-1 pt-1 pb-3 mx-md-auto px-md-auto">
       <Accordion>
         <Card>
-          <Card.Header className="p-3">
+          <Card.Header className="p-3 form-options-header">
             Tipo de servicio:{" "}
             <strong>
               {
@@ -179,7 +181,7 @@ function CVForm(props) {
           </Accordion.Collapse>
         </Card>
         <Card>
-          <Card.Header className="p-3">
+          <Card.Header className="p-3 form-options-header">
             Estilo:
             <Accordion.Toggle
               as={Button}
@@ -226,6 +228,10 @@ function CVForm(props) {
       </Accordion>
     </Container>
   );
+
+  /*---Modals---*/
+
+  //Example of current format - page selectable
   let egModal = (
     <Modal
       centered
@@ -281,6 +287,7 @@ function CVForm(props) {
     </Modal>
   );
 
+  //Choose new format
   let choiceModal = (
     <Modal
       centered
@@ -355,7 +362,11 @@ function CVForm(props) {
     <Container className="mb-5 px-0 px-md-3">
       <Form
         className="cv-form border rounded px-2 px-md-4 py-3"
-        onSubmit={e => this.handleSubmit(e)}
+        onSubmit={e => {
+          props.handleSubmit(e);
+          props.history.push("/caja");
+          window.scrollTo(0, 0);
+        }}
         onKeyPress={event => {
           if (
             event.which === 13 &&

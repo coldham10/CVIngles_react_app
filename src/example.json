@@ -1,68 +1,456 @@
 {
   "options": {
     "inputLanguage": "es",
-    "outputLanguage": "en"
+    "outputLanguage": "en",
+    "format": 0
   },
   "model": [
     {
-      "type": "datos",
-      "value": [
-        { "type": "name", "value": "Joaquin Phoenix" },
-        { "type": "dob", "value": "1980-07-07" },
-        { "type": "address", "value": "557 Calle 13, Medellin, Colombia" },
-        { "type": "contact", "value": { "type": "wa", "value": "123456789" } },
+      "name": "datos",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Datos Personales",
+      "data": [
         {
+          "name": "name",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "text",
+          "data": "Joaquin Phoenix"
+        },
+        {
+          "name": "dob",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "date",
+          "data": "1980-07-07"
+        },
+        {
+          "name": "address",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Direccíon",
+          "type": "text",
+          "data": "557 Calle 13, Medellin, Colombia"
+        },
+        {
+          "name": "contact0",
+          "CVtype": "entry",
+          "deletable": true,
+          "width": 12,
+          "displayName": "Modo de Contacto 1",
           "type": "contact",
-          "value": { "type": "li", "value": "joaquin-phoenix-33" }
+          "contactType": "wa",
+          "inputType": "tel",
+          "data": 123456789
+        },
+        {
+          "name": "contact1",
+          "CVtype": "entry",
+          "deletable": true,
+          "width": 12,
+          "displayName": "Modo de Contacto 2",
+          "type": "contact",
+          "contactType": "li",
+          "inputType": "text",
+          "data": "joaquin-phoenix-33"
         }
-      ]
+      ],
+      "default": {
+        "name": "contact",
+        "CVtype": "entry",
+        "deletable": true,
+        "width": 12,
+        "displayName": "Modo de Contacto ",
+        "type": "contact",
+        "contactType": "phone",
+        "inputType": "tel",
+        "data": ""
+      }
     },
     {
-      "type": "estudios",
-      "value": [
+      "name": "experiencia",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Experiencia Laboral",
+      "data": [
         {
-          "type": "degree",
-          "value": [
-            { "type": "degreeName", "value": "BSc. Phisica applicada" },
-            { "type": "startYear", "value": 1990 },
-            { "type": "endYear", "value": 1994 },
-            { "type": "grade", "value": "4.4/5.0" },
-            { "type": "university", "value": "Univesidad de Medellin" },
-            { "type": "location", "value": "Medellin, Colombia" },
-            { "type": "desc", "value": "Nada interesante, de veras" }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "experiencia",
-      "value": [
-        {
+          "name": "job0",
           "type": "job",
-          "value": [
-            { "type": "title", "value": "CEO" },
-            { "type": "employer", "value": "General Dynamics" },
-            { "type": "location", "value": "Boston, USA" },
-            { "type": "startYear", "value": 1990 },
-            { "type": "endYear", "value": 1994 },
+          "CVtype": "group",
+          "deletable": true,
+          "displayName": "Trabajo 1",
+          "data": [
             {
-              "type": "desc",
-              "value": "Muy aburrido, nada que hacer la verdad."
+              "name": "title",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 12,
+              "displayName": "Título",
+              "type": "text",
+              "data": "CEO"
             },
             {
-              "type": "achievements",
-              "value": [
-                { "type": "achievement", "value": "Gane mucha plata" },
-                { "type": "achievement", "value": "Hizo amigos" },
+              "name": "employer",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Empleador",
+              "type": "text",
+              "data": "General Dynamics"
+            },
+            {
+              "name": "location",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Ciudad, País",
+              "type": "text",
+              "data": "Boston, USA"
+            },
+            {
+              "name": "startYear",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Año de Comienzo",
+              "type": "year",
+              "data": "1995"
+            },
+            {
+              "name": "endYear",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Año de Terminación",
+              "type": "year",
+              "data": "2000"
+            },
+            {
+              "name": "desc",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 12,
+              "displayName": "Descripción",
+              "type": "textarea",
+              "data": "Muy aburrido, nada que hacer la verdad"
+            },
+            {
+              "name": "achievements",
+              "CVtype": "group",
+              "deletable": false,
+              "displayName": "Logros",
+              "width": 12,
+              "data": [
                 {
+                  "name": "achievement0",
+                  "CVtype": "entry",
+                  "deletable": true,
+                  "displayName": "Logro 1",
+                  "width": 12,
                   "type": "achievement",
-                  "value": "Organize fiestas ricas para toda la empreza"
+                  "data": "Gane mucha plata"
+                },
+                {
+                  "name": "achievement1",
+                  "CVtype": "entry",
+                  "deletable": true,
+                  "displayName": "Logro 2",
+                  "width": 12,
+                  "type": "achievement",
+                  "data": "Hizo amigos"
+                },
+                {
+                  "name": "achievement2",
+                  "CVtype": "entry",
+                  "deletable": true,
+                  "displayName": "Logro 3",
+                  "width": 12,
+                  "type": "achievement",
+                  "data": "Organize fiestas ricas para toda la empreza"
                 }
-              ]
+              ],
+              "default": {
+                "name": "achievement",
+                "CVtype": "entry",
+                "deletable": true,
+                "displayName": "Logro",
+                "width": 12,
+                "type": "achievement",
+                "data": ""
+              }
             }
           ]
         }
-      ]
+      ],
+      "default": {
+        "name": "job",
+        "CVtype": "group",
+        "type": "job",
+        "deletable": true,
+        "displayName": "Trabajo",
+        "data": [
+          {
+            "name": "title",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Título",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "employer",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Empleador",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          },
+          {
+            "name": "achievements",
+            "CVtype": "group",
+            "deletable": false,
+            "displayName": "Logros",
+            "width": 12,
+            "data": [
+              {
+                "name": "achievement0",
+                "CVtype": "entry",
+                "deletable": true,
+                "displayName": "Logro 1",
+                "width": 12,
+                "type": "achievement",
+                "data": ""
+              }
+            ],
+            "default": {
+              "name": "achievement",
+              "CVtype": "entry",
+              "deletable": true,
+              "displayName": "Logro",
+              "width": 12,
+              "type": "achievement",
+              "data": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "estudios",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Estudios",
+      "data": [
+        {
+          "name": "degree0",
+          "CVtype": "group",
+          "type": "degree",
+          "deletable": true,
+          "displayName": "Estudio 1",
+          "data": [
+            {
+              "name": "degreeName",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 12,
+              "displayName": "Nombre Completo de Carrera o Curso",
+              "type": "text",
+              "data": "BSc. Phisica applicada"
+            },
+            {
+              "name": "startYear",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 4,
+              "displayName": "Año de Comienzo",
+              "type": "year",
+              "data": "1990"
+            },
+            {
+              "name": "endYear",
+              "deletable": false,
+              "CVtype": "entry",
+              "width": 4,
+              "displayName": "Año de Terminación",
+              "type": "year",
+              "data": "1994"
+            },
+            {
+              "name": "grade",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 4,
+              "displayName": "Nota (x.x/x.x)",
+              "type": "text",
+              "data": "4.4/5.0"
+            },
+            {
+              "name": "university",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Universidad o Instituto",
+              "type": "text",
+              "data": "Universidad de Medellín"
+            },
+            {
+              "name": "location",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 6,
+              "displayName": "Ciudad, País",
+              "type": "text",
+              "data": "Medellín, Colombia"
+            },
+            {
+              "name": "desc",
+              "CVtype": "entry",
+              "deletable": false,
+              "width": 12,
+              "displayName": "Descripción",
+              "type": "textarea",
+              "data": "Nada interesante, de veras"
+            }
+          ]
+        }
+      ],
+      "default": {
+        "name": "degree",
+        "CVtype": "group",
+        "type": "degree",
+        "deletable": true,
+        "displayName": "Estudio ",
+        "data": [
+          {
+            "name": "name",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Nombre Completo de Carrera o Curso",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "grade",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Nota (x.x/x.x)",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "university",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Universidad o Instituto",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "default": {
+    "skills": {
+      "name": "skills",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Habilidades",
+      "data": [],
+      "default": {
+        "name": "skillsec",
+        "CVtype": "group",
+        "type": "skillsec",
+        "deletable": true,
+        "displayName": "Test",
+        "data": []
+      }
+    },
+    "langs": {},
+    "thesis": {},
+    "interests": {},
+    "other": {}
+  }
 }

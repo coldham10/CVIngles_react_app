@@ -137,3 +137,7 @@
 .entry-group {
   background-color: rgba(155, 193, 188, 0.3);
 }
+
+.form-options-header {
+  background-color: var(--platinum) !important;
+}

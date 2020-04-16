@@ -1,55 +1,241 @@
 {
   "options": {
-    "service": "",
-    "cv-format": "",
-    "cv-color": ""
+    "inputLanguage": "es",
+    "outputLanguage": "en"
   },
   "model": [
     {
-      "type": "datos",
-      "value": [
-        { "type": "name", "value": "" },
-        { "type": "dob", "value": "" },
-        { "type": "address", "value": "" },
-        { "type": "contact", "value": { "type": "phone", "value": "" } }
-      ]
-    },
-    {
-      "type": "estudios",
-      "value": [
+      "name": "datos",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Datos Personales",
+      "data": [
         {
-          "type": "degree",
-          "value": [
-            { "type": "degreeName", "value": "" },
-            { "type": "startYear", "value": "" },
-            { "type": "endYear", "value": "" },
-            { "type": "grade", "value": "" },
-            { "type": "university", "value": "" },
-            { "type": "location", "value": "" },
-            { "type": "desc", "value": "" }
-          ]
+          "name": "name",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "text",
+          "data": ""
+        },
+        {
+          "name": "dob",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Nombre Completo",
+          "type": "date",
+          "data": ""
+        },
+        {
+          "name": "address",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Direccíon",
+          "type": "text",
+          "data": ""
         }
-      ]
+      ],
+      "default": {
+        "name": "contact",
+        "CVtype": "entry",
+        "deletable": true,
+        "width": 12,
+        "displayName": "Modo de Contacto ",
+        "type": "contact",
+        "contactType": "phone",
+        "inputType": "tel",
+        "data": ""
+      }
     },
     {
-      "type": "experiencia",
-      "value": [
-        {
-          "type": "job",
-          "value": [
-            { "type": "title", "value": "" },
-            { "type": "employer", "value": "" },
-            { "type": "location", "value": "" },
-            { "type": "startYear", "value": "" },
-            { "type": "endYear", "value": "" },
-            { "type": "desc", "value": "" },
-            {
-              "type": "achievements",
-              "value": [{ "type": "achievement", "value": "" }]
+      "name": "experiencia",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Experiencia Laboral",
+      "data": [],
+      "default": {
+        "name": "job",
+        "CVtype": "group",
+        "type": "job",
+        "deletable": true,
+        "displayName": "Trabajo",
+        "data": [
+          {
+            "name": "title",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Título",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "employer",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Empleador",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          },
+          {
+            "name": "achievements",
+            "CVtype": "group",
+            "deletable": false,
+            "displayName": "Logros",
+            "width": 12,
+            "data": [],
+            "default": {
+              "name": "achievement",
+              "CVtype": "entry",
+              "deletable": true,
+              "displayName": "Logro",
+              "width": 12,
+              "type": "achievement",
+              "data": ""
             }
-          ]
-        }
-      ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "estudios",
+      "CVtype": "section",
+      "deletable": false,
+      "displayName": "Estudios",
+      "data": [],
+      "default": {
+        "name": "degree",
+        "CVtype": "group",
+        "type": "degree",
+        "deletable": true,
+        "displayName": "Estudio ",
+        "data": [
+          {
+            "name": "name",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Nombre Completo de Carrera o Curso",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "startYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Año de Comienzo",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "endYear",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Año de Terminación",
+            "type": "year",
+            "data": ""
+          },
+          {
+            "name": "grade",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 4,
+            "displayName": "Nota (x.x/x.x)",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "university",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Universidad o Instituto",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "location",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 6,
+            "displayName": "Ciudad, País",
+            "type": "text",
+            "data": ""
+          },
+          {
+            "name": "desc",
+            "CVtype": "entry",
+            "deletable": false,
+            "width": 12,
+            "displayName": "Descripción",
+            "type": "textarea",
+            "data": ""
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "default": {
+    "skills": {
+      "name": "skills",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Habilidades",
+      "data": [],
+      "default": {
+        "name": "skillsec",
+        "CVtype": "group",
+        "type": "skillsec",
+        "deletable": true,
+        "displayName": "Test",
+        "data": []
+      }
+    },
+    "langs": {},
+    "thesis": {},
+    "interests": {},
+    "other": {}
+  }
 }
