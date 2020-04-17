@@ -138,7 +138,6 @@ class App extends React.Component {
   }
 
   formCRUD() {
-    console.log(arguments);
     /*arguments: first n-2 guide to relevant section
     second to last is CREATE, UPDATE or DELETE
     last argument = {prop: val} or {}*/
@@ -152,16 +151,29 @@ class App extends React.Component {
     }
     switch (arguments[n - 2]) {
       case "CREATE":
+        parent = modelObj;
         if (n > 2) {
           //Not adding new section
-          modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+          modelObj =
+            parent.data[
+              parent.data.push(JSON.parse(JSON.stringify(parent.default))) - 1
+            ];
         } else {
-          modelObj.data.push(this.template.default[arguments[n - 1].name]);
+          modelObj =
+            parent.data[
+              parent.data.push(
+                JSON.parse(
+                  JSON.stringify(this.template.default[arguments[n - 1].name])
+                )
+              ) - 1
+            ];
         }
-        parent = modelObj; //allow renaming traversal of recently added-to modelObj
+        for (let key in arguments[n - 1]) {
+          modelObj[key] = arguments[n - 1][key];
+        }
         break;
       case "UPDATE":
-        for (var key in arguments[n - 1]) {
+        for (let key in arguments[n - 1]) {
           modelObj[key] = arguments[n - 1][key];
         }
         break;
@@ -169,23 +181,32 @@ class App extends React.Component {
         parent.data = parent.data.filter(obj => obj !== modelObj);
         break;
       default:
-        console.log("Error unkown CRUD argument");
+        console.warn("Error unkown CRUD argument");
     }
     let idx = 0; //Renaming variable entries
-    // TODO: extra sections rename with variable extra
     parent.data.forEach(elem => {
-      if (elem.type === "contact") {
-        elem.name = "contact" + idx++;
-        elem.displayName = "Modo de Contacto " + idx;
-      } else if (elem.type === "achievement") {
-        elem.name = "achievement" + idx++;
-        elem.displayName = "Logro " + idx;
-      } else if (elem.type === "job") {
-        elem.name = "job" + idx++;
-        elem.displayName = "Trabajo " + idx;
-      } else if (elem.type === "degree") {
-        elem.name = "degree" + idx++;
-        elem.displayName = "Estudio " + idx;
+      switch (elem.type) {
+        case "contact":
+          elem.name = "contact" + idx++;
+          elem.name = elem.displayName = "Modo de Contacto " + idx;
+          break;
+        case "achievement":
+          elem.name = "achievement" + idx++;
+          elem.displayName = "Logro " + idx;
+          break;
+        case "job":
+          elem.name = "job" + idx++;
+          elem.displayName = "Trabajo " + idx;
+          break;
+        case "degree":
+          elem.name = "degree" + idx++;
+          elem.displayName = "Estudio " + idx;
+          break;
+        case "other":
+          elem.name = "other" + idx++;
+          break;
+        default:
+          break;
       }
     });
     this.setState({ formData: modelCopy });
@@ -195,10 +216,13 @@ class App extends React.Component {
     let copyRelevant = function(original) {
       //Recursively extract only name and data from full model
       let newObj = {};
-      let key = original.name;
+      let key =
+        original.type === "other"
+          ? original.name + "__" + original.displayName
+          : original.name;
       if (typeof original.data !== "object") {
         newObj[key] = original.contactType
-          ? original.contactType + "_" + original.data
+          ? original.contactType + "__" + original.data
           : original.data;
       } else {
         let children = original.data.map(item => copyRelevant(item));
@@ -207,10 +231,10 @@ class App extends React.Component {
       return newObj;
     };
 
-    return {
-      options: this.state.options,
-      model: copyRelevant({ name: "model", data: this.state.formData })
-    };
+    return Object.assign(
+      copyRelevant({ name: "model", data: this.state.formData }),
+      { options: this.state.options }
+    );
   }
 }
 

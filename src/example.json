@@ -2,7 +2,8 @@
   "options": {
     "inputLanguage": "es",
     "outputLanguage": "en",
-    "format": 0
+    "format": 0,
+    "service": "t"
   },
   "model": [
     {
@@ -437,7 +438,7 @@
       "name": "skills",
       "CVtype": "section",
       "deletable": true,
-      "displayName": "Habilidades",
+      "displayName": "Otros Habilidades",
       "data": [],
       "default": {
         "name": "skillsec",
@@ -451,6 +452,14 @@
     "langs": {},
     "thesis": {},
     "interests": {},
-    "other": {}
+    "other": {
+      "name": "other",
+      "type": "other",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "",
+      "data": [],
+      "default": {}
+    }
   }
 }

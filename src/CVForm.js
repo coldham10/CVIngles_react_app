@@ -33,6 +33,7 @@ function CVForm(props) {
           displayName={section.displayName}
           data={section.data}
           default={section.default}
+          type={section.type}
           formCRUD={props.formCRUD.bind(null, section.name)}
         />
       );
@@ -41,6 +42,52 @@ function CVForm(props) {
       return null;
     }
   });
+
+  //Button to add new CV sections
+  let [showSecDD, setShowSecDD] = useState(false);
+  let addSection = (
+    <Container className="mt-0 mb-3 py-2 px-2 mt-md-4 mb-md-4 p-md-4">
+      <DropdownButton
+        title="Nueva sección"
+        show={showSecDD}
+        onToggle={a => setShowSecDD(a)}
+        onSelect={i =>
+          props.formCRUD("CREATE", {
+            name: ["skills", "langs", "thesis", "interests"][i]
+          })
+        }
+      >
+        {["Otros Habilidades", "Idiomas", "Tesis", "Intereses"].map(
+          (secName, i) => (
+            <Dropdown.Item
+              disabled={props.data.map(s => s.displayName).includes(secName)}
+              eventKey={i}
+              key={i}
+            >
+              {secName}
+            </Dropdown.Item>
+          )
+        )}
+        <Dropdown.Divider />
+        <Container>
+          <Form.Control
+            placeholder="Personalizado"
+            onKeyDown={e => {
+              //Enter key pressed
+              if (e.which === 13 && e.target.value !== "") {
+                props.formCRUD("CREATE", {
+                  name: "other",
+                  displayName: e.target.value
+                });
+                e.target.value = "";
+                setShowSecDD(false);
+              }
+            }}
+          ></Form.Control>
+        </Container>
+      </DropdownButton>
+    </Container>
+  );
 
   //Hooks to manage modal display state
   const [showEgModal, setShowEgModal] = useState(false); //Format example modal displayed?
@@ -380,6 +427,7 @@ function CVForm(props) {
         </Container>
         <Container className="mx-0 px-1 my-1 py-2 mx-md-auto px-md-auto">
           {inner}
+          {addSection}
         </Container>
         {options}
         <Button variant="primary" type="submit" className="m-3">
