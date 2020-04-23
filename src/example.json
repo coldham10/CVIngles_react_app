@@ -3,7 +3,8 @@
     "inputLanguage": "es",
     "outputLanguage": "en",
     "format": 0,
-    "service": "t"
+    "service": "t",
+    "color": "blue"
   },
   "model": [
     {
@@ -13,20 +14,29 @@
       "displayName": "Datos Personales",
       "data": [
         {
-          "name": "name",
+          "name": "fname",
           "CVtype": "entry",
           "deletable": false,
-          "width": 12,
-          "displayName": "Nombre Completo",
+          "width": 6,
+          "displayName": "Nombre(s)",
           "type": "text",
-          "data": "Joaquin Phoenix"
+          "data": "Joaquin"
+        },
+        {
+          "name": "lname",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 6,
+          "displayName": "Apellido(s)",
+          "type": "text",
+          "data": "Phoenix"
         },
         {
           "name": "dob",
           "CVtype": "entry",
           "deletable": false,
           "width": 12,
-          "displayName": "Nombre Completo",
+          "displayName": "Fecha de Nacimiento",
           "type": "date",
           "data": "1980-07-07"
         },

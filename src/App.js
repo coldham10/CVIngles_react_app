@@ -194,7 +194,7 @@ class App extends React.Component {
       switch (elem.type) {
         case "contact":
           elem.name = "contact" + idx++;
-          elem.name = elem.displayName = "Modo de Contacto " + idx;
+          elem.displayName = "Modo de Contacto " + idx;
           break;
         case "achievement":
           elem.name = "achievement" + idx++;

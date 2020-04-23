@@ -97,6 +97,7 @@
 
 .choice {
   margin-top: 100px;
+  overflow: hidden;
 }
 
 .choice-group {
