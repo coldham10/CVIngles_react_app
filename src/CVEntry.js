@@ -70,6 +70,20 @@ function CVEntry(props) {
         </InputGroup>
       </Form.Group>
     );
+  } else if (props.type === "lang") {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <InputGroup>
+          <Form.Control className="rounded" placeholder="Idioma" />
+          <DropdownButton
+            as={InputGroup.Prepend}
+            variant="outline-secondary"
+          ></DropdownButton>
+          <InputGroup.Append>{deleteButton}</InputGroup.Append>
+        </InputGroup>
+      </Form.Group>
+    );
   } else {
     return (
       <Form.Group>

@@ -441,15 +441,29 @@
       "displayName": "Otros Habilidades",
       "data": [],
       "default": {
-        "name": "skillsec",
-        "CVtype": "group",
-        "type": "skillsec",
+        "name": "skill",
+        "CVtype": "entry",
+        "type": "skill",
         "deletable": true,
-        "displayName": "Test",
-        "data": []
+        "displayName": "",
+        "data": ""
       }
     },
-    "langs": {},
+    "langs": {
+      "name": "langs",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Idiomas",
+      "data": [],
+      "default": {
+        "name": "lang",
+        "CVtype": "entry",
+        "type": "lang",
+        "deletable": true,
+        "displayName": "",
+        "data": ""
+      }
+    },
     "thesis": {},
     "interests": {},
     "other": {

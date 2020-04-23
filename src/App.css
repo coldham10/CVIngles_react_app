@@ -21,10 +21,6 @@
   background-color: var(--cadet);
 }
 
-.btn-primary {
-  background-color: var(--terra);
-}
-
 .btn-secondary {
   background-color: var(--cadet) !important;
   border-width: 0px !important;

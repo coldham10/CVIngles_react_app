@@ -121,7 +121,10 @@ class App extends React.Component {
                   setOptions={opts => this.setState({ options: opts })}
                   formCRUD={this.formCRUD.bind(this)}
                   handleSubmit={e => {
-                    this.setState({ toSend: this.getAppData() });
+                    this.setState({
+                      toSend: this.getAppData()
+                    });
+                    console.log(JSON.stringify(this.getAppData()));
                     e.preventDefault();
                   }}
                 />
@@ -142,7 +145,7 @@ class App extends React.Component {
     second to last is CREATE, UPDATE or DELETE
     last argument = {prop: val} or {}*/
     const n = arguments.length;
-    const modelCopy = JSON.parse(JSON.stringify(this.state.formData)); //Deep Copy
+    let modelCopy = JSON.parse(JSON.stringify(this.state.formData)); //Deep Copy
     let modelObj = { data: modelCopy };
     let parent = null;
     for (let i = 0; i < n - 2; i++) {
@@ -179,6 +182,9 @@ class App extends React.Component {
         break;
       case "DELETE":
         parent.data = parent.data.filter(obj => obj !== modelObj);
+        if (n === 3) {
+          modelCopy = parent.data;
+        }
         break;
       default:
         console.warn("Error unkown CRUD argument");
@@ -204,6 +210,10 @@ class App extends React.Component {
           break;
         case "other":
           elem.name = "other" + idx++;
+          break;
+        case "skill":
+          elem.name = "skill" + idx++;
+          elem.displayName = "Habilidad " + idx;
           break;
         default:
           break;

@@ -34,6 +34,7 @@ function CVForm(props) {
           data={section.data}
           default={section.default}
           type={section.type}
+          deletable={section.deletable}
           formCRUD={props.formCRUD.bind(null, section.name)}
         />
       );
@@ -430,7 +431,7 @@ function CVForm(props) {
           {addSection}
         </Container>
         {options}
-        <Button variant="primary" type="submit" className="m-3">
+        <Button type="submit" className="m-3">
           Enviar
         </Button>
       </Form>
