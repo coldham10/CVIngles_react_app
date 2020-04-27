@@ -22,10 +22,33 @@ import Modal from "react-bootstrap/Modal";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 import CVSection from "./CVSection.js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function CVForm(props) {
+  const stripePromise = loadStripe(
+    "pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw"
+  );
+  const toCheckout = async (event) => {
+    // When the customer clicks on the button, redirect them to Checkout.
+    const stripe = await stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      items: [
+        {
+          sku: {
+            p: "sku_HAyeENTtw83AH4",
+            t: "sku_HAygNDGw8p9Ket",
+            i: "sku_HAyhjrPoPglqoV",
+          }[props.options.service],
+          quantity: 1,
+        },
+      ],
+      successUrl: "http://cvingles.net/enviar",
+      cancelUrl: "http://cvingles.net/enviar",
+    });
+  };
+
   /*Map section data to section objects -- the body of the form*/
-  let inner = props.data.map(section => {
+  let inner = props.data.map((section) => {
     if (section.CVtype === "section") {
       return (
         <CVSection
@@ -51,17 +74,17 @@ function CVForm(props) {
       <DropdownButton
         title="Nueva sección"
         show={showSecDD}
-        onToggle={a => setShowSecDD(a)}
-        onSelect={i =>
+        onToggle={(a) => setShowSecDD(a)}
+        onSelect={(i) =>
           props.formCRUD("CREATE", {
-            name: ["skills", "langs", "thesis", "interests"][i]
+            name: ["skills", "langs", "thesis", "interests"][i],
           })
         }
       >
         {["Otros Habilidades", "Idiomas", "Tesis", "Intereses"].map(
           (secName, i) => (
             <Dropdown.Item
-              disabled={props.data.map(s => s.displayName).includes(secName)}
+              disabled={props.data.map((s) => s.displayName).includes(secName)}
               eventKey={i}
               key={i}
             >
@@ -73,12 +96,12 @@ function CVForm(props) {
         <Container>
           <Form.Control
             placeholder="Personalizado"
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               //Enter key pressed
               if (e.which === 13 && e.target.value !== "") {
                 props.formCRUD("CREATE", {
                   name: "other",
-                  displayName: e.target.value
+                  displayName: e.target.value,
                 });
                 e.target.value = "";
                 setShowSecDD(false);
@@ -107,7 +130,7 @@ function CVForm(props) {
                 {
                   p: "De Lujo",
                   t: "Traducción Profesional",
-                  i: "Inglés Nativo"
+                  i: "Inglés Nativo",
                 }[props.options.service]
               }
             </strong>
@@ -129,7 +152,7 @@ function CVForm(props) {
                       {
                         p: "De Lujo",
                         t: "Traducción",
-                        i: "Inglés Nativo"
+                        i: "Inglés Nativo",
                       }[props.options.service]
                     }
                   >
@@ -219,7 +242,7 @@ function CVForm(props) {
                               Incluye también formato impesionante.
                             </strong>
                           </>
-                        )
+                        ),
                       }[props.options.service]
                     }
                   </p>
@@ -300,7 +323,7 @@ function CVForm(props) {
           nextIcon={<MdNavigateNext color="black" size="2rem" />}
           prevIcon={<MdNavigateBefore color="black" size="2rem" />}
           activeIndex={modalPage}
-          onSelect={page => setPage(page)}
+          onSelect={(page) => setPage(page)}
         >
           <Carousel.Item>
             <Image fluid src={"./eg" + props.options.format + "-0.jpg"} />
@@ -315,7 +338,7 @@ function CVForm(props) {
           <Col
             className="py-1 px-2 mx-1"
             style={{
-              border: modalPage === 0 ? "1px solid black" : "0px solid black"
+              border: modalPage === 0 ? "1px solid black" : "0px solid black",
             }}
             onClick={() => setPage(0)}
           >
@@ -324,7 +347,7 @@ function CVForm(props) {
           <Col
             className="py-1 px-2 mx-1"
             style={{
-              border: modalPage === 1 ? "1px solid black" : "0px solid black"
+              border: modalPage === 1 ? "1px solid black" : "0px solid black",
             }}
             onClick={() => setPage(1)}
           >
@@ -353,7 +376,7 @@ function CVForm(props) {
                 width: "16rem",
                 height: "16rem",
                 backgroundColor:
-                  props.options.format === 0 ? "#5ca4a9" : "white"
+                  props.options.format === 0 ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 props.setOptions(
@@ -371,7 +394,7 @@ function CVForm(props) {
                 width: "16rem",
                 height: "16rem",
                 backgroundColor:
-                  props.options.format === 1 ? "#5ca4a9" : "white"
+                  props.options.format === 1 ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 props.setOptions(
@@ -389,7 +412,7 @@ function CVForm(props) {
                 width: "16rem",
                 height: "16rem",
                 backgroundColor:
-                  props.options.format === 2 ? "#5ca4a9" : "white"
+                  props.options.format === 2 ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 props.setOptions(
@@ -410,12 +433,11 @@ function CVForm(props) {
     <Container className="mb-5 px-0 px-md-3">
       <Form
         className="cv-form border rounded px-2 px-md-4 py-3"
-        onSubmit={e => {
+        onSubmit={(e) => {
           props.handleSubmit(e);
-          props.history.push("/caja");
-          window.scrollTo(0, 0);
+          toCheckout(e);
         }}
-        onKeyPress={event => {
+        onKeyPress={(event) => {
           if (
             event.which === 13 &&
             event.target.type !== "textarea" /* Enter key*/

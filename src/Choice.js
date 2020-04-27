@@ -17,7 +17,6 @@ import Carousel from "react-bootstrap/Carousel";
 import Alert from "react-bootstrap/Alert";
 
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
-
 class Choice extends React.Component {
   constructor(props) {
     super(props);

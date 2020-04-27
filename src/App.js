@@ -4,7 +4,6 @@ import "./App.css";
 import Home from "./Home.js";
 import CVForm from "./CVForm.js";
 import Choice from "./Choice.js";
-import Checkout from "./Checkout.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -128,9 +127,6 @@ class App extends React.Component {
                     e.preventDefault();
                   }}
                 />
-              </Route>
-              <Route path="/caja">
-                <Checkout />
               </Route>
             </Switch>
           </div>
