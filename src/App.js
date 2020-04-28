@@ -12,7 +12,7 @@ import {
   Switch,
   Route,
   Link,
-  NavLink
+  NavLink,
 } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -86,12 +86,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     /*TODO load from local save*/
+    var { options, formData } = this.loadLocal();
     this.template = require("./example.json");
     this.state = {
-      formData: this.template.model,
-      options: this.template.options,
-      toSend: null
+      formData: formData || this.template.model,
+      options: options || this.template.options,
+      toSend: null,
     };
+    window.addEventListener("unload", () => this.storeLocal());
   }
 
   render() {
@@ -104,26 +106,27 @@ class App extends React.Component {
               <Route exact path="/">
                 <Home
                   options={this.state.options}
-                  setOptions={opts => this.setState({ options: opts })}
+                  setOptions={(opts) => this.setState({ options: opts })}
                 />
               </Route>
               <Route path="/empiece">
                 <Choice
                   options={this.state.options}
-                  setOptions={opts => this.setState({ options: opts })}
+                  setOptions={(opts) => this.setState({ options: opts })}
+                  storeLocal={(data) => this.storeLocal(data)}
                 />
               </Route>
               <Route path="/enviar">
                 <CVForm
                   data={this.state.formData}
                   options={this.state.options}
-                  setOptions={opts => this.setState({ options: opts })}
+                  setOptions={(opts) => this.setState({ options: opts })}
                   formCRUD={this.formCRUD.bind(this)}
-                  handleSubmit={e => {
+                  handleSubmit={(e) => {
                     this.setState({
-                      toSend: this.getAppData()
+                      toSend: this.getAppData(),
                     });
-                    console.log(JSON.stringify(this.getAppData()));
+                    this.storeLocal();
                     e.preventDefault();
                   }}
                 />
@@ -146,7 +149,7 @@ class App extends React.Component {
     let parent = null;
     for (let i = 0; i < n - 2; i++) {
       parent = modelObj;
-      modelObj = parent.data.find(element => element.name === arguments[i]);
+      modelObj = parent.data.find((element) => element.name === arguments[i]);
     }
     switch (arguments[n - 2]) {
       case "CREATE":
@@ -177,7 +180,7 @@ class App extends React.Component {
         }
         break;
       case "DELETE":
-        parent.data = parent.data.filter(obj => obj !== modelObj);
+        parent.data = parent.data.filter((obj) => obj !== modelObj);
         if (n === 3) {
           modelCopy = parent.data;
         }
@@ -186,7 +189,7 @@ class App extends React.Component {
         console.warn("Error unkown CRUD argument");
     }
     let idx = 0; //Renaming variable entries
-    parent.data.forEach(elem => {
+    parent.data.forEach((elem) => {
       switch (elem.type) {
         case "contact":
           elem.name = "contact" + idx++;
@@ -219,7 +222,7 @@ class App extends React.Component {
   }
 
   getAppData() {
-    let copyRelevant = function(original) {
+    let copyRelevant = function (original) {
       //Recursively extract only name and data from full model
       let newObj = {};
       let key =
@@ -231,7 +234,7 @@ class App extends React.Component {
           ? original.contactType + "__" + original.data
           : original.data;
       } else {
-        let children = original.data.map(item => copyRelevant(item));
+        let children = original.data.map((item) => copyRelevant(item));
         newObj[key] = Object.assign({}, ...children);
       }
       return newObj;
@@ -241,6 +244,33 @@ class App extends React.Component {
       copyRelevant({ name: "model", data: this.state.formData }),
       { options: this.state.options }
     );
+  }
+
+  storeLocal(data) {
+    if (data === undefined) {
+      data = this.state;
+    }
+    try {
+      if (data.formData !== undefined) {
+        window.localStorage.setItem("formData", JSON.stringify(data.formData));
+      }
+      if (data.options !== undefined) {
+        window.localStorage.setItem("options", JSON.stringify(data.options));
+      }
+    } catch (e) {
+      console.error("Error setting localStorage");
+    }
+  }
+
+  loadLocal() {
+    try {
+      const retrievedData = JSON.parse(window.localStorage.getItem("formData"));
+      const retrievedOpts = JSON.parse(window.localStorage.getItem("options"));
+      return { formData: retrievedData, options: retrievedOpts };
+    } catch (e) {
+      console.error("Error retrieving localStorage");
+      return { formData: null, options: null };
+    }
   }
 }
 

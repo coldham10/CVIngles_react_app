@@ -27,7 +27,7 @@ class Choice extends React.Component {
       touchOverlayEnabled: true,
       touchOverlayShow: null,
       serviceWarning: false,
-      styleWarning: false
+      styleWarning: false,
     };
     this.sendOptions = props.setOptions;
   }
@@ -40,10 +40,11 @@ class Choice extends React.Component {
     ) {
       this.setState({
         serviceWarning: this.state.options.service === undefined,
-        styleWarning: this.state.options.format === undefined
+        styleWarning: this.state.options.format === undefined,
       });
     } else {
       this.props.history.push("/enviar");
+      this.props.storeLocal({ options: this.state.options });
       window.scrollTo(0, 0);
     }
   }
@@ -61,13 +62,13 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "32rem",
                 backgroundColor:
-                  this.state.options.service === "p" ? "#5ca4a9" : "white"
+                  this.state.options.service === "p" ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 this.setState({
                   options: Object.assign({}, this.state.options, {
-                    service: "p"
-                  })
+                    service: "p",
+                  }),
                 })
               }
             >
@@ -101,13 +102,13 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "32rem",
                 backgroundColor:
-                  this.state.options.service === "t" ? "#5ca4a9" : "white"
+                  this.state.options.service === "t" ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 this.setState({
                   options: Object.assign({}, this.state.options, {
-                    service: "t"
-                  })
+                    service: "t",
+                  }),
                 })
               }
             >
@@ -140,13 +141,13 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "32rem",
                 backgroundColor:
-                  this.state.options.service === "i" ? "#5ca4a9" : "white"
+                  this.state.options.service === "i" ? "#5ca4a9" : "white",
               }}
               onClick={() =>
                 this.setState({
                   options: Object.assign({}, this.state.options, {
-                    service: "i"
-                  })
+                    service: "i",
+                  }),
                 })
               }
             >
@@ -187,7 +188,7 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "18rem",
                 backgroundColor:
-                  this.state.options.format === 0 ? "#5ca4a9" : "white"
+                  this.state.options.format === 0 ? "#5ca4a9" : "white",
               }}
               onMouseEnter={() =>
                 window.setTimeout(() => {
@@ -199,13 +200,13 @@ class Choice extends React.Component {
               onMouseLeave={() =>
                 this.setState({
                   touchOverlayEnabled: true,
-                  touchOverlayShow: null
+                  touchOverlayShow: null,
                 })
               }
               onClick={() => this.setState({ touchOverlayShow: 0 })}
             >
               <Card.Img variant="top" src="./eg0-sample.jpg" />
-              {(function(that) {
+              {(function (that) {
                 if (
                   that.state.touchOverlayEnabled &&
                   that.state.touchOverlayShow === 0
@@ -226,18 +227,18 @@ class Choice extends React.Component {
                           style={{
                             borderBottomWidth: "2px",
                             borderBottomColor: "rgb(100,100,100)",
-                            borderBottomStyle: "solid"
+                            borderBottomStyle: "solid",
                           }}
                           onMouseDown={() =>
                             that.setState({
                               options: Object.assign({}, that.state.options, {
-                                format: 0
-                              })
+                                format: 0,
+                              }),
                             })
                           }
                           onMouseUp={() =>
                             that.setState({
-                              touchOverlayShow: null
+                              touchOverlayShow: null,
                             })
                           }
                         >
@@ -265,8 +266,8 @@ class Choice extends React.Component {
                             onClick={() =>
                               that.setState({
                                 options: Object.assign({}, that.state.options, {
-                                  format: 0
-                                })
+                                  format: 0,
+                                }),
                               })
                             }
                           >
@@ -298,7 +299,7 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "18rem",
                 backgroundColor:
-                  this.state.options.format === 1 ? "#5ca4a9" : "white"
+                  this.state.options.format === 1 ? "#5ca4a9" : "white",
               }}
               onMouseEnter={() =>
                 window.setTimeout(() => {
@@ -310,13 +311,13 @@ class Choice extends React.Component {
               onMouseLeave={() =>
                 this.setState({
                   touchOverlayEnabled: true,
-                  touchOverlayShow: null
+                  touchOverlayShow: null,
                 })
               }
               onClick={() => this.setState({ touchOverlayShow: 1 })}
             >
               <Card.Img variant="top" src="./eg1-sample.jpg" />
-              {(function(that) {
+              {(function (that) {
                 if (
                   that.state.touchOverlayEnabled &&
                   that.state.touchOverlayShow === 1
@@ -337,18 +338,18 @@ class Choice extends React.Component {
                           style={{
                             borderBottomWidth: "2px",
                             borderBottomColor: "rgb(100,100,100)",
-                            borderBottomStyle: "solid"
+                            borderBottomStyle: "solid",
                           }}
                           onMouseDown={() =>
                             that.setState({
                               options: Object.assign({}, that.state.options, {
-                                format: 1
-                              })
+                                format: 1,
+                              }),
                             })
                           }
                           onMouseUp={() =>
                             that.setState({
-                              touchOverlayShow: null
+                              touchOverlayShow: null,
                             })
                           }
                         >
@@ -376,8 +377,8 @@ class Choice extends React.Component {
                             onClick={() =>
                               that.setState({
                                 options: Object.assign({}, that.state.options, {
-                                  format: 1
-                                })
+                                  format: 1,
+                                }),
                               })
                             }
                           >
@@ -409,7 +410,7 @@ class Choice extends React.Component {
                 width: "18rem",
                 height: "18rem",
                 backgroundColor:
-                  this.state.options.format === 2 ? "#5ca4a9" : "white"
+                  this.state.options.format === 2 ? "#5ca4a9" : "white",
               }}
               onMouseEnter={() =>
                 window.setTimeout(() => {
@@ -421,13 +422,13 @@ class Choice extends React.Component {
               onMouseLeave={() =>
                 this.setState({
                   touchOverlayEnabled: true,
-                  touchOverlayShow: null
+                  touchOverlayShow: null,
                 })
               }
               onClick={() => this.setState({ touchOverlayShow: 2 })}
             >
               <Card.Img variant="top" src="./eg2-sample.jpg" />
-              {(function(that) {
+              {(function (that) {
                 if (
                   that.state.touchOverlayEnabled &&
                   that.state.touchOverlayShow === 2
@@ -448,18 +449,18 @@ class Choice extends React.Component {
                           style={{
                             borderBottomWidth: "2px",
                             borderBottomColor: "rgb(100,100,100)",
-                            borderBottomStyle: "solid"
+                            borderBottomStyle: "solid",
                           }}
                           onMouseDown={() =>
                             that.setState({
                               options: Object.assign({}, that.state.options, {
-                                format: 2
-                              })
+                                format: 2,
+                              }),
                             })
                           }
                           onMouseUp={() =>
                             that.setState({
-                              touchOverlayShow: null
+                              touchOverlayShow: null,
                             })
                           }
                         >
@@ -487,8 +488,8 @@ class Choice extends React.Component {
                             onClick={() =>
                               that.setState({
                                 options: Object.assign({}, that.state.options, {
-                                  format: 2
-                                })
+                                  format: 2,
+                                }),
                               })
                             }
                           >
@@ -534,12 +535,12 @@ class Choice extends React.Component {
             nextIcon={<MdNavigateNext color="black" size="2rem" />}
             prevIcon={<MdNavigateBefore color="black" size="2rem" />}
             activeIndex={this.state.examplePage - 1}
-            onSelect={page => this.setState({ examplePage: page + 1 })}
+            onSelect={(page) => this.setState({ examplePage: page + 1 })}
           >
             <Carousel.Item>
               <Image
                 fluid
-                src={(function(that) {
+                src={(function (that) {
                   switch (that.state.showExample) {
                     case 0:
                       return "eg0-0.jpg";
@@ -556,7 +557,7 @@ class Choice extends React.Component {
             <Carousel.Item>
               <Image
                 fluid
-                src={(function(that) {
+                src={(function (that) {
                   switch (that.state.showExample) {
                     case 0:
                       return "eg0-1.jpg";
@@ -580,7 +581,7 @@ class Choice extends React.Component {
                 border:
                   this.state.examplePage === 1
                     ? "1px solid black"
-                    : "0px solid black"
+                    : "0px solid black",
               }}
               onClick={() => this.setState({ examplePage: 1 })}
             >
@@ -592,7 +593,7 @@ class Choice extends React.Component {
                 border:
                   this.state.examplePage === 2
                     ? "1px solid black"
-                    : "0px solid black"
+                    : "0px solid black",
               }}
               onClick={() => this.setState({ examplePage: 2 })}
             >

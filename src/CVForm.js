@@ -23,11 +23,9 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 import CVSection from "./CVSection.js";
 import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw");
 
 function CVForm(props) {
-  const stripePromise = loadStripe(
-    "pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw"
-  );
   const toCheckout = async (event) => {
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await stripePromise;
