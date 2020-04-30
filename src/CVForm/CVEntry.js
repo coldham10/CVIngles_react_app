@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
@@ -16,7 +16,7 @@ import {
   FaEnvelope,
   FaLinkedin,
   FaGlobeAmericas,
-  FaTwitter
+  FaTwitter,
 } from "react-icons/fa";
 
 import PopoverStickOnHover from "./PopoverStickOnHover.jsx";
@@ -40,7 +40,7 @@ function CVEntry(props) {
             updateEntry={(contactType, inputType) => {
               props.formCRUD("UPDATE", {
                 contactType: contactType,
-                inputType: inputType
+                inputType: inputType,
               });
             }}
             contactType={props.contactType}
@@ -49,7 +49,7 @@ function CVEntry(props) {
             className="rounded-right"
             type={getContactInputType(props.contactType)}
             value={props.data}
-            onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
+            onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
           />
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -64,7 +64,7 @@ function CVEntry(props) {
             className="rounded"
             type="text"
             value={props.data}
-            onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
+            onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
           ></Form.Control>
           <InputGroup.Append>{deleteButton}</InputGroup.Append>
         </InputGroup>
@@ -93,7 +93,7 @@ function CVEntry(props) {
           type={props.type === "textarea" ? "text" : props.type}
           as={props.type === "textarea" ? "textarea" : "input"}
           value={props.data}
-          onChange={e => props.formCRUD("UPDATE", { data: e.target.value })}
+          onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
         ></Form.Control>
       </Form.Group>
     );

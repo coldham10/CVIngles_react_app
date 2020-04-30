@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 
 import Home from "./Home.js";
-import CVForm from "./CVForm.js";
-import Choice from "./Choice.js";
+import CVForm from "./CVForm/CVForm.js";
+import Choice from "./Choice/Choice.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

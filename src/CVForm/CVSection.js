@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,7 +14,7 @@ import CVEntryGroup from "./CVEntryGroup.js";
 import { MdEdit } from "react-icons/md";
 
 function CVSection(props) {
-  let inner = props.data.map(entry => {
+  let inner = props.data.map((entry) => {
     if (entry.CVtype === "entry") {
       return (
         <CVEntry
@@ -58,20 +58,20 @@ function CVSection(props) {
         {editing ? (
           <Form.Control
             defaultValue={props.displayName}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               //Enter key pressed
               if (e.which === 13 && e.target.value !== "") {
                 props.formCRUD("UPDATE", {
-                  displayName: e.target.value
+                  displayName: e.target.value,
                 });
                 e.target.value = "";
                 setEditing(false);
               }
             }}
-            onBlur={e => {
+            onBlur={(e) => {
               if (e.target.value !== "") {
                 props.formCRUD("UPDATE", {
-                  displayName: e.target.value
+                  displayName: e.target.value,
                 });
               }
               e.target.value = "";

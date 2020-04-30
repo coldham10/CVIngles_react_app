@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
@@ -23,7 +23,7 @@ class CVEntryGroup extends React.Component {
     const rows = [];
     let row = [];
     let rowLength = 0;
-    this.props.data.forEach(entry => {
+    this.props.data.forEach((entry) => {
       if (entry.name === "achievements") {
         row.push(
           <Form.Group as={Col} md={entry.width} key={entry.name}>
