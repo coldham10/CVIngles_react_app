@@ -8,19 +8,13 @@ import { withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import Image from "react-bootstrap/Image";
-import Carousel from "react-bootstrap/Carousel";
-import Modal from "react-bootstrap/Modal";
-
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 import CVSection from "./CVSection.js";
 import CVFormOptions from "./CVFormOptions.js";
+import FormEgModal from "./FormEgModal.js";
+import FormChoiceModal from "./FormChoiceModal.js";
 
 import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe("pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw");
@@ -118,135 +112,6 @@ function CVForm(props) {
   const [modalPage, setPage] = useState(0); //Format example page number
   const [showChoiceModal, setShowChoiceModal] = useState(false); //Format choice modal displayed?
 
-  /*---Modals---*/
-
-  //Example of current format - page selectable
-  let egModal = (
-    <Modal
-      centered
-      show={showEgModal}
-      onHide={() => {
-        setShowEgModal(false);
-        setPage(0);
-      }}
-      size="lg"
-    >
-      <Modal.Header closeButton className="py-1" />
-      <Modal.Body className="p-0">
-        <Carousel
-          interval={null}
-          indicators={false}
-          wrap={false}
-          slide={false}
-          nextIcon={<MdNavigateNext color="black" size="2rem" />}
-          prevIcon={<MdNavigateBefore color="black" size="2rem" />}
-          activeIndex={modalPage}
-          onSelect={(page) => setPage(page)}
-        >
-          <Carousel.Item>
-            <Image fluid src={"./eg" + props.options.format + "-0.jpg"} />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Image fluid src={"./eg" + props.options.format + "-1.jpg"} />
-          </Carousel.Item>
-        </Carousel>
-      </Modal.Body>
-      <Modal.Footer className="py-1">
-        <Row className="mx-auto">
-          <Col
-            className="py-1 px-2 mx-1"
-            style={{
-              border: modalPage === 0 ? "1px solid black" : "0px solid black",
-            }}
-            onClick={() => setPage(0)}
-          >
-            1
-          </Col>
-          <Col
-            className="py-1 px-2 mx-1"
-            style={{
-              border: modalPage === 1 ? "1px solid black" : "0px solid black",
-            }}
-            onClick={() => setPage(1)}
-          >
-            2
-          </Col>
-        </Row>
-      </Modal.Footer>
-    </Modal>
-  );
-
-  //Choose new format
-  let choiceModal = (
-    <Modal
-      centered
-      show={showChoiceModal}
-      onHide={() => setShowChoiceModal(false)}
-      size="xl"
-    >
-      <Modal.Header closeButton className="py-1" />
-      <Modal.Body className="p-0">
-        <Row>
-          <Col>
-            <Card
-              className={"mx-auto my-4 p-1 style-choice"}
-              style={{
-                width: "16rem",
-                height: "16rem",
-                backgroundColor:
-                  props.options.format === 0 ? "#5ca4a9" : "white",
-              }}
-              onClick={() =>
-                props.setOptions(
-                  Object.assign({ ...props.options }, { format: 0 })
-                )
-              }
-            >
-              <Card.Img variant="top" src="./eg0-sample.jpg" />
-            </Card>
-          </Col>
-          <Col>
-            <Card
-              className={"mx-auto my-4 p-1 style-choice"}
-              style={{
-                width: "16rem",
-                height: "16rem",
-                backgroundColor:
-                  props.options.format === 1 ? "#5ca4a9" : "white",
-              }}
-              onClick={() =>
-                props.setOptions(
-                  Object.assign({ ...props.options }, { format: 1 })
-                )
-              }
-            >
-              <Card.Img variant="top" src="./eg1-sample.jpg" />
-            </Card>
-          </Col>
-          <Col>
-            <Card
-              className={"mx-auto my-4 p-1 style-choice"}
-              style={{
-                width: "16rem",
-                height: "16rem",
-                backgroundColor:
-                  props.options.format === 2 ? "#5ca4a9" : "white",
-              }}
-              onClick={() =>
-                props.setOptions(
-                  Object.assign({ ...props.options }, { format: 2 })
-                )
-              }
-            >
-              <Card.Img variant="top" src="./eg2-sample.jpg" />
-            </Card>
-          </Col>
-        </Row>
-      </Modal.Body>
-      <Modal.Footer></Modal.Footer>
-    </Modal>
-  );
-
   return (
     <Container className="mb-5 px-0 px-md-3">
       <Form
@@ -280,8 +145,19 @@ function CVForm(props) {
           Enviar
         </Button>
       </Form>
-      {egModal}
-      {choiceModal}
+      <FormEgModal
+        show={showEgModal}
+        setShow={setShowEgModal}
+        page={modalPage}
+        setPage={setPage}
+        options={props.options}
+      />
+      <FormChoiceModal
+        show={showChoiceModal}
+        setShow={setShowChoiceModal}
+        options={props.options}
+        setOptions={props.setOptions}
+      />
     </Container>
   );
 }
