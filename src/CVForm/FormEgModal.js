@@ -8,8 +8,14 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
 import Modal from "react-bootstrap/Modal";
-
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+
+import eg0_0 from "../images/eg0-0.jpg";
+import eg1_0 from "../images/eg1-0.jpg";
+import eg2_0 from "../images/eg2-0.jpg";
+import eg0_1 from "../images/eg2-0.jpg";
+import eg1_1 from "../images/eg2-0.jpg";
+import eg2_1 from "../images/eg2-0.jpg";
 
 //Example of current format - page selectable
 function FormEgModal(props) {
@@ -36,10 +42,10 @@ function FormEgModal(props) {
           onSelect={(page) => props.setPage(page)}
         >
           <Carousel.Item>
-            <Image fluid src={"./eg" + props.options.format + "-0.jpg"} />
+            <Image fluid src={[eg0_0, eg1_0, eg2_0][props.options.format]} />
           </Carousel.Item>
           <Carousel.Item>
-            <Image fluid src={"./eg" + props.options.format + "-1.jpg"} />
+            <Image fluid src={[eg0_1, eg1_1, eg2_1][props.options.format]} />
           </Carousel.Item>
         </Carousel>
       </Modal.Body>

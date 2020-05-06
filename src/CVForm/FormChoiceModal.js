@@ -8,6 +8,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 
+import eg0_sample_img from "../images/eg0-sample.jpg";
+import eg1_sample_img from "../images/eg1-sample.jpg";
+import eg2_sample_img from "../images/eg2-sample.jpg";
+
 //Modal in CVForm to choose new format
 function FormChoiceModal(props) {
   return (
@@ -35,7 +39,7 @@ function FormChoiceModal(props) {
                 )
               }
             >
-              <Card.Img variant="top" src="./eg0-sample.jpg" />
+              <Card.Img variant="top" src={eg0_sample_img} />
             </Card>
           </Col>
           <Col>
@@ -53,7 +57,7 @@ function FormChoiceModal(props) {
                 )
               }
             >
-              <Card.Img variant="top" src="./eg1-sample.jpg" />
+              <Card.Img variant="top" src={eg1_sample_img} />
             </Card>
           </Col>
           <Col>
@@ -71,7 +75,7 @@ function FormChoiceModal(props) {
                 )
               }
             >
-              <Card.Img variant="top" src="./eg2-sample.jpg" />
+              <Card.Img variant="top" src={eg2_sample_img} />
             </Card>
           </Col>
         </Row>

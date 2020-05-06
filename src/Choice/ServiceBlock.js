@@ -8,6 +8,10 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import shrink_suit_img from "../images/shrink-suit.jpg";
+import shrink_english_img from "../images/shrink-english.jpg";
+import shrink_splash_img from "../images/shrink-splash.jpg";
+
 /*---Block on Choice page with cards for selecting the service type--*/
 function ServiceBlock(props) {
   return (
@@ -33,7 +37,7 @@ function ServiceBlock(props) {
               })
             }
           >
-            <Card.Img variant="top" src="./shrink-suit.jpg" />
+            <Card.Img variant="top" src={shrink_suit_img} />
             <Card.Body>
               <Card.Title>
                 <Row>
@@ -75,7 +79,7 @@ function ServiceBlock(props) {
               })
             }
           >
-            <Card.Img variant="top" src="./shrink-english.jpg" />
+            <Card.Img variant="top" src={shrink_english_img} />
             <Card.Body>
               <Card.Title>
                 <Row>
@@ -116,7 +120,7 @@ function ServiceBlock(props) {
               })
             }
           >
-            <Card.Img variant="top" src="./shrink-splash.jpg" />
+            <Card.Img variant="top" src={shrink_splash_img} />
             <Card.Body>
               <Card.Title>
                 <Row>

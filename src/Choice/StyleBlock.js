@@ -11,6 +11,10 @@ import Col from "react-bootstrap/Col";
 import StyleTouchOverlay from "./StyleTouchOverlay.js";
 import StyleHoverOverlay from "./StyleHoverOverlay.js";
 
+import eg0_sample_img from "../images/eg0-sample.jpg";
+import eg1_sample_img from "../images/eg1-sample.jpg";
+import eg2_sample_img from "../images/eg2-sample.jpg";
+
 /*---Block on Choice page with cards for selecting the formatting style---*/
 function StyleBlock(props) {
   return (
@@ -41,7 +45,7 @@ function StyleBlock(props) {
             }
             onClick={() => props.parent.setState({ touchOverlayShow: 0 })}
           >
-            <Card.Img variant="top" src="./eg0-sample.jpg" />
+            <Card.Img variant="top" src={eg0_sample_img} />
             {(function (that) {
               if (
                 that.state.touchOverlayEnabled &&
@@ -79,7 +83,7 @@ function StyleBlock(props) {
             }
             onClick={() => props.parent.setState({ touchOverlayShow: 1 })}
           >
-            <Card.Img variant="top" src="./eg1-sample.jpg" />
+            <Card.Img variant="top" src={eg1_sample_img} />
             {(function (that) {
               if (
                 that.state.touchOverlayEnabled &&
@@ -117,7 +121,7 @@ function StyleBlock(props) {
             }
             onClick={() => props.parent.setState({ touchOverlayShow: 2 })}
           >
-            <Card.Img variant="top" src="./eg2-sample.jpg" />
+            <Card.Img variant="top" src={eg2_sample_img} />
             {(function (that) {
               if (
                 that.state.touchOverlayEnabled &&

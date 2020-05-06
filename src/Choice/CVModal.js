@@ -9,6 +9,13 @@ import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import Carousel from "react-bootstrap/Carousel";
 
+import eg0_0 from "../images/eg0-0.jpg";
+import eg1_0 from "../images/eg1-0.jpg";
+import eg2_0 from "../images/eg2-0.jpg";
+import eg0_1 from "../images/eg2-0.jpg";
+import eg1_1 from "../images/eg2-0.jpg";
+import eg2_1 from "../images/eg2-0.jpg";
+
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 /*---Modal for zooming in on CV examples---*/
@@ -40,11 +47,11 @@ function CVModal(props) {
               src={(function (that) {
                 switch (that.state.showExample) {
                   case 0:
-                    return "eg0-0.jpg";
+                    return eg0_0;
                   case 1:
-                    return "eg1-0.jpg";
+                    return eg1_0;
                   case 2:
-                    return "eg2-0.jpg";
+                    return eg2_0;
                   default:
                     return null;
                 }
@@ -57,11 +64,11 @@ function CVModal(props) {
               src={(function (that) {
                 switch (that.state.showExample) {
                   case 0:
-                    return "eg0-1.jpg";
+                    return eg0_1;
                   case 1:
-                    return "eg1-1.jpg";
+                    return eg1_1;
                   case 2:
-                    return "eg2-1.jpg";
+                    return eg2_1;
                   default:
                     return null;
                 }

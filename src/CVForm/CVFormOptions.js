@@ -14,6 +14,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
+import eg0 from "../images/eg0-sample.jpg";
+import eg1 from "../images/eg1-sample.jpg";
+import eg2 from "../images/eg2-sample.jpg";
+
 //Accordion options to change format and service type
 function CVFormOptions(props) {
   return (
@@ -165,7 +169,7 @@ function CVFormOptions(props) {
               <Row>
                 <Col xs={7} md={5}>
                   <Image
-                    src={"./eg" + props.options.format + "-sample.jpg"}
+                    src={[eg0, eg1, eg2][props.options.format]}
                     className="w-100 m-xs-0 m-md-3 border"
                   />
                 </Col>

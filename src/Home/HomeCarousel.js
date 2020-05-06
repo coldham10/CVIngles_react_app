@@ -1,6 +1,5 @@
 import React from "react";
 import "../App.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Container from "react-bootstrap/Container";
@@ -9,6 +8,10 @@ import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 
 import { IoIosArrowDown } from "react-icons/io";
+
+import suit_pro_img from "../images/suit-pro.jpg";
+import dark_english_img from "../images/dark-english.jpg";
+import splash_img from "../images/splash.jpg";
 
 function HomeCarousel(props) {
   return (
@@ -26,7 +29,7 @@ function HomeCarousel(props) {
               <Image
                 as={Card.Image}
                 className="vh-100 carousel-image"
-                src="suit-pro.jpg"
+                src={suit_pro_img}
               />
               <Card.ImgOverlay className="mb-0 pb-0">
                 <Card.Title className="text-center">
@@ -51,7 +54,7 @@ function HomeCarousel(props) {
               <Image
                 as={Card.Image}
                 className="vh-100 carousel-image"
-                src="dark-english.jpg"
+                src={dark_english_img}
               />
               <Card.ImgOverlay className="mb-0 pb-0">
                 <Card.Title className="text-center">
@@ -76,7 +79,7 @@ function HomeCarousel(props) {
               <Image
                 as={Card.Image}
                 className="vh-100 carousel-image"
-                src="splash.jpg"
+                src={splash_img}
               />
               <Card.ImgOverlay className="mb-0 pb-0">
                 <Card.Title className="text-center">

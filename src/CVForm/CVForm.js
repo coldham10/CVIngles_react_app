@@ -21,7 +21,7 @@ const stripePromise = loadStripe("pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw");
 
 function CVForm(props) {
   const toCheckout = async (event) => {
-    // When the customer clicks on the button, redirect them to Checkout.
+    // When the customer clicks on the button, redirect them to Stripe Checkout.
     const stripe = await stripePromise;
     const { error } = await stripe.redirectToCheckout({
       items: [
@@ -34,9 +34,9 @@ function CVForm(props) {
           quantity: 1,
         },
       ],
-      successUrl: "http://cvingles.net/enviar",
+      successUrl: "http://cvingles.net/enviado",
       cancelUrl: "http://cvingles.net/enviar",
-      clientReferenceId: "test000",
+      clientReferenceId: props.ucid,
       locale: "es",
     });
   };
