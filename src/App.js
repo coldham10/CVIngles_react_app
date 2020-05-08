@@ -10,7 +10,9 @@ import Footer from "./Footer.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import AWS from "aws-sdk";
+//import AWS from "aws-sdk";
+import AWS from "aws-sdk/global";
+import apigClientFactory from "aws-api-gateway-client";
 
 AWS.config.region = "us-east-1";
 const uploadEndpont =
@@ -219,6 +221,33 @@ class App extends React.Component {
   sendData(data) {
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: "us-east-1:29a1cfb4-0d43-4800-bde3-4ff877ed9b25",
+    });
+    AWS.config.credentials.refresh(() => {
+      let credentials = AWS.config.credentials.data.Credentials;
+      let apigClient = apigClientFactory.newClient({
+        invokeUrl: uploadEndpont,
+        region: "us-east-1",
+        accessKey: credentials.AccessKeyId,
+        secretKey: credentials.SecretKey,
+        sessionToken: credentials.SessionToken,
+      });
+      //data/json upload
+      let pathParams = { resource: "data" };
+      let pathTemplate = "/{resource}";
+      let additionalParams = {
+        headers: {
+          sessionID: this.state.ucid,
+        },
+      };
+      apigClient
+        .invokeApi(pathParams, pathTemplate, "POST", additionalParams, data)
+        .then(function (result) {
+          console.log("upload success");
+        })
+        .catch(function (result) {
+          console.warn("upload failed");
+          console.log(result);
+        });
     });
   }
 }
