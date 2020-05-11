@@ -15,9 +15,10 @@ import CVSection from "./CVSection.js";
 import CVFormOptions from "./CVFormOptions.js";
 import FormEgModal from "./FormEgModal.js";
 import FormChoiceModal from "./FormChoiceModal.js";
+import { stripe_pk } from "../keys.js";
 
 import { loadStripe } from "@stripe/stripe-js";
-const stripePromise = loadStripe("pk_test_1g7zgBmmQ8HZtjxuBuC0A0WN00erWtfYzw");
+const stripePromise = loadStripe(stripe_pk);
 
 function CVForm(props) {
   const toCheckout = async (event) => {

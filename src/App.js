@@ -6,6 +6,7 @@ import CVForm from "./CVForm/CVForm.js";
 import Choice from "./Choice/Choice.js";
 import MainNavBar from "./MainNavBar.js";
 import Footer from "./Footer.js";
+import { cognito_id } from "./keys.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -220,7 +221,7 @@ class App extends React.Component {
 
   sendData(data) {
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: "us-east-1:29a1cfb4-0d43-4800-bde3-4ff877ed9b25",
+      IdentityPoolId: cognito_id,
     });
     AWS.config.credentials.refresh(() => {
       let credentials = AWS.config.credentials.data.Credentials;
