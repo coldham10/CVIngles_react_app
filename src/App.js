@@ -245,8 +245,7 @@ class App extends React.Component {
           console.log("upload success");
         })
         .catch(function (result) {
-          console.warn("upload failed");
-          console.log(result);
+          //TODO implement funtion to stop payment if no upload.
         });
     });
   }

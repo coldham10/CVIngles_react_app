@@ -23,7 +23,7 @@ function CVForm(props) {
   const toCheckout = async (event) => {
     // When the customer clicks on the button, redirect them to Stripe Checkout.
     const stripe = await stripePromise;
-    /*const { error } = await stripe.redirectToCheckout({
+    const { error } = await stripe.redirectToCheckout({
       items: [
         {
           sku: {
@@ -38,7 +38,7 @@ function CVForm(props) {
       cancelUrl: "http://cvingles.net/enviar",
       clientReferenceId: props.ucid,
       locale: "es",
-    });*/
+    });
   };
 
   /*Map section data to section objects -- the body of the form*/
