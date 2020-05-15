@@ -135,6 +135,11 @@
   background-color: rgba(155, 193, 188, 0.3);
 }
 
+.img-uploader {
+  background-color: var(--platinum);
+  border-radius: 0.25rem;
+}
+
 .form-options-header {
   background-color: var(--platinum) !important;
 }

@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import ImageUploader from "react-images-upload";
 
 import CVSection from "./CVSection.js";
 import CVFormOptions from "./CVFormOptions.js";
@@ -38,6 +39,11 @@ function CVForm(props) {
       successUrl: "http://cvingles.net/enviado",
       cancelUrl: "http://cvingles.net/enviar",
       clientReferenceId: props.ucid,
+      customerEmail: (
+        props.data
+          .find((e) => e.name === "datos")
+          .data.find((e) => e.contactType === "email") || { data: undefined }
+      ).data,
       locale: "es",
     });
   };
@@ -65,7 +71,7 @@ function CVForm(props) {
   //Button to add new CV sections
   let [showSecDD, setShowSecDD] = useState(false);
   let addSection = (
-    <Container className="mt-0 mb-3 py-2 px-2 mt-md-4 mb-md-4 p-md-4">
+    <Container className="my-0 py-2 px-2 mt-md-4 mb-md-1 p-md-4">
       <DropdownButton
         title="Nueva sección"
         show={showSecDD}
@@ -135,6 +141,22 @@ function CVForm(props) {
         <Container className="mx-0 px-1 my-1 py-2 mx-md-auto px-md-auto">
           {inner}
           {addSection}
+        </Container>
+        <Container className="rounded mx-0 px-1 my-1 pt-1 pb-3 mx-md-auto px-md-auto">
+          <ImageUploader
+            className="img-uploader"
+            buttonClassName="btn btn-primary"
+            buttonText="Elegir imagen (opcional)"
+            imgExtension={[".jpg", ".jpeg", ".png", ".bmp"]}
+            maxFileSize={1048576}
+            fileSizeError="pesa más de 1Mb"
+            fileTypeError="no es compatible"
+            singleImage={true}
+            withIcon={false}
+            withPreview={true}
+            withLabel={false}
+            onChange={(pics) => props.sendImg(pics[0])}
+          />
         </Container>
         <CVFormOptions
           setEg={setShowEgModal}

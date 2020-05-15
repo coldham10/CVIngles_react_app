@@ -10,8 +10,6 @@ import { cognito_id } from "./keys.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-//import AWS from "aws-sdk";
 import AWS from "aws-sdk/global";
 import apigClientFactory from "aws-api-gateway-client";
 
@@ -72,6 +70,7 @@ class App extends React.Component {
                     this.storeLocal();
                     e.preventDefault();
                   }}
+                  sendImg={(pic) => this.sendImg(pic)}
                 />
               </Route>
             </Switch>
@@ -249,6 +248,11 @@ class App extends React.Component {
           //TODO implement funtion to stop payment if no upload.
         });
     });
+  }
+
+  sendImg(pic) {
+    if (pic === undefined) return;
+    console.log(pic);
   }
 }
 
