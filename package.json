@@ -9,7 +9,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "aws-api-gateway-client": "^0.3.3",
-    "aws-sdk": "^2.677.0",
+    "aws-sdk": "^2.679.0",
     "bootstrap": "^4.5.0",
     "eslint-plugin-flowtype": "^4.7.0",
     "jquery": "^3.5.1",
@@ -20,7 +20,7 @@
     "react-icons": "^3.10.0",
     "react-images-upload": "^1.2.8",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.3.1",
+    "react-scripts": "3.4.1",
     "source-map-explorer": "^2.4.2"
   },
   "scripts": {
