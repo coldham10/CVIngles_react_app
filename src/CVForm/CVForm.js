@@ -16,6 +16,7 @@ import CVSection from "./CVSection.js";
 import CVFormOptions from "./CVFormOptions.js";
 import FormEgModal from "./FormEgModal.js";
 import FormChoiceModal from "./FormChoiceModal.js";
+import NoImgModal from "./NoImgModal.js";
 import { stripe_pk } from "../keys.js";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -23,7 +24,8 @@ const stripePromise = loadStripe(stripe_pk);
 
 function CVForm(props) {
   const toCheckout = async (event) => {
-    // When the customer clicks on the button, redirect them to Stripe Checkout.
+    props.handleSubmit();
+    // When the customer clicks on the button, first props.handleSubmit is called, then redirect to Stripe Checkout.
     const stripe = await stripePromise;
     const { error } = await stripe.redirectToCheckout({
       items: [
@@ -75,6 +77,7 @@ function CVForm(props) {
       <DropdownButton
         title="Nueva sección"
         show={showSecDD}
+        variant="light"
         onToggle={(a) => setShowSecDD(a)}
         onSelect={(i) =>
           props.formCRUD("CREATE", {
@@ -118,14 +121,19 @@ function CVForm(props) {
   const [showEgModal, setShowEgModal] = useState(false); //Format example modal displayed?
   const [modalPage, setPage] = useState(0); //Format example page number
   const [showChoiceModal, setShowChoiceModal] = useState(false); //Format choice modal displayed?
+  const [showNoImgModal, setShowNoImgModal] = useState(false); //Format choice modal displayed?
 
   return (
     <Container className="mb-5 px-0 px-md-3">
       <Form
         className="cv-form border rounded px-2 px-md-4 py-3"
         onSubmit={(e) => {
-          props.handleSubmit(e);
-          toCheckout(e);
+          e.preventDefault();
+          if (props.imageStatus === "NONE" && props.options.format !== 1) {
+            setShowNoImgModal(true);
+          } else {
+            toCheckout(e);
+          }
         }}
         onKeyPress={(event) => {
           if (
@@ -164,7 +172,7 @@ function CVForm(props) {
           options={props.options}
           setOptions={props.setOptions}
         />
-        <Button type="submit" className="m-3">
+        <Button type="submit" className="my-3 my-md-4" size="lg" block>
           Enviar
         </Button>
       </Form>
@@ -180,6 +188,11 @@ function CVForm(props) {
         setShow={setShowChoiceModal}
         options={props.options}
         setOptions={props.setOptions}
+      />
+      <NoImgModal
+        show={showNoImgModal}
+        setShow={setShowNoImgModal}
+        toCheckout={() => toCheckout()}
       />
     </Container>
   );

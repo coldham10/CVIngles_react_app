@@ -18,7 +18,7 @@ function HomeCarousel(props) {
     <Container fluid className="m-0 p-0">
       <Carousel
         className="mb-0 pb-0"
-        pauseOnHover={false}
+        pause={false}
         interval={6000}
         indicators={false}
         controls={false}

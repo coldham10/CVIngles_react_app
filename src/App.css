@@ -143,3 +143,9 @@
 .form-options-header {
   background-color: var(--platinum) !important;
 }
+
+/*Modals*/
+
+.standard-modal {
+  font-family: Montserrat, sans-serif;
+}

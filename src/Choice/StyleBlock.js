@@ -20,7 +20,7 @@ function StyleBlock(props) {
   return (
     <Container className="border rounded my-5 p-2 p-md-3 choice-group">
       <h3 className="pb-1 pt-3 px-2">Estilo</h3>
-      <Row>
+      <Row xs={1} lg={3} noGutters>
         <Col>
           <Card
             className={"mx-auto my-4 p-1 style-choice"}

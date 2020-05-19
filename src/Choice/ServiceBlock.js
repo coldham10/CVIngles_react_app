@@ -17,7 +17,7 @@ function ServiceBlock(props) {
   return (
     <Container className="border rounded my-4 p-2 p-md-3 choice-group">
       <h3 className="pb-1 pt-3 px-2">Tipo de servicio</h3>
-      <Row>
+      <Row xs={1} lg={3} noGutters>
         <Col>
           <Card
             className={"mx-auto my-4"}

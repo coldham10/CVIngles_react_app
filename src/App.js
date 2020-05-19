@@ -32,7 +32,7 @@ class App extends React.Component {
       ucid: (Math.floor(Math.random() * new Date().getTime()) % Math.pow(2, 32))
         .toString(16)
         .padStart(8, "0"), // TODO: load from local unless explicit restart condition given
-      toSend: null,
+      imageStatus: "NONE",
     };
     window.addEventListener("unload", () => this.storeLocal());
   }
@@ -64,16 +64,12 @@ class App extends React.Component {
                   ucid={this.state.ucid}
                   setOptions={(opts) => this.setState({ options: opts })}
                   formCRUD={this.formCRUD.bind(this)}
-                  handleSubmit={(e) => {
-                    let data = this.getAppData();
-                    this.setState({
-                      toSend: data,
-                    });
-                    this.sendData(data);
+                  handleSubmit={() => {
+                    this.sendData(this.getAppData());
                     this.storeLocal();
-                    e.preventDefault();
                   }}
                   sendImg={(pic) => this.sendImg(pic)}
+                  imageStatus={this.state.imageStatus}
                 />
               </Route>
             </Switch>
@@ -187,7 +183,7 @@ class App extends React.Component {
 
     return Object.assign(
       copyRelevant({ name: "model", data: this.state.formData }),
-      { options: this.state.options }
+      { options: this.state.options, imageStatus: this.state.imageStatus }
     );
   }
 
@@ -251,7 +247,11 @@ class App extends React.Component {
   }
 
   sendImg(pic) {
-    if (pic === undefined) return;
+    if (pic === undefined) {
+      this.setState({ imageStatus: "NONE" });
+      return;
+    }
+    this.setState({ imageStatus: "LOADING" });
     let reader = new FileReader();
     reader.onload = () => {
       AWS.config.credentials.refresh(() => {
@@ -268,7 +268,7 @@ class App extends React.Component {
         let pathTemplate = "/{resource}";
         let additionalParams = {
           headers: {
-            sessionID: this.ucid,
+            sessionID: this.state.ucid,
             "Content-Type": pic.type,
           },
         };
@@ -280,14 +280,8 @@ class App extends React.Component {
             additionalParams,
             reader.result.split(",")[1]
           )
-          .then(function (result) {
-            console.log("image upload success");
-            // TODO:
-          })
-          .catch(function (result) {
-            console.warn("image upload failure");
-            //TODO implement funtion to stop payment if no upload.
-          });
+          .then(() => this.setState({ imageStatus: "COMPLETE" }))
+          .catch(() => this.setState({ imageStatus: "FAILED" }));
       });
     };
     reader.readAsDataURL(pic);
