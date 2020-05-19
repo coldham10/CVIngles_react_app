@@ -17,6 +17,9 @@ import apigClientFactory from "aws-api-gateway-client";
 AWS.config.region = "us-east-1";
 const uploadEndpont =
   "https://micezq8w65.execute-api.us-east-1.amazonaws.com/test";
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+  IdentityPoolId: cognito_id,
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -219,9 +222,6 @@ class App extends React.Component {
   }
 
   sendData(data) {
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: cognito_id,
-    });
     AWS.config.credentials.refresh(() => {
       let credentials = AWS.config.credentials.data.Credentials;
       let apigClient = apigClientFactory.newClient({
@@ -252,7 +252,6 @@ class App extends React.Component {
 
   sendImg(pic) {
     if (pic === undefined) return;
-    console.log(pic);
     let reader = new FileReader();
     reader.onload = () => {
       AWS.config.credentials.refresh(() => {
@@ -292,7 +291,6 @@ class App extends React.Component {
       });
     };
     reader.readAsDataURL(pic);
-    //reader.readAsArrayBuffer(pic);
   }
 }
 
