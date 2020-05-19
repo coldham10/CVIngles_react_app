@@ -2,13 +2,21 @@ import React from "react";
 import "./App.css";
 
 import Home from "./Home/Home.js";
-import FormDataHandler from "./CVForm/FormDataHandler.js";
+import CVForm from "./CVForm/CVForm.js";
 import Choice from "./Choice/Choice.js";
 import MainNavBar from "./MainNavBar.js";
 import Footer from "./Footer.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+//import AWS from "aws-sdk";
+import AWS from "aws-sdk/global";
+import apigClientFactory from "aws-api-gateway-client";
+
+AWS.config.region = "us-east-1";
+const uploadEndpont =
+  "https://micezq8w65.execute-api.us-east-1.amazonaws.com/test";
 
 class App extends React.Component {
   constructor(props) {
@@ -48,12 +56,20 @@ class App extends React.Component {
                 />
               </Route>
               <Route path="/enviar">
-                <FormDataHandler
+                <CVForm
                   options={this.state.options}
                   ucid={this.state.ucid}
                   setOptions={(opts) => this.setState({ options: opts })}
-                  template={this.template}
-                  loadedData={this.loadedData}
+                  formCRUD={this.formCRUD.bind(this)}
+                  handleSubmit={(e) => {
+                    let data = this.getAppData();
+                    this.setState({
+                      toSend: data,
+                    });
+                    this.sendData(data);
+                    this.storeLocal();
+                    e.preventDefault();
+                  }}
                 />
               </Route>
             </Switch>
@@ -76,6 +92,38 @@ class App extends React.Component {
       console.error("Error retrieving localStorage");
       return { formData: null, options: null };
     }
+  }
+
+  sendData(data) {
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: cognito_id,
+    });
+    AWS.config.credentials.refresh(() => {
+      let credentials = AWS.config.credentials.data.Credentials;
+      let apigClient = apigClientFactory.newClient({
+        invokeUrl: uploadEndpont,
+        region: "us-east-1",
+        accessKey: credentials.AccessKeyId,
+        secretKey: credentials.SecretKey,
+        sessionToken: credentials.SessionToken,
+      });
+      //data/json upload
+      let pathParams = { resource: "data" };
+      let pathTemplate = "/{resource}";
+      let additionalParams = {
+        headers: {
+          sessionID: this.state.ucid,
+        },
+      };
+      apigClient
+        .invokeApi(pathParams, pathTemplate, "POST", additionalParams, data)
+        .then(function (result) {
+          console.log("upload success");
+        })
+        .catch(function (result) {
+          //TODO implement funtion to stop payment if no upload.
+        });
+    });
   }
 }
 
