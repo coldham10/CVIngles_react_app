@@ -53,9 +53,12 @@ class CVForm extends React.Component {
 
   async toCheckout(prevTries) {
     // When the customer clicks on the button, first props.handleSubmit is called, then redirect to Stripe Checkout.
-    if (prevTries < 3) {
+    if (this.props.dataStatus === "LOADING") {
+      window.setTimeout(() => this.toCheckout(prevTries), 500);
+    } else if (prevTries < 3) {
       this.setState({ redirectFail: false });
       if (this.props.dataStatus !== "COMPLETE") {
+        console.log("Not complete" + this.props.dataStatus);
         window.setTimeout(() => this.toCheckout(prevTries + 1), 500);
       } else {
         //data successfully uploaded

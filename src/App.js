@@ -227,6 +227,7 @@ class App extends React.Component {
 
   sendData(data) {
     //Send form data and options as a JSON object to backend api
+    this.setState({ dataStatus: "LOADING" });
     AWS.config.credentials.refresh(() => {
       try {
         //if refresh unsuccessful, credentials will not have the data attribute
