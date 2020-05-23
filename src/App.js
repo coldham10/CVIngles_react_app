@@ -32,7 +32,11 @@ class App extends React.Component {
       ucid: (Math.floor(Math.random() * new Date().getTime()) % Math.pow(2, 32))
         .toString(16)
         .padStart(8, "0"), // TODO: load from local unless explicit restart condition given
+      dataStatus: "NONE",
       imageStatus: "NONE",
+      imageMessage: "",
+      dataUploadAttempts: 0,
+      imageUploadAttempts: 0,
     };
     window.addEventListener("unload", () => this.storeLocal());
   }
@@ -69,7 +73,9 @@ class App extends React.Component {
                     this.storeLocal();
                   }}
                   sendImg={(pic) => this.sendImg(pic)}
+                  dataStatus={this.state.dataStatus}
                   imageStatus={this.state.imageStatus}
+                  imageMessage={this.state.imageMessage}
                 />
               </Route>
             </Switch>
@@ -188,6 +194,7 @@ class App extends React.Component {
   }
 
   storeLocal(data) {
+    //Store form data and options in localStorage
     if (data === undefined) {
       data = this.state;
     }
@@ -204,6 +211,7 @@ class App extends React.Component {
   }
 
   loadLocal() {
+    //Load data and otr options from localStorage if they exist
     try {
       const retrievedData = JSON.parse(window.localStorage.getItem("formData"));
       const retrievedOpts = JSON.parse(window.localStorage.getItem("options"));
@@ -218,16 +226,32 @@ class App extends React.Component {
   }
 
   sendData(data) {
+    //Send form data and options as a JSON object to backend api
     AWS.config.credentials.refresh(() => {
-      let credentials = AWS.config.credentials.data.Credentials;
-      let apigClient = apigClientFactory.newClient({
-        invokeUrl: uploadEndpont,
-        region: "us-east-1",
-        accessKey: credentials.AccessKeyId,
-        secretKey: credentials.SecretKey,
-        sessionToken: credentials.SessionToken,
-      });
-      //data/json upload
+      try {
+        //if refresh unsuccessful, credentials will not have the data attribute
+        let credentials = AWS.config.credentials.data.Credentials;
+        var apigClient = apigClientFactory.newClient({
+          invokeUrl: uploadEndpont,
+          region: "us-east-1",
+          accessKey: credentials.AccessKeyId,
+          secretKey: credentials.SecretKey,
+          sessionToken: credentials.SessionToken,
+        });
+      } catch {
+        //Could not get IAM credentials
+        this.setState((prevState) => ({
+          dataUploadAttempts: prevState.dataUploadAttempts + 1,
+        }));
+        //Three retries before failing
+        if (this.state.dataUploadAttempts < 3) {
+          this.sendData(data);
+        } else {
+          this.setState({ dataStatus: "FAILED", dataUploadAttempts: 0 });
+        }
+        return;
+      }
+      //Setting up the message
       let pathParams = { resource: "data" };
       let pathTemplate = "/{resource}";
       let additionalParams = {
@@ -235,35 +259,69 @@ class App extends React.Component {
           sessionID: this.state.ucid,
         },
       };
+      //invoking data api
       apigClient
         .invokeApi(pathParams, pathTemplate, "POST", additionalParams, data)
-        .then(function (result) {
-          console.log("upload success");
-        })
-        .catch(function (result) {
-          //TODO implement funtion to stop payment if no upload.
+        .then(() =>
+          this.setState({ dataStatus: "COMPLETE", dataUploadAttempts: 0 })
+        )
+        .catch(() => {
+          //Three attempts otherwise fail
+          this.setState((prevState) => ({
+            dataUploadAttempts: prevState.dataUploadAttempts + 1,
+          }));
+          if (this.state.dataUploadAttempts < 3) {
+            this.sendData(data);
+          } else {
+            this.setState({ dataStatus: "FAILED", dataUploadAttempts: 0 });
+          }
+          return;
         });
     });
   }
 
   sendImg(pic) {
+    //Send image to backend api
     if (pic === undefined) {
-      this.setState({ imageStatus: "NONE" });
+      //When image removed pic is sent as undefined
+      this.setState({
+        imageStatus: "NONE",
+        imageMessage: "",
+        imageUploadAttempts: 0,
+      });
       return;
     }
     this.setState({ imageStatus: "LOADING" });
     let reader = new FileReader();
     reader.onload = () => {
+      //Once image has been loaded
       AWS.config.credentials.refresh(() => {
-        let credentials = AWS.config.credentials.data.Credentials;
-        let apigClient = apigClientFactory.newClient({
-          invokeUrl: uploadEndpont,
-          region: "us-east-1",
-          accessKey: credentials.AccessKeyId,
-          secretKey: credentials.SecretKey,
-          sessionToken: credentials.SessionToken,
-        });
-        //image upload
+        try {
+          let credentials = AWS.config.credentials.data.Credentials;
+          var apigClient = apigClientFactory.newClient({
+            invokeUrl: uploadEndpont,
+            region: "us-east-1",
+            accessKey: credentials.AccessKeyId,
+            secretKey: credentials.SecretKey,
+            sessionToken: credentials.SessionToken,
+          });
+        } catch {
+          //Could not get IAM credentials
+          this.setState((prevState) => ({
+            imageUploadAttempts: prevState.imageUploadAttempts + 1,
+          }));
+          //Three retries before failing
+          if (this.state.imageUploadAttempts < 3) {
+            this.sendImg(pic);
+          } else {
+            this.setState({
+              imageStatus: "FAILED",
+              imageMessage: ", no se puede conectar con el servidor",
+            });
+          }
+          return;
+        }
+        //setting up image upload api call
         let pathParams = { resource: "image" };
         let pathTemplate = "/{resource}";
         let additionalParams = {
@@ -272,6 +330,7 @@ class App extends React.Component {
             "Content-Type": pic.type,
           },
         };
+        //Invoke the image upload api
         apigClient
           .invokeApi(
             pathParams,
@@ -280,10 +339,31 @@ class App extends React.Component {
             additionalParams,
             reader.result.split(",")[1]
           )
-          .then(() => this.setState({ imageStatus: "COMPLETE" }))
-          .catch(() => this.setState({ imageStatus: "FAILED" }));
+          .then(() =>
+            this.setState({
+              imageStatus: "COMPLETE",
+              imageMessage: "",
+              imageUploadAttempts: 0,
+            })
+          )
+          .catch(() => {
+            //Three attempts otherwise fail
+            this.setState((prevState) => ({
+              imageUploadAttempts: prevState.imageUploadAttempts + 1,
+            }));
+            if (this.state.imageUploadAttempts < 3) {
+              this.sendImg(pic);
+            } else {
+              this.setState({
+                imageStatus: "FAILED",
+                imageMessage: ", error de red",
+              });
+            }
+            return;
+          });
       });
     };
+    //On successful load calls reader.onload above
     reader.readAsDataURL(pic);
   }
 }

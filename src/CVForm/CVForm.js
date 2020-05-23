@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { withRouter } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
-import ImageUploader from "react-images-upload";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
 
-import CVSection from "./CVSection.js";
+import ImageUploader from "react-images-upload";
+import { loadStripe } from "@stripe/stripe-js";
+
 import CVFormOptions from "./CVFormOptions.js";
-import FormEgModal from "./FormEgModal.js";
+import CVSection from "./CVSection.js";
 import FormChoiceModal from "./FormChoiceModal.js";
+import FormEgModal from "./FormEgModal.js";
 import NoImgModal from "./NoImgModal.js";
 import { stripe_pk } from "../keys.js";
 
-import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(stripe_pk);
 
 class CVForm extends React.Component {
@@ -31,46 +35,63 @@ class CVForm extends React.Component {
       showChoiceModal: false,
       showNoImgModal: false,
       showSecDD: false,
+      redirectFail: false,
     };
   }
 
   handleSubmit() {
-    if (this.props.imageStatus === "FAILED") {
-    } else if (
-      this.props.imageStatus === "NONE" &&
+    if (
+      this.props.imageStatus in ["NONE", "FAILED"] &&
       this.props.options.format !== 1
     ) {
       this.setState({ showNoImgModal: true });
     } else {
       this.props.handleSubmit();
-      this.toCheckout();
+      this.toCheckout(0);
     }
   }
 
-  async toCheckout() {
+  async toCheckout(prevTries) {
     // When the customer clicks on the button, first props.handleSubmit is called, then redirect to Stripe Checkout.
-    const stripe = await stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      items: [
-        {
-          sku: {
-            p: "sku_HAyeENTtw83AH4",
-            t: "sku_HAygNDGw8p9Ket",
-            i: "sku_HAyhjrPoPglqoV",
-          }[this.props.options.service],
-          quantity: 1,
-        },
-      ],
-      successUrl: "http://cvingles.net/enviado",
-      cancelUrl: "http://cvingles.net/enviar",
-      clientReferenceId: this.props.ucid,
-      customerEmail: (
-        this.props.data
-          .find((e) => e.name === "datos")
-          .data.find((e) => e.contactType === "email") || { data: undefined }
-      ).data,
-      locale: "es",
-    });
+    if (prevTries < 3) {
+      this.setState({ redirectFail: false });
+      if (this.props.dataStatus !== "COMPLETE") {
+        window.setTimeout(() => this.toCheckout(prevTries + 1), 500);
+      } else {
+        //data successfully uploaded
+        try {
+          const stripe = await stripePromise;
+          const { error } = await stripe.redirectToCheckout({
+            items: [
+              {
+                sku: {
+                  p: "sku_HAyeENTtw83AH4",
+                  t: "sku_HAygNDGw8p9Ket",
+                  i: "sku_HAyhjrPoPglqoV",
+                }[this.props.options.service],
+                quantity: 1,
+              },
+            ],
+            successUrl: "http://cvingles.net/enviado",
+            cancelUrl: "http://cvingles.net/enviar",
+            clientReferenceId: this.props.ucid,
+            customerEmail: (
+              this.props.data
+                .find((e) => e.name === "datos")
+                .data.find((e) => e.contactType === "email") || {
+                data: undefined,
+              }
+            ).data,
+            locale: "es",
+          });
+        } catch {
+          this.toCheckout(prevTries + 1);
+        }
+      }
+    } else {
+      //More than three failed attempts or timeouts
+      this.setState({ redirectFail: true });
+    }
   }
 
   render() {
@@ -142,6 +163,13 @@ class CVForm extends React.Component {
       </Container>
     );
 
+    let imgSpinner =
+      this.props.imageStatus === "LOADING" ? (
+        <Row className="justify-content-center">
+          <Spinner animation="border" />
+        </Row>
+      ) : null;
+
     return (
       <Container className="mb-5 px-0 px-md-3">
         <Form
@@ -180,6 +208,10 @@ class CVForm extends React.Component {
               withLabel={false}
               onChange={(pics) => this.props.sendImg(pics[0])}
             />
+            {imgSpinner}
+            <Alert variant="danger" show={this.props.imageStatus === "FAILED"}>
+              {"La subida de la imagen falló" + this.props.imageMessage}
+            </Alert>
           </Container>
           <CVFormOptions
             setEg={(s) => this.setState({ showEgModal: s })}
@@ -187,9 +219,18 @@ class CVForm extends React.Component {
             options={this.props.options}
             setOptions={this.props.setOptions}
           />
-          <Button type="submit" className="my-3 my-md-4" size="lg" block>
+          <Button
+            type="submit"
+            disabled={this.props.imageStatus === "LOADING"}
+            className="my-3 my-md-4"
+            size="lg"
+            block
+          >
             Enviar
           </Button>
+          <Alert variant="danger" show={this.state.redirectFail}>
+            No se puede conectar con el servidor
+          </Alert>
         </Form>
         <FormEgModal
           show={this.state.showEgModal}
