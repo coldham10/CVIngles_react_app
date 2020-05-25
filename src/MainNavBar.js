@@ -14,7 +14,7 @@ function MainNavBar(props) {
       collapseOnSelect
       fixed="top"
       expand="md"
-      className="custom-nav mb-4"
+      className={"mb-4 " + (props.transparent ? "nav-hidden" : "nav-shown")}
     >
       <Container className="p-0">
         <Navbar.Brand as={Link} to="/">

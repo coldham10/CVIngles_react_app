@@ -8,9 +8,17 @@ body {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body::-webkit-scrollbar {
+  width: 7px;
+}
+body::-webkit-scrollbar-track {
+  background: rgb(50, 50, 50);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(110, 110, 110);
+  border-radius: 10px;
 }

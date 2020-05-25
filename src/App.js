@@ -37,6 +37,7 @@ class App extends React.Component {
       imageMessage: "",
       dataUploadAttempts: 0,
       imageUploadAttempts: 0,
+      navbarTransparent: true,
     };
     window.addEventListener("unload", () => this.storeLocal());
   }
@@ -45,13 +46,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <MainNavBar />
+          <MainNavBar transparent={this.state.navbarTransparent} />
           <div>
             <Switch>
               <Route exact path="/">
                 <Home
                   options={this.state.options}
                   setOptions={(opts) => this.setState({ options: opts })}
+                  setNavTransparent={(b) =>
+                    this.setState({ navbarTransparent: b })
+                  }
                 />
               </Route>
               <Route path="/empiece">

@@ -11,10 +11,16 @@
 }
 
 .navbar {
-  background-color: var(--cadet);
-  border-bottom: 2px solid var(--terra);
   font-family: "Montserrat", sans-serif;
   font-size: 1.2em;
+}
+
+.nav-hidden {
+  background-color: rgba(92, 164, 169, 0.3);
+}
+.nav-shown {
+  background-color: var(--cadet);
+  border-bottom: 2px solid var(--terra);
 }
 
 .footer {

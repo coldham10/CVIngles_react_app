@@ -15,6 +15,25 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.setOptions = this.props.setOptions;
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  handleScroll() {
+    if (window.scrollY > 10) {
+      this.props.setNavTransparent(false);
+    } else {
+      this.props.setNavTransparent(true);
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+    this.handleScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+    this.props.setNavTransparent(false);
   }
 
   submit(service) {
