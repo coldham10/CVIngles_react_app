@@ -22,6 +22,7 @@ import CVSection from "./CVSection.js";
 import FormChoiceModal from "./FormChoiceModal.js";
 import FormEgModal from "./FormEgModal.js";
 import NoImgModal from "./NoImgModal.js";
+import SaveToast from "./SaveToast.js";
 import { stripe_pk } from "../keys.js";
 
 const stripePromise = loadStripe(stripe_pk);
@@ -253,6 +254,7 @@ class CVForm extends React.Component {
           setShow={(s) => this.setState({ showNoImgModal: s })}
           toCheckout={() => this.toCheckout()}
         />
+        <SaveToast status={this.props.saveStatus} />
       </Container>
     );
   }

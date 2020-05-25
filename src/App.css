@@ -150,8 +150,14 @@
   background-color: var(--platinum) !important;
 }
 
-/*Modals*/
+/*Modals and toasts*/
 
 .standard-modal {
   font-family: Montserrat, sans-serif;
+}
+
+.save-toast {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }

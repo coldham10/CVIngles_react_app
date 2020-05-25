@@ -1,7 +1,8 @@
 {
   "options": {
-    "inputLanguage": "es",
-    "outputLanguage": "en"
+    "format": 0,
+    "service": "t",
+    "color": "blue"
   },
   "model": [
     {
@@ -11,11 +12,20 @@
       "displayName": "Datos Personales",
       "data": [
         {
-          "name": "name",
+          "name": "fname",
           "CVtype": "entry",
           "deletable": false,
-          "width": 12,
-          "displayName": "Nombre Completo",
+          "width": 6,
+          "displayName": "Nombre(s)",
+          "type": "text",
+          "data": ""
+        },
+        {
+          "name": "lname",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 6,
+          "displayName": "Apellido(s)",
           "type": "text",
           "data": ""
         },
@@ -24,7 +34,7 @@
           "CVtype": "entry",
           "deletable": false,
           "width": 12,
-          "displayName": "Nombre Completo",
+          "displayName": "Fecha de Nacimiento",
           "type": "date",
           "data": ""
         },
@@ -39,11 +49,11 @@
         }
       ],
       "default": {
-        "name": "contact",
+        "name": "contact0",
         "CVtype": "entry",
         "deletable": true,
         "width": 12,
-        "displayName": "Modo de Contacto ",
+        "displayName": "Modo de Contacto 1",
         "type": "contact",
         "contactType": "phone",
         "inputType": "tel",
@@ -57,11 +67,11 @@
       "displayName": "Experiencia Laboral",
       "data": [],
       "default": {
-        "name": "job",
+        "name": "job0",
         "CVtype": "group",
         "type": "job",
         "deletable": true,
-        "displayName": "Trabajo",
+        "displayName": "Trabajo 1",
         "data": [
           {
             "name": "title",
@@ -125,10 +135,10 @@
             "width": 12,
             "data": [],
             "default": {
-              "name": "achievement",
+              "name": "achievement0",
               "CVtype": "entry",
               "deletable": true,
-              "displayName": "Logro",
+              "displayName": "Logro 1",
               "width": 12,
               "type": "achievement",
               "data": ""
@@ -144,11 +154,11 @@
       "displayName": "Estudios",
       "data": [],
       "default": {
-        "name": "degree",
+        "name": "degree0",
         "CVtype": "group",
         "type": "degree",
         "deletable": true,
-        "displayName": "Estudio ",
+        "displayName": "Estudio 1",
         "data": [
           {
             "name": "name",
@@ -222,20 +232,42 @@
       "name": "skills",
       "CVtype": "section",
       "deletable": true,
-      "displayName": "Habilidades",
+      "displayName": "Otros Habilidades",
       "data": [],
       "default": {
-        "name": "skillsec",
-        "CVtype": "group",
-        "type": "skillsec",
+        "name": "skill0",
+        "CVtype": "entry",
+        "type": "skill",
         "deletable": true,
-        "displayName": "Test",
-        "data": []
+        "displayName": "",
+        "data": ""
       }
     },
-    "langs": {},
+    "langs": {
+      "name": "langs",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Idiomas",
+      "data": [],
+      "default": {
+        "name": "lang0",
+        "CVtype": "entry",
+        "type": "lang",
+        "deletable": true,
+        "displayName": "",
+        "data": ""
+      }
+    },
     "thesis": {},
     "interests": {},
-    "other": {}
+    "other": {
+      "name": "other",
+      "type": "other",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "",
+      "data": [],
+      "default": {}
+    }
   }
 }

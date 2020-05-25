@@ -25,7 +25,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     var { options, formData } = this.loadLocal();
-    this.template = require("./example.json");
+    this.template = require("./model.json");
     this.state = {
       formData: formData || this.template.model,
       options: options || this.template.options,
@@ -37,9 +37,13 @@ class App extends React.Component {
       imageMessage: "",
       dataUploadAttempts: 0,
       imageUploadAttempts: 0,
-      navbarTransparent: true,
+      navbarTransparent: false,
+      saveStatus: "READY",
     };
-    window.addEventListener("unload", () => this.storeLocal());
+
+    if (!formData) {
+      this.addDefaults();
+    }
   }
 
   render() {
@@ -80,6 +84,7 @@ class App extends React.Component {
                   dataStatus={this.state.dataStatus}
                   imageStatus={this.state.imageStatus}
                   imageMessage={this.state.imageMessage}
+                  saveStatus={this.state.saveStatus}
                 />
               </Route>
             </Switch>
@@ -170,6 +175,24 @@ class App extends React.Component {
       }
     });
     this.setState({ formData: modelCopy });
+    this.queueSave();
+  }
+
+  addDefaults() {
+    //If not loading data, add a single default to all possible entries in the template to "flesh it out" a little
+    let q = [];
+    let copyObj = JSON.parse(JSON.stringify(this.state.formData));
+    copyObj.forEach((sec) => q.push(sec));
+    while (q.length > 0) {
+      let node = q.shift();
+      if ("default" in node) {
+        node.data.push(JSON.parse(JSON.stringify(node.default)));
+      }
+      if (Array.isArray(node.data)) {
+        node.data.forEach((obj) => q.push(obj));
+      }
+    }
+    this.state.formData = copyObj;
   }
 
   getAppData() {
@@ -209,8 +232,26 @@ class App extends React.Component {
       if (data.options !== undefined) {
         window.localStorage.setItem("options", JSON.stringify(data.options));
       }
+      this.setState((prevState) => {
+        if (prevState.saveStatus !== "QUEUED") {
+          return { saveStatus: "READY" };
+        } else {
+          return null;
+        }
+      });
     } catch (e) {
       console.error("Error setting localStorage");
+      this.setState({ saveStatus: "FAILED" });
+    }
+  }
+
+  queueSave(data) {
+    if (this.state.saveStatus !== "QUEUED") {
+      this.setState({ saveStatus: "QUEUED" });
+      window.setTimeout(() => {
+        this.setState({ saveStatus: "SAVING" });
+        this.storeLocal(data);
+      }, 2500);
     }
   }
 
