@@ -87,6 +87,15 @@ class App extends React.Component {
                   saveStatus={this.state.saveStatus}
                 />
               </Route>
+              <Route path="*">
+                <Home
+                  options={this.state.options}
+                  setOptions={(opts) => this.setState({ options: opts })}
+                  setNavTransparent={(b) =>
+                    this.setState({ navbarTransparent: b })
+                  }
+                />
+              </Route>
             </Switch>
           </div>
           <Footer />
