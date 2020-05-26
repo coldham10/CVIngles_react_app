@@ -16,7 +16,7 @@ function MainNavBar(props) {
       expand="md"
       className={"mb-4 " + (props.transparent ? "nav-hidden" : "nav-shown")}
     >
-      <Container className="p-0">
+      <Container fluid className="p-0">
         <Navbar.Brand as={Link} to="/">
           <img
             alt=""

@@ -12,9 +12,9 @@ import Carousel from "react-bootstrap/Carousel";
 import eg0_0 from "../images/eg0-0.jpg";
 import eg1_0 from "../images/eg1-0.jpg";
 import eg2_0 from "../images/eg2-0.jpg";
-import eg0_1 from "../images/eg2-0.jpg";
-import eg1_1 from "../images/eg2-0.jpg";
-import eg2_1 from "../images/eg2-0.jpg";
+import eg0_1 from "../images/eg0-1.jpg";
+import eg1_1 from "../images/eg1-1.jpg";
+import eg2_1 from "../images/eg2-1.jpg";
 
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 

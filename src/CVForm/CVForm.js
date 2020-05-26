@@ -42,7 +42,7 @@ class CVForm extends React.Component {
 
   handleSubmit() {
     if (
-      this.props.imageStatus in ["NONE", "FAILED"] &&
+      ["NONE", "FAILED"].includes(this.props.imageStatus) &&
       this.props.options.format !== 1
     ) {
       this.setState({ showNoImgModal: true });
@@ -59,7 +59,6 @@ class CVForm extends React.Component {
     } else if (prevTries < 3) {
       this.setState({ redirectFail: false });
       if (this.props.dataStatus !== "COMPLETE") {
-        console.log("Not complete" + this.props.dataStatus);
         window.setTimeout(() => this.toCheckout(prevTries + 1), 500);
       } else {
         //data successfully uploaded
@@ -252,7 +251,8 @@ class CVForm extends React.Component {
         <NoImgModal
           show={this.state.showNoImgModal}
           setShow={(s) => this.setState({ showNoImgModal: s })}
-          toCheckout={() => this.toCheckout()}
+          handleSubmit={() => this.props.handleSubmit()}
+          toCheckout={() => this.toCheckout(0)}
         />
         <SaveToast status={this.props.saveStatus} />
       </Container>

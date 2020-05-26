@@ -251,7 +251,7 @@ class App extends React.Component {
       window.setTimeout(() => {
         this.setState({ saveStatus: "SAVING" });
         this.storeLocal(data);
-      }, 2500);
+      }, 2000);
     }
   }
 

@@ -13,14 +13,42 @@
 .navbar {
   font-family: "Montserrat", sans-serif;
   font-size: 1.2em;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
 }
 
 .nav-hidden {
-  background-color: rgba(92, 164, 169, 0.3);
+  background-color: transparent;
 }
+
 .nav-shown {
   background-color: var(--cadet);
   border-bottom: 2px solid var(--terra);
+}
+
+a.nav-link {
+  transition: color 0.8s ease, margin 0.5s ease, padding 0.5s ease;
+}
+
+.nav-hidden a.nav-link {
+  color: white !important;
+}
+
+.nav-hidden .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.nav-hidden .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.nav-hidden .show a.nav-link,
+.nav-hidden .collapsing a.nav-link {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  margin: 2px 0px;
+  padding-left: 6px;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0px 1px black;
 }
 
 .footer {

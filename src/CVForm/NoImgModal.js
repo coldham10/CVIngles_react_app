@@ -29,7 +29,13 @@ function NoImgModal(props) {
         <Button variant="dark" onClick={() => props.setShow(false)}>
           Atrás
         </Button>
-        <Button variant="primary" onClick={() => props.toCheckout()}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            props.handleSubmit();
+            props.toCheckout();
+          }}
+        >
           Enviar sin foto
         </Button>
       </Modal.Footer>
