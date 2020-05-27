@@ -19,10 +19,10 @@ import { loadStripe } from "@stripe/stripe-js";
 
 import CVFormOptions from "./CVFormOptions.js";
 import CVSection from "./CVSection.js";
-import FormChoiceModal from "./FormChoiceModal.js";
-import FormEgModal from "./FormEgModal.js";
-import NoImgModal from "./NoImgModal.js";
-import SaveToast from "./SaveToast.js";
+import FormChoiceModal from "./Objects/FormChoiceModal.js";
+import FormEgModal from "./Objects/FormEgModal.js";
+import NoImgModal from "./Objects/NoImgModal.js";
+import SaveToast from "./Objects/SaveToast.js";
 import { stripe_pk } from "../keys.js";
 
 const stripePromise = loadStripe(stripe_pk);
