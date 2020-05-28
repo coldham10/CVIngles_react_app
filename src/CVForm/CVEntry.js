@@ -5,9 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import DropdownButton from "react-bootstrap/DropdownButton";
 
 import ContactDropdown from "./Objects/ContactDropdown";
+import LangDropdown from "./Objects/LangDropdown";
 
 import { FaTrash } from "react-icons/fa";
 
@@ -65,12 +65,18 @@ function CVEntry(props) {
       <Form.Group>
         <Form.Label>{props.displayName}</Form.Label>
         <InputGroup>
-          <Form.Control className="rounded" placeholder="Idioma" />
-          <DropdownButton
-            as={InputGroup.Prepend}
-            variant="outline-secondary"
-          ></DropdownButton>
-          <InputGroup.Append>{deleteButton}</InputGroup.Append>
+          <Form.Control
+            placeholder="Idioma"
+            value={props.data}
+            onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
+          />
+          <InputGroup.Append>
+            <LangDropdown
+              level={props.langLevel}
+              updateLevel={(l) => props.formCRUD("UPDATE", { langLevel: l })}
+            />
+          </InputGroup.Append>
+          {deleteButton}
         </InputGroup>
       </Form.Group>
     );

@@ -172,6 +172,9 @@ class App extends React.Component {
           elem.name = "degree" + idx++;
           elem.displayName = "Estudio " + idx;
           break;
+        case "lang":
+          elem.name = "lang" + idx++;
+          break;
         case "other":
           elem.name = "other" + idx++;
           break;
@@ -213,9 +216,13 @@ class App extends React.Component {
           ? original.name + "__" + original.displayName
           : original.name;
       if (typeof original.data !== "object") {
-        newObj[key] = original.contactType
-          ? original.contactType + "__" + original.data
-          : original.data;
+        if (original.contactType) {
+          newObj[key] = original.contactType + "__" + original.data;
+        } else if (original.langLevel) {
+          newObj[key] = original.langLevel + "__" + original.data;
+        } else {
+          newObj[key] = original.data;
+        }
       } else {
         let children = original.data.map((item) => copyRelevant(item));
         newObj[key] = Object.assign({}, ...children);

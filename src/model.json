@@ -253,6 +253,7 @@
         "type": "lang",
         "deletable": true,
         "displayName": "",
+        "langLevel": "",
         "data": ""
       }
     },

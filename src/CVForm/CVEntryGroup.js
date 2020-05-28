@@ -11,7 +11,7 @@ import Collapse from "react-bootstrap/Collapse";
 
 import { MdClose, MdExpandLess, MdExpandMore } from "react-icons/md";
 
-import CVEntry from "./CVEntry.js";
+import CVEntry from "./CVEntry";
 
 class CVEntryGroup extends React.Component {
   constructor(props) {

@@ -178,6 +178,16 @@ a.nav-link {
   background-color: var(--platinum) !important;
 }
 
+.input-group > .input-group-append > .dropdown > .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dropdown-menu {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
 /*Modals and toasts*/
 
 .standard-modal {

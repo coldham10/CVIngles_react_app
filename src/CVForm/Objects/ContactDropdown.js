@@ -1,17 +1,17 @@
 import React from "react";
 
-import InputGroup from "react-bootstrap/InputGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import InputGroup from "react-bootstrap/InputGroup";
 import Popover from "react-bootstrap/Popover";
 
 import {
-  FaWhatsapp,
-  FaPhone,
   FaEnvelope,
-  FaLinkedin,
   FaGlobeAmericas,
+  FaLinkedin,
+  FaPhone,
   FaTwitter,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 import PopoverStickOnHover from "./PopoverStickOnHover.jsx";

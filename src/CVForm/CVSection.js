@@ -24,6 +24,7 @@ function CVSection(props) {
           deletable={entry.deletable}
           displayName={entry.displayName}
           contactType={entry.contactType}
+          langLevel={entry.langLevel}
           formCRUD={props.formCRUD.bind(null, entry.name)}
         />
       );
