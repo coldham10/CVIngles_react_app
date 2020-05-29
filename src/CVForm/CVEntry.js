@@ -2,9 +2,11 @@ import React from "react";
 import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
 
 import ContactDropdown from "./Objects/ContactDropdown";
 import LangDropdown from "./Objects/LangDropdown";
@@ -80,17 +82,49 @@ function CVEntry(props) {
         </InputGroup>
       </Form.Group>
     );
+  } else if (props.type === "int" || props.type === "skill") {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <Form.Row>
+          <Col xs={3}>
+            <Form.Control
+              value={props.key}
+              onChange={(e) =>
+                props.formCRUD("UPDATE", { key: e.target.value })
+              }
+              placeholder="Nombre"
+            />
+          </Col>
+          <Col xs={7} sm={8}>
+            <Form.Control
+              value={props.data}
+              onChange={(e) =>
+                props.formCRUD("UPDATE", { data: e.target.value })
+              }
+              placeholder="Descripción"
+            />
+          </Col>
+          <Col xs={1}>{deleteButton}</Col>
+        </Form.Row>
+      </Form.Group>
+    );
   } else {
     return (
       <Form.Group>
         <Form.Label>{props.displayName}</Form.Label>
-        <Form.Control
-          className="rounded"
-          type={props.type === "textarea" ? "text" : props.type}
-          as={props.type === "textarea" ? "textarea" : "input"}
-          value={props.data}
-          onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
-        ></Form.Control>
+        <InputGroup>
+          <Form.Control
+            className="rounded"
+            type={props.type === "textarea" ? "text" : props.type}
+            as={props.type === "textarea" ? "textarea" : "input"}
+            value={props.data}
+            onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
+          />
+          {props.deletable ? (
+            <InputGroup.Append>{deleteButton}</InputGroup.Append>
+          ) : null}
+        </InputGroup>
       </Form.Group>
     );
   }

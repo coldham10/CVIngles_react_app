@@ -183,6 +183,11 @@ a.nav-link {
   border-bottom-left-radius: 0;
 }
 
+.input-group > .input-group-prepend > .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .dropdown-menu {
   max-height: 50vh;
   overflow-y: auto;

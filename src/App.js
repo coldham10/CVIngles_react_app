@@ -134,6 +134,8 @@ class App extends React.Component {
                 )
               ) - 1
             ];
+          //Creating a new section should have a default entry added
+          modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
         }
         for (let key in arguments[n - 1]) {
           modelObj[key] = arguments[n - 1][key];
@@ -182,6 +184,10 @@ class App extends React.Component {
           elem.name = "skill" + idx++;
           elem.displayName = "Habilidad " + idx;
           break;
+        case "int":
+          elem.name = "int" + idx++;
+          elem.displayName = "Interes " + idx;
+          break;
         default:
           break;
       }
@@ -220,6 +226,8 @@ class App extends React.Component {
           newObj[key] = original.contactType + "__" + original.data;
         } else if (original.langLevel) {
           newObj[key] = original.langLevel + "__" + original.data;
+        } else if (original.key) {
+          newObj[key] = original.key + "__" + original.data;
         } else {
           newObj[key] = original.data;
         }

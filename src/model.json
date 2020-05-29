@@ -237,7 +237,8 @@
         "CVtype": "entry",
         "type": "skill",
         "deletable": true,
-        "displayName": "",
+        "displayName": "Habilidad 1",
+        "key": "",
         "data": ""
       }
     },
@@ -257,8 +258,58 @@
         "data": ""
       }
     },
-    "thesis": {},
-    "interests": {},
+    "thesis": {
+      "name": "thesis",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Tesis de Maestría",
+      "data": [
+        {
+          "name": "title",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Título",
+          "type": "text",
+          "data": ""
+        },
+        {
+          "name": "supervisors",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Supervisores",
+          "type": "text",
+          "data": ""
+        },
+        {
+          "name": "desc",
+          "CVtype": "entry",
+          "deletable": false,
+          "width": 12,
+          "displayName": "Descripción",
+          "type": "textarea",
+          "data": ""
+        }
+      ],
+      "default": {}
+    },
+    "interests": {
+      "name": "ints",
+      "CVtype": "section",
+      "deletable": true,
+      "displayName": "Intereses",
+      "data": [],
+      "default": {
+        "name": "int0",
+        "CVtype": "entry",
+        "type": "int",
+        "deletable": true,
+        "displayName": "Interes 1",
+        "key": "",
+        "data": ""
+      }
+    },
     "other": {
       "name": "other",
       "type": "other",
@@ -266,7 +317,15 @@
       "deletable": true,
       "displayName": "",
       "data": [],
-      "default": {}
+      "default": {
+        "name": "other0",
+        "CVtype": "entry",
+        "type": "other",
+        "deletable": true,
+        "displayName": "",
+        "key": "",
+        "data": ""
+      }
     }
   }
 }

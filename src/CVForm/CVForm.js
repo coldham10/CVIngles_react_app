@@ -132,19 +132,22 @@ class CVForm extends React.Component {
             })
           }
         >
-          {["Otros Habilidades", "Idiomas", "Tesis", "Intereses"].map(
-            (secName, i) => (
-              <Dropdown.Item
-                disabled={this.props.data
-                  .map((s) => s.displayName)
-                  .includes(secName)}
-                eventKey={i}
-                key={i}
-              >
-                {secName}
-              </Dropdown.Item>
-            )
-          )}
+          {[
+            "Otros Habilidades",
+            "Idiomas",
+            "Tesis de Maestría",
+            "Intereses",
+          ].map((secName, i) => (
+            <Dropdown.Item
+              disabled={this.props.data
+                .map((s) => s.displayName)
+                .includes(secName)}
+              eventKey={i}
+              key={i}
+            >
+              {secName}
+            </Dropdown.Item>
+          ))}
           <Dropdown.Divider />
           <Container>
             <Form.Control

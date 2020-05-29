@@ -87,23 +87,31 @@ function CVSection(props) {
     </Row>
   );
 
+  let moreButton =
+    Object.keys(props.default).length === 0 ? (
+      <Button variant="link" />
+    ) : (
+      <Button variant="link" onClick={() => props.formCRUD("CREATE", {})}>
+        Más
+      </Button>
+    );
+
   return (
     <Container className="cv-form-section border rounded mt-0 mb-3 py-2 px-2 mt-md-4 mb-md-4 p-md-4">
       <Container className="mx-auto px-auto my-2 py-2">{header}</Container>
       <Container className="px-0 px-md-2">{inner}</Container>
-
-      <Button variant="link" onClick={() => props.formCRUD("CREATE", {})}>
-        Más
-      </Button>
-      {props.deletable ? (
-        <Button
-          className="float-right"
-          variant="link"
-          onClick={() => props.formCRUD("DELETE", {})}
-        >
-          Eliminar sección
-        </Button>
-      ) : null}
+      <Container>
+        {moreButton}
+        {props.deletable ? (
+          <Button
+            className="float-right"
+            variant="link"
+            onClick={() => props.formCRUD("DELETE", {})}
+          >
+            Eliminar sección
+          </Button>
+        ) : null}
+      </Container>
     </Container>
   );
 }
