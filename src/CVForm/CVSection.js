@@ -39,7 +39,7 @@ function CVSection(props) {
         />
       );
     } else {
-      console.log("unknown CVtype, error 7133");
+      console.log("unknown CVtype, error 7133 ");
       return null;
     }
   });
@@ -87,14 +87,13 @@ function CVSection(props) {
     </Row>
   );
 
-  let moreButton =
-    Object.keys(props.default).length === 0 ? (
-      <Button variant="link" />
-    ) : (
-      <Button variant="link" onClick={() => props.formCRUD("CREATE", {})}>
-        Más
-      </Button>
-    );
+  let moreButton = props.default ? (
+    <Button variant="link" />
+  ) : (
+    <Button variant="link" onClick={() => props.formCRUD("CREATE", {})}>
+      Más
+    </Button>
+  );
 
   return (
     <Container className="cv-form-section border rounded mt-0 mb-3 py-2 px-2 mt-md-4 mb-md-4 p-md-4">

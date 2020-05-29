@@ -135,7 +135,9 @@ class App extends React.Component {
               ) - 1
             ];
           //Creating a new section should have a default entry added
-          modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+          if (Object.keys(modelObj.default).length > 0) {
+            modelObj.data.push(JSON.parse(JSON.stringify(modelObj.default)));
+          }
         }
         for (let key in arguments[n - 1]) {
           modelObj[key] = arguments[n - 1][key];
@@ -217,30 +219,34 @@ class App extends React.Component {
     let copyRelevant = function (original) {
       //Recursively extract only name and data from full model
       let newObj = {};
-      let key =
+      newObj.name =
         original.type === "other"
           ? original.name + "__" + original.displayName
           : original.name;
       if (typeof original.data !== "object") {
         if (original.contactType) {
-          newObj[key] = original.contactType + "__" + original.data;
+          newObj.data = original.contactType + "__" + original.data;
         } else if (original.langLevel) {
-          newObj[key] = original.langLevel + "__" + original.data;
-        } else if (original.key) {
-          newObj[key] = original.key + "__" + original.data;
+          newObj.data = original.langLevel + "__" + original.data;
+        } else if (original.dataKey) {
+          newObj.data = original.dataKey + "__" + original.data;
         } else {
-          newObj[key] = original.data;
+          newObj.data = original.data;
         }
       } else {
         let children = original.data.map((item) => copyRelevant(item));
-        newObj[key] = Object.assign({}, ...children);
+        newObj.data = children;
       }
       return newObj;
     };
 
     return Object.assign(
-      copyRelevant({ name: "model", data: this.state.formData }),
-      { options: this.state.options, imageStatus: this.state.imageStatus }
+      {},
+      {
+        model: copyRelevant({ data: this.state.formData }).data,
+        options: this.state.options,
+        imageStatus: this.state.imageStatus,
+      }
     );
   }
 

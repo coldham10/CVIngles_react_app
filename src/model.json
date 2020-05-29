@@ -238,7 +238,7 @@
         "type": "skill",
         "deletable": true,
         "displayName": "Habilidad 1",
-        "key": "",
+        "dataKey": "",
         "data": ""
       }
     },
@@ -306,7 +306,7 @@
         "type": "int",
         "deletable": true,
         "displayName": "Interes 1",
-        "key": "",
+        "dataKey": "",
         "data": ""
       }
     },
@@ -323,7 +323,7 @@
         "type": "other",
         "deletable": true,
         "displayName": "",
-        "key": "",
+        "dataKey": "",
         "data": ""
       }
     }

@@ -89,9 +89,9 @@ function CVEntry(props) {
         <Form.Row>
           <Col xs={3}>
             <Form.Control
-              value={props.key}
+              value={props.dataKey}
               onChange={(e) =>
-                props.formCRUD("UPDATE", { key: e.target.value })
+                props.formCRUD("UPDATE", { dataKey: e.target.value })
               }
               placeholder="Nombre"
             />

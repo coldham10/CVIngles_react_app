@@ -30,15 +30,24 @@ function LangDropdown(props) {
       onSelect={(level) => props.updateLevel(level)}
     >
       {["x0", "x1", "x2", "x3"].map((l) => (
-        <Dropdown.Item eventKey={l}> {levelDict[l]} </Dropdown.Item>
+        <Dropdown.Item key={l} eventKey={l}>
+          {" "}
+          {levelDict[l]}{" "}
+        </Dropdown.Item>
       ))}
       <Dropdown.Divider />
       {["a1", "a2", "b1", "b2", "c1", "c2"].map((l) => (
-        <Dropdown.Item eventKey={l}> {levelDict[l]} </Dropdown.Item>
+        <Dropdown.Item key={l} eventKey={l}>
+          {" "}
+          {levelDict[l]}{" "}
+        </Dropdown.Item>
       ))}
       <Dropdown.Divider />
       {["i0", "i1", "i2", "i3", "i4", "i5"].map((l) => (
-        <Dropdown.Item eventKey={l}> {levelDict[l]} </Dropdown.Item>
+        <Dropdown.Item key={l} eventKey={l}>
+          {" "}
+          {levelDict[l]}{" "}
+        </Dropdown.Item>
       ))}
     </DropdownButton>
   );
