@@ -232,15 +232,22 @@ class App extends React.Component {
       let newObj = {};
       newObj.name =
         original.type === "other"
-          ? original.name + "__" + original.displayName
+          ? original.name + "__!__" + original.displayName
           : original.name;
       if (typeof original.data !== "object") {
         if (original.contactType) {
-          newObj.data = original.contactType + "__" + original.data;
+          newObj.data = original.contactType + "__!__" + original.data;
         } else if (original.langLevel) {
-          newObj.data = original.langLevel + "__" + original.data;
+          newObj.data = original.langLevel + "__!__" + original.data;
+        } else if (original.dataKey && original.dataComment) {
+          newObj.data =
+            original.dataKey +
+            "__!__" +
+            original.data +
+            "__!__" +
+            original.dataComment;
         } else if (original.dataKey) {
-          newObj.data = original.dataKey + "__" + original.data;
+          newObj.data = original.dataKey + "__!__" + original.data;
         } else {
           newObj.data = original.data;
         }

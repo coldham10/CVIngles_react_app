@@ -109,6 +109,50 @@ function CVEntry(props) {
         </Form.Row>
       </Form.Group>
     );
+  } else if (props.type === "other") {
+    return (
+      <Form.Group>
+        <Form.Label>{props.displayName}</Form.Label>
+        <Form.Row>
+          <Col xs={10} md={11} className="pr-xs-0 pr-md-1">
+            <Form.Row>
+              <Col xs={5} sm={4} md={3}>
+                <Form.Control
+                  value={props.dataKey}
+                  onChange={(e) =>
+                    props.formCRUD("UPDATE", { dataKey: e.target.value })
+                  }
+                  placeholder="Nombre"
+                />
+              </Col>
+              <Col xs={7} sm={8} md={9}>
+                <Form.Control
+                  value={props.data}
+                  onChange={(e) =>
+                    props.formCRUD("UPDATE", { data: e.target.value })
+                  }
+                  placeholder="Descripción"
+                />
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col className="mt-2" xs={12} sm={6}>
+                <Form.Control
+                  value={props.dataComment}
+                  onChange={(e) =>
+                    props.formCRUD("UPDATE", { dataComment: e.target.value })
+                  }
+                  placeholder="Commentario(???) (opcional)"
+                />
+              </Col>
+            </Form.Row>
+          </Col>
+          <Col xs={1} className="d-flex align-content-center">
+            {deleteButton}
+          </Col>
+        </Form.Row>
+      </Form.Group>
+    );
   } else {
     return (
       <Form.Group>

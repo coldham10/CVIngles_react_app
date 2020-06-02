@@ -15,6 +15,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 
 import ImageUploader from "react-images-upload";
+import FlipMove from "react-flip-move";
 import { loadStripe } from "@stripe/stripe-js";
 
 import CVFormOptions from "./CVFormOptions.js";
@@ -199,7 +200,7 @@ class CVForm extends React.Component {
             <h1>Cree Su Hoja de Vida</h1>
           </Container>
           <Container className="mx-0 px-1 my-1 py-2 mx-md-auto px-md-auto">
-            {inner}
+            <FlipMove>{inner}</FlipMove>
             {addSection}
           </Container>
           <Container className="rounded mx-0 px-1 my-1 pt-1 pb-3 mx-md-auto px-md-auto">
