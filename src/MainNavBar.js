@@ -17,18 +17,40 @@ function MainNavBar(props) {
       className={"mb-4 " + (props.transparent ? "nav-hidden" : "nav-shown")}
     >
       <Container fluid className="p-0">
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          onClick={() => {
+            window.scrollTo({
+              left: 0,
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
           <img
             alt=""
             src="/draft_logo_long.svg"
-            width="160"
+            width="160px"
             className="d-inline-block"
           />{" "}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link as={NavLink} exact eventKey="1" to="/">
+            <Nav.Link
+              as={NavLink}
+              exact
+              eventKey="1"
+              to="/"
+              onSelect={() => {
+                window.scrollTo({
+                  left: 0,
+                  top: window.innerHeight - 10,
+                  behavior: "smooth",
+                });
+              }}
+            >
               Servicios
             </Nav.Link>
             <Nav.Link as={NavLink} eventKey="2" to="/testimonios">

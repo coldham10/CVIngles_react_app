@@ -23,7 +23,7 @@ function FormChoiceModal(props) {
     >
       <Modal.Header closeButton className="py-1" />
       <Modal.Body className="p-0">
-        <Row>
+        <Row xs={1} lg={3}>
           <Col>
             <Card
               className={"mx-auto my-4 p-1 style-choice"}

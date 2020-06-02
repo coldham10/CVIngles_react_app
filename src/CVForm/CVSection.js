@@ -68,7 +68,7 @@ class CVSection extends React.Component {
     let header = (
       <Container fluid className="p-0">
         {this.props.first ? (
-          <Button className="float-right px-0" variant="link"></Button>
+          <Button className="float-right px-0" variant="link" disabled></Button>
         ) : (
           <Button
             className="float-right px-0 mx-md-2"
@@ -122,7 +122,7 @@ class CVSection extends React.Component {
     );
 
     let moreButton = !this.props.default ? (
-      <Button variant="link" />
+      <Button variant="link" disabled />
     ) : (
       <Button variant="link" onClick={() => this.props.formCRUD("CREATE", {})}>
         Más

@@ -93,7 +93,7 @@ function HomeCarousel(props) {
               Formato muy profesional y elegante
             </h3>
             <br />
-            <IoIosArrowDown className="scroll-indicator" />
+            <IoIosArrowDown id="main-si" className="scroll-indicator" />
             <IoIosArrowDown className="scroll-indicator delayed-15" />
           </Carousel.Caption>
         </Carousel.Item>
