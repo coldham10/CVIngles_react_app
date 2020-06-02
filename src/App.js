@@ -42,7 +42,7 @@ class App extends React.Component {
     };
 
     if (!formData) {
-      this.addDefaults();
+      this.state.formData = this.addDefaults();
     }
   }
 
@@ -154,6 +154,17 @@ class App extends React.Component {
           modelCopy = parent.data;
         }
         break;
+      case "SWAP":
+        let idx = parent.data.findIndex((obj) => obj === modelObj);
+        console.log(idx);
+        if (arguments[n - 1].dir === "UP") {
+          parent.data[idx] = parent.data[idx - 1];
+          parent.data[idx - 1] = modelObj;
+        } else if (arguments[n - 1].dir === "DOWN") {
+          parent.data[idx] = parent.data[idx + 1];
+          parent.data[idx + 1] = modelObj;
+        }
+        break;
       default:
         console.warn("Error unkown CRUD argument");
     }
@@ -212,7 +223,7 @@ class App extends React.Component {
         node.data.forEach((obj) => q.push(obj));
       }
     }
-    this.state.formData = copyObj;
+    return copyObj;
   }
 
   getAppData() {

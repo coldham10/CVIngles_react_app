@@ -64,7 +64,7 @@ class CVForm extends React.Component {
         //data successfully uploaded
         try {
           const stripe = await stripePromise;
-          const { error } = await stripe.redirectToCheckout({
+          var { error } = await stripe.redirectToCheckout({
             items: [
               {
                 sku: {
@@ -89,6 +89,7 @@ class CVForm extends React.Component {
           });
         } catch {
           this.toCheckout(prevTries + 1);
+          console.warn(error);
         }
       }
     } else {
@@ -99,7 +100,7 @@ class CVForm extends React.Component {
 
   render() {
     /*Map section data to section objects -- the body of the form*/
-    let inner = this.props.data.map((section) => {
+    let inner = this.props.data.map((section, idx) => {
       if (section.CVtype === "section") {
         return (
           <CVSection
@@ -107,6 +108,8 @@ class CVForm extends React.Component {
             displayName={section.displayName}
             data={section.data}
             default={section.default}
+            first={idx < 2}
+            last={idx === 0 || idx === this.props.data.length - 1}
             type={section.type}
             deletable={section.deletable}
             formCRUD={this.props.formCRUD.bind(null, section.name)}
