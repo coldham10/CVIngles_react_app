@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "../App.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,8 +13,10 @@ import ContactDropdown from "./Objects/ContactDropdown";
 import LangDropdown from "./Objects/LangDropdown";
 
 import { FaTrash } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 function CVEntry(props) {
+  var [titleEditing, setEditing] = useState(false);
   const deleteButton = props.deletable ? (
     <Button variant="link" onMouseUp={() => props.formCRUD("DELETE", {})}>
       <FaTrash color="#ed6a5a" />
@@ -112,40 +115,67 @@ function CVEntry(props) {
   } else if (props.type === "other") {
     return (
       <Form.Group>
-        <Form.Label>{props.displayName}</Form.Label>
+        <Form.Label>
+          {titleEditing ? (
+            <InputGroup className="ml-2">
+              <Form.Control
+                value={props.dataKey}
+                onChange={(e) => {
+                  props.formCRUD("UPDATE", { dataKey: e.target.value });
+                }}
+                onKeyDown={(e) => {
+                  if (e.which === 13) {
+                    setEditing(false);
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value !== "") {
+                    props.formCRUD("UPDATE", { dataKey: e.target.value });
+                  }
+                  e.target.value = "";
+                  setEditing(false);
+                }}
+                placeholder="Nombre"
+              />
+              <InputGroup.Append>
+                <Button
+                  variant="link"
+                  onClick={() => setEditing((prevState) => !prevState)}
+                >
+                  <MdEdit color="black" />
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          ) : (
+            <>
+              {props.dataKey || "Nombre"}
+              <Button
+                variant="link"
+                onClick={() => setEditing((prevState) => !prevState)}
+              >
+                <MdEdit color="black" />
+              </Button>
+            </>
+          )}
+        </Form.Label>
         <Form.Row>
-          <Col xs={10} md={11} className="pr-xs-0 pr-md-1">
-            <Form.Row>
-              <Col xs={5} sm={4} md={3}>
-                <Form.Control
-                  value={props.dataKey}
-                  onChange={(e) =>
-                    props.formCRUD("UPDATE", { dataKey: e.target.value })
-                  }
-                  placeholder="Nombre"
-                />
-              </Col>
-              <Col xs={7} sm={8} md={9}>
-                <Form.Control
-                  value={props.data}
-                  onChange={(e) =>
-                    props.formCRUD("UPDATE", { data: e.target.value })
-                  }
-                  placeholder="Descripción"
-                />
-              </Col>
-            </Form.Row>
-            <Form.Row>
-              <Col className="mt-2" xs={12} sm={6}>
-                <Form.Control
-                  value={props.dataComment}
-                  onChange={(e) =>
-                    props.formCRUD("UPDATE", { dataComment: e.target.value })
-                  }
-                  placeholder="Commentario(???) (opcional)"
-                />
-              </Col>
-            </Form.Row>
+          <Col xs={12} sm={6} md={7}>
+            <Form.Control
+              value={props.data}
+              onChange={(e) =>
+                props.formCRUD("UPDATE", { data: e.target.value })
+              }
+              placeholder="Descripción"
+            />
+          </Col>
+          <Col xs={10} sm={5} md={4}>
+            <Form.Control
+              value={props.dataComment}
+              onChange={(e) =>
+                props.formCRUD("UPDATE", { dataComment: e.target.value })
+              }
+              placeholder="Comentario (opcional)"
+            />
           </Col>
           <Col xs={1} className="d-flex align-content-center">
             {deleteButton}

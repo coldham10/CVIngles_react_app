@@ -26,6 +26,8 @@ class CVSection extends React.Component {
           <CVEntry
             type={entry.type}
             data={entry.data}
+            dataKey={entry.dataKey}
+            dataComment={entry.dataComment}
             key={entry.name}
             deletable={entry.deletable}
             displayName={entry.displayName}
