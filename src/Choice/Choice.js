@@ -1,17 +1,18 @@
 import React from "react";
 import "../App.css";
 
+import ColorBlock from "./ColorBlock.js";
+import CVModal from "./CVModal.js";
 import ServiceBlock from "./ServiceBlock.js";
 import StyleBlock from "./StyleBlock.js";
-import CVModal from "./CVModal.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { withRouter } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 /*---Page for selecting service type and formatting options---*/
 class Choice extends React.Component {
@@ -68,6 +69,7 @@ class Choice extends React.Component {
         <h1 className="px-3 pb-2">Seleccione sus opciones</h1>
         <ServiceBlock parent={this} />
         <StyleBlock parent={this} />
+        <ColorBlock parent={this} />
         <CVModal parent={this} />
         <Container className="pb-5">
           <Button

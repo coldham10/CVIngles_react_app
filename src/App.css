@@ -154,6 +154,15 @@ a.nav-link {
   }
 }
 
+.color-group {
+  background-color: rgba(155, 193, 188, 0.3);
+}
+
+.color-card {
+  border-color: var(--cadet) !important;
+  border-width: 4px !important;
+}
+
 /*Form*/
 
 .cv-form {
