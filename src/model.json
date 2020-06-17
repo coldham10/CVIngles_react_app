@@ -16,7 +16,8 @@
           "width": 6,
           "displayName": "Nombre(s)",
           "type": "text",
-          "data": ""
+          "data": "",
+          "required": ["data"]
         },
         {
           "name": "lname",
@@ -25,7 +26,8 @@
           "width": 6,
           "displayName": "Apellido(s)",
           "type": "text",
-          "data": ""
+          "data": "",
+          "required": ["data"]
         },
         {
           "name": "dob",
@@ -34,7 +36,8 @@
           "width": 12,
           "displayName": "Fecha de Nacimiento",
           "type": "date",
-          "data": ""
+          "data": "",
+          "required": []
         },
         {
           "name": "address",
@@ -43,7 +46,8 @@
           "width": 12,
           "displayName": "Direccíon",
           "type": "text",
-          "data": ""
+          "data": "",
+          "required": ["data"]
         }
       ],
       "default": {
@@ -55,7 +59,8 @@
         "type": "contact",
         "contactType": "phone",
         "inputType": "tel",
-        "data": ""
+        "data": "",
+        "required": ["data"]
       }
     },
     {
@@ -78,7 +83,8 @@
             "width": 12,
             "displayName": "Título",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "employer",
@@ -87,7 +93,8 @@
             "width": 6,
             "displayName": "Empleador",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "location",
@@ -96,7 +103,8 @@
             "width": 6,
             "displayName": "Ciudad, País",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": []
           },
           {
             "name": "startYear",
@@ -105,7 +113,8 @@
             "width": 6,
             "displayName": "Año de Comienzo",
             "type": "year",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "endYear",
@@ -114,7 +123,8 @@
             "width": 6,
             "displayName": "Año de Terminación",
             "type": "year",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "desc",
@@ -123,7 +133,8 @@
             "width": 12,
             "displayName": "Descripción",
             "type": "textarea",
-            "data": ""
+            "data": "",
+            "required": []
           },
           {
             "name": "achievements",
@@ -139,7 +150,8 @@
               "displayName": "Logro 1",
               "width": 12,
               "type": "achievement",
-              "data": ""
+              "data": "",
+              "required": []
             }
           }
         ]
@@ -165,7 +177,8 @@
             "width": 12,
             "displayName": "Nombre Completo de Carrera o Curso",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "startYear",
@@ -174,7 +187,8 @@
             "width": 4,
             "displayName": "Año de Comienzo",
             "type": "year",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "endYear",
@@ -183,7 +197,8 @@
             "width": 4,
             "displayName": "Año de Terminación",
             "type": "year",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "grade",
@@ -192,7 +207,8 @@
             "width": 4,
             "displayName": "Nota (x.x/x.x)",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": []
           },
           {
             "name": "university",
@@ -201,7 +217,8 @@
             "width": 6,
             "displayName": "Universidad o Instituto",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": ["data"]
           },
           {
             "name": "location",
@@ -210,7 +227,8 @@
             "width": 6,
             "displayName": "Ciudad, País",
             "type": "text",
-            "data": ""
+            "data": "",
+            "required": []
           },
           {
             "name": "desc",
@@ -219,7 +237,8 @@
             "width": 12,
             "displayName": "Descripción",
             "type": "textarea",
-            "data": ""
+            "data": "",
+            "required": []
           }
         ]
       }
@@ -239,7 +258,8 @@
         "deletable": true,
         "displayName": "Habilidad 1",
         "dataKey": "",
-        "data": ""
+        "data": "",
+        "required": ["dataKey"]
       }
     },
     "langs": {
@@ -255,7 +275,8 @@
         "deletable": true,
         "displayName": "",
         "langLevel": "",
-        "data": ""
+        "data": "",
+        "required": ["data", "langLevel"]
       }
     },
     "thesis": {
@@ -271,7 +292,8 @@
           "width": 12,
           "displayName": "Título",
           "type": "text",
-          "data": ""
+          "data": "",
+          "required": ["data"]
         },
         {
           "name": "supervisors",
@@ -280,7 +302,8 @@
           "width": 12,
           "displayName": "Supervisores",
           "type": "text",
-          "data": ""
+          "data": "",
+          "required": []
         },
         {
           "name": "desc",
@@ -289,7 +312,8 @@
           "width": 12,
           "displayName": "Descripción",
           "type": "textarea",
-          "data": ""
+          "data": "",
+          "required": []
         }
       ],
       "default": {}
@@ -307,7 +331,8 @@
         "deletable": true,
         "displayName": "Interes 1",
         "dataKey": "",
-        "data": ""
+        "data": "",
+        "required": ["dataKey"]
       }
     },
     "other": {
@@ -325,7 +350,8 @@
         "displayName": "",
         "dataKey": "",
         "data": "",
-        "dataComment": ""
+        "dataComment": "",
+        "required": ["dataKey", "data"]
       }
     }
   }

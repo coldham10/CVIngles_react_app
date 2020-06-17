@@ -76,6 +76,7 @@ class App extends React.Component {
                   ucid={this.state.ucid}
                   setOptions={(opts) => this.setState({ options: opts })}
                   formCRUD={this.formCRUD.bind(this)}
+                  findInputErrors={() => this.findInputErrors()}
                   handleSubmit={() => {
                     this.sendData(this.getAppData());
                     this.storeLocal();
@@ -102,6 +103,69 @@ class App extends React.Component {
         </Router>
       </div>
     );
+  }
+
+  addDefaults() {
+    //If not loading data, add a single default to all possible entries in the template to "flesh it out" a little
+    let q = [];
+    let copyObj = JSON.parse(JSON.stringify(this.state.formData));
+    copyObj.forEach((sec) => q.push(sec));
+    while (q.length > 0) {
+      let node = q.shift();
+      if ("default" in node) {
+        node.data.push(JSON.parse(JSON.stringify(node.default)));
+      }
+      if (Array.isArray(node.data)) {
+        node.data.forEach((obj) => q.push(obj));
+      }
+    }
+    return copyObj;
+  }
+
+  findInputErrors() {
+    let modelCopy = {
+      CVtype: "model",
+      data: JSON.parse(JSON.stringify(this.state.formData)),
+    }; //Deep Copy
+    let recursiveValidate = function (obj) {
+      if (obj.CVtype === "entry") {
+        let errs = obj.required.map((requirement) => {
+          if (obj[requirement] === "" || obj[requirement] === undefined) {
+            obj.invalid = true;
+          } else if (obj.inputType === "email") {
+            if (/^\S+@\S+\.\S+/.test(obj.data)) {
+              //valid email
+              obj.invalid = false;
+            } else {
+              obj.invalid = true;
+            }
+          } else if (obj.type === "year") {
+            obj.invalid =
+              Number.isNaN(Number(obj.data)) ||
+              obj.data < 1850 ||
+              obj.data > 2050;
+          } else {
+            obj.invalid = false;
+          }
+          return obj.invalid;
+        });
+        if (errs.length > 0) {
+          return errs.reduce((acc, curr) => acc || curr); //If any return true, retun true
+        } else {
+          return false;
+        }
+      } else {
+        let errs = obj.data.map((elem) => recursiveValidate(elem));
+        if (errs.length > 0) {
+          return errs.reduce((acc, curr) => acc || curr); //If any return true, retun true
+        } else {
+          return false;
+        }
+      }
+    };
+    let isErr = recursiveValidate(modelCopy);
+    this.setState({ formData: modelCopy.data });
+    return isErr;
   }
 
   formCRUD() {
@@ -147,6 +211,7 @@ class App extends React.Component {
         for (let key in arguments[n - 1]) {
           modelObj[key] = arguments[n - 1][key];
         }
+        modelObj.invalid = undefined;
         break;
       case "DELETE":
         parent.data = parent.data.filter((obj) => obj !== modelObj);
@@ -209,23 +274,6 @@ class App extends React.Component {
     this.queueSave();
   }
 
-  addDefaults() {
-    //If not loading data, add a single default to all possible entries in the template to "flesh it out" a little
-    let q = [];
-    let copyObj = JSON.parse(JSON.stringify(this.state.formData));
-    copyObj.forEach((sec) => q.push(sec));
-    while (q.length > 0) {
-      let node = q.shift();
-      if ("default" in node) {
-        node.data.push(JSON.parse(JSON.stringify(node.default)));
-      }
-      if (Array.isArray(node.data)) {
-        node.data.forEach((obj) => q.push(obj));
-      }
-    }
-    return copyObj;
-  }
-
   getAppData() {
     let copyRelevant = function (original) {
       //Recursively extract only name and data from full model
@@ -268,41 +316,6 @@ class App extends React.Component {
     );
   }
 
-  storeLocal(data) {
-    //Store form data and options in localStorage
-    if (data === undefined) {
-      data = this.state;
-    }
-    try {
-      if (data.formData !== undefined) {
-        window.localStorage.setItem("formData", JSON.stringify(data.formData));
-      }
-      if (data.options !== undefined) {
-        window.localStorage.setItem("options", JSON.stringify(data.options));
-      }
-      this.setState((prevState) => {
-        if (prevState.saveStatus !== "QUEUED") {
-          return { saveStatus: "READY" };
-        } else {
-          return null;
-        }
-      });
-    } catch (e) {
-      console.error("Error setting localStorage");
-      this.setState({ saveStatus: "FAILED" });
-    }
-  }
-
-  queueSave(data) {
-    if (this.state.saveStatus !== "QUEUED") {
-      this.setState({ saveStatus: "QUEUED" });
-      window.setTimeout(() => {
-        this.setState({ saveStatus: "SAVING" });
-        this.storeLocal(data);
-      }, 2000);
-    }
-  }
-
   loadLocal() {
     //Load data and otr options from localStorage if they exist
     try {
@@ -315,6 +328,16 @@ class App extends React.Component {
     } catch (e) {
       console.error("Error retrieving localStorage");
       return { formData: null, options: null };
+    }
+  }
+
+  queueSave(data) {
+    if (this.state.saveStatus !== "QUEUED") {
+      this.setState({ saveStatus: "QUEUED" });
+      window.setTimeout(() => {
+        this.setState({ saveStatus: "SAVING" });
+        this.storeLocal(data);
+      }, 2000);
     }
   }
 
@@ -459,6 +482,31 @@ class App extends React.Component {
     };
     //On successful load calls reader.onload above
     reader.readAsDataURL(pic);
+  }
+
+  storeLocal(data) {
+    //Store form data and options in localStorage
+    if (data === undefined) {
+      data = this.state;
+    }
+    try {
+      if (data.formData !== undefined) {
+        window.localStorage.setItem("formData", JSON.stringify(data.formData));
+      }
+      if (data.options !== undefined) {
+        window.localStorage.setItem("options", JSON.stringify(data.options));
+      }
+      this.setState((prevState) => {
+        if (prevState.saveStatus !== "QUEUED") {
+          return { saveStatus: "READY" };
+        } else {
+          return null;
+        }
+      });
+    } catch (e) {
+      console.error("Error setting localStorage");
+      this.setState({ saveStatus: "FAILED" });
+    }
   }
 }
 

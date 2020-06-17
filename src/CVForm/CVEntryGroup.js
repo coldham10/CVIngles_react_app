@@ -44,6 +44,7 @@ class CVEntryGroup extends React.Component {
               type={entry.type}
               data={entry.data}
               key={entry.name}
+              invalid={entry.invalid}
               displayName={entry.displayName}
               deletable={entry.deletable}
               formCRUD={this.props.formCRUD.bind(null, entry.name)}

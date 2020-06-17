@@ -33,6 +33,7 @@ class CVSection extends React.Component {
             displayName={entry.displayName}
             contactType={entry.contactType}
             langLevel={entry.langLevel}
+            invalid={entry.invalid}
             formCRUD={this.props.formCRUD.bind(null, entry.name)}
           />
         );

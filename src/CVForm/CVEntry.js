@@ -41,6 +41,7 @@ function CVEntry(props) {
             contactType={props.contactType}
           />
           <Form.Control
+            isInvalid={props.invalid}
             className="rounded-right"
             type={getContactInputType(props.contactType)}
             value={props.data}
@@ -56,6 +57,7 @@ function CVEntry(props) {
         <Form.Label>{props.displayName}</Form.Label>
         <InputGroup>
           <Form.Control
+            isInvalid={props.invalid}
             className="rounded"
             type="text"
             value={props.data}
@@ -71,6 +73,7 @@ function CVEntry(props) {
         <Form.Label>{props.displayName}</Form.Label>
         <InputGroup>
           <Form.Control
+            isInvalid={props.invalid}
             placeholder="Idioma"
             value={props.data}
             onChange={(e) => props.formCRUD("UPDATE", { data: e.target.value })}
@@ -92,6 +95,7 @@ function CVEntry(props) {
         <Form.Row>
           <Col xs={3}>
             <Form.Control
+              isInvalid={props.invalid}
               value={props.dataKey}
               onChange={(e) =>
                 props.formCRUD("UPDATE", { dataKey: e.target.value })
@@ -101,6 +105,7 @@ function CVEntry(props) {
           </Col>
           <Col xs={7} sm={8}>
             <Form.Control
+              isInvalid={props.invalid}
               value={props.data}
               onChange={(e) =>
                 props.formCRUD("UPDATE", { data: e.target.value })
@@ -119,6 +124,7 @@ function CVEntry(props) {
           {titleEditing ? (
             <InputGroup className="ml-2">
               <Form.Control
+                isInvalid={props.invalid}
                 value={props.dataKey}
                 onChange={(e) => {
                   props.formCRUD("UPDATE", { dataKey: e.target.value });
@@ -161,6 +167,7 @@ function CVEntry(props) {
         <Form.Row>
           <Col xs={12} sm={6} md={7}>
             <Form.Control
+              isInvalid={props.invalid}
               value={props.data}
               onChange={(e) =>
                 props.formCRUD("UPDATE", { data: e.target.value })
@@ -170,6 +177,7 @@ function CVEntry(props) {
           </Col>
           <Col xs={10} sm={5} md={4}>
             <Form.Control
+              isInvalid={props.invalid}
               value={props.dataComment}
               onChange={(e) =>
                 props.formCRUD("UPDATE", { dataComment: e.target.value })
@@ -189,6 +197,7 @@ function CVEntry(props) {
         <Form.Label>{props.displayName}</Form.Label>
         <InputGroup>
           <Form.Control
+            isInvalid={props.invalid}
             className="rounded"
             type={props.type === "textarea" ? "text" : props.type}
             as={props.type === "textarea" ? "textarea" : "input"}

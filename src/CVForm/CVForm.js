@@ -38,16 +38,21 @@ class CVForm extends React.Component {
       showNoImgModal: false,
       showSecDD: false,
       redirectFail: false,
+      validationFail: false,
     };
   }
 
   handleSubmit() {
-    if (
+    if (this.props.findInputErrors()) {
+      this.setState({ validationFail: true });
+    } else if (
       ["NONE", "FAILED"].includes(this.props.imageStatus) &&
       this.props.options.format !== 1
     ) {
+      this.setState({ validationFail: false });
       this.setState({ showNoImgModal: true });
     } else {
+      this.setState({ validationFail: false });
       this.props.handleSubmit();
       this.toCheckout(0);
     }
@@ -183,6 +188,7 @@ class CVForm extends React.Component {
     return (
       <Container className="mb-5 px-0 px-md-3">
         <Form
+          noValidate
           className="cv-form border rounded px-2 px-md-4 py-3"
           onSubmit={(e) => {
             e.preventDefault();
@@ -240,6 +246,9 @@ class CVForm extends React.Component {
           </Button>
           <Alert variant="danger" show={this.state.redirectFail}>
             No se puede conectar con el servidor
+          </Alert>
+          <Alert variant="warning" show={this.state.validationFail}>
+            El formulario tiene errores
           </Alert>
         </Form>
         <FormEgModal
