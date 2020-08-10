@@ -137,7 +137,7 @@ class CVForm extends React.Component {
           onToggle={(a) => this.setState({ showSecDD: a })}
           onSelect={(i) =>
             this.props.formCRUD("CREATE", {
-              name: ["skills", "langs", "thesis", "interests"][i],
+              name: ["skills", "langs", "thesis", "interests"][i - 1],
             })
           }
         >
@@ -151,8 +151,8 @@ class CVForm extends React.Component {
               disabled={this.props.data
                 .map((s) => s.displayName)
                 .includes(secName)}
-              eventKey={i}
-              key={i}
+              eventKey={i + 1}
+              key={i + 1}
             >
               {secName}
             </Dropdown.Item>
