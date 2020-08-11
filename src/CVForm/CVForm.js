@@ -215,8 +215,8 @@ class CVForm extends React.Component {
               buttonClassName="btn btn-primary"
               buttonText="Elegir imagen (opcional)"
               imgExtension={[".jpg", ".jpeg", ".png", ".bmp"]}
-              maxFileSize={1048576}
-              fileSizeError="pesa más de 1Mb"
+              maxFileSize={5242880}
+              fileSizeError="pesa más de 5Mb"
               fileTypeError="no es compatible"
               singleImage={true}
               withIcon={false}

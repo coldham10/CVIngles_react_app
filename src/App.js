@@ -397,8 +397,36 @@ class App extends React.Component {
     });
   }
 
+  resizeImg(dataURL, maxDimension) {
+    let img = document.createElement("img");
+    img.src = dataURL;
+    let width = img.width;
+    var height = img.height;
+    //calculate new dimensions, preserving aspect ration
+    if (width > height) {
+      height *= maxDimension / width;
+      width = maxDimension;
+    } else {
+      width *= maxDimension / height;
+      height = maxDimension;
+    }
+    //Using canvas resizing trick
+    let canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    let compressedURL = canvas.toDataURL("image/jpeg");
+    //// TODO: delete elements
+    console.log(this.state.ucid);
+    console.log(compressedURL);
+    return compressedURL;
+  }
+
   sendImg(pic) {
     //Send image to backend api
+    let resize = false;
     if (pic === undefined) {
       //When image removed pic is sent as undefined
       this.setState({
@@ -407,13 +435,17 @@ class App extends React.Component {
         imageUploadAttempts: 0,
       });
       return;
+    } else if (pic.size > 1048576) {
+      //1 Megabyte largest upload before client-side resize
+      resize = true;
     }
     this.setState({ imageStatus: "LOADING" });
     let reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = (e) => {
       //Once image has been loaded
       AWS.config.credentials.refresh(() => {
         try {
+          //Opening AWS api gateway client
           let credentials = AWS.config.credentials.data.Credentials;
           var apigClient = apigClientFactory.newClient({
             invokeUrl: uploadEndpont,
@@ -444,9 +476,12 @@ class App extends React.Component {
         let additionalParams = {
           headers: {
             sessionID: this.state.ucid,
-            "Content-Type": pic.type,
+            "Content-Type": resize ? "image/jpeg" : pic.type,
           },
         };
+        let dataURL = resize
+          ? this.resizeImg(e.target.result, 700)
+          : e.target.result;
         //Invoke the image upload api
         apigClient
           .invokeApi(
@@ -454,7 +489,7 @@ class App extends React.Component {
             pathTemplate,
             "POST",
             additionalParams,
-            reader.result.split(",")[1]
+            dataURL.split(",")[1]
           )
           .then(() =>
             this.setState({
