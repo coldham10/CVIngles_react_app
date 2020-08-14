@@ -14,7 +14,7 @@ function MainNavBar(props) {
       collapseOnSelect
       fixed="top"
       expand="md"
-      className={"mb-4 " + (props.transparent ? "nav-hidden" : "nav-shown")}
+      className={props.transparent ? "nav-hidden" : "nav-shown"}
     >
       <Container fluid className="p-0">
         <Navbar.Brand

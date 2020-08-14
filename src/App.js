@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import Home from "./Home/Home.js";
-import CVForm from "./CVForm/CVForm.js";
-import Choice from "./Choice/Choice.js";
-import MainNavBar from "./MainNavBar.js";
-import Footer from "./Footer.js";
+import Home from "./Home/Home";
+import CVForm from "./CVForm/CVForm";
+import Choice from "./Choice/Choice";
+import Confirmation from "./Confirmation/Confirmation";
+import MainNavBar from "./MainNavBar";
+import Footer from "./Footer";
 import { cognito_id } from "./keys.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -51,54 +52,55 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <MainNavBar transparent={this.state.navbarTransparent} />
-          <div>
-            <Switch>
-              <Route exact path="/">
-                <Home
-                  options={this.state.options}
-                  setOptions={(opts) => this.setState({ options: opts })}
-                  setNavTransparent={(b) =>
-                    this.setState({ navbarTransparent: b })
-                  }
-                />
-              </Route>
-              <Route path="/empiece">
-                <Choice
-                  options={this.state.options}
-                  setOptions={(opts) => this.setState({ options: opts })}
-                  storeLocal={(data) => this.storeLocal(data)}
-                />
-              </Route>
-              <Route path="/enviar">
-                <CVForm
-                  data={this.state.formData}
-                  options={this.state.options}
-                  ucid={this.state.ucid}
-                  setOptions={(opts) => this.setState({ options: opts })}
-                  formCRUD={this.formCRUD.bind(this)}
-                  findInputErrors={() => this.findInputErrors()}
-                  handleSubmit={() => {
-                    this.sendData(this.getAppData());
-                    this.storeLocal();
-                  }}
-                  sendImg={(pic) => this.sendImg(pic)}
-                  dataStatus={this.state.dataStatus}
-                  imageStatus={this.state.imageStatus}
-                  imageMessage={this.state.imageMessage}
-                  saveStatus={this.state.saveStatus}
-                />
-              </Route>
-              <Route path="*">
-                <Home
-                  options={this.state.options}
-                  setOptions={(opts) => this.setState({ options: opts })}
-                  setNavTransparent={(b) =>
-                    this.setState({ navbarTransparent: b })
-                  }
-                />
-              </Route>
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact path="/">
+              <Home
+                options={this.state.options}
+                setOptions={(opts) => this.setState({ options: opts })}
+                setNavTransparent={(b) =>
+                  this.setState({ navbarTransparent: b })
+                }
+              />
+            </Route>
+            <Route path="/empiece">
+              <Choice
+                options={this.state.options}
+                setOptions={(opts) => this.setState({ options: opts })}
+                storeLocal={(data) => this.storeLocal(data)}
+              />
+            </Route>
+            <Route path="/enviar">
+              <CVForm
+                data={this.state.formData}
+                options={this.state.options}
+                ucid={this.state.ucid}
+                setOptions={(opts) => this.setState({ options: opts })}
+                formCRUD={this.formCRUD.bind(this)}
+                findInputErrors={() => this.findInputErrors()}
+                handleSubmit={() => {
+                  this.sendData(this.getAppData());
+                  this.storeLocal();
+                }}
+                sendImg={(pic) => this.sendImg(pic)}
+                dataStatus={this.state.dataStatus}
+                imageStatus={this.state.imageStatus}
+                imageMessage={this.state.imageMessage}
+                saveStatus={this.state.saveStatus}
+              />
+            </Route>
+            <Route path="/enviado">
+              <Confirmation />
+            </Route>
+            <Route path="*">
+              <Home
+                options={this.state.options}
+                setOptions={(opts) => this.setState({ options: opts })}
+                setNavTransparent={(b) =>
+                  this.setState({ navbarTransparent: b })
+                }
+              />
+            </Route>
+          </Switch>
           <Footer />
         </Router>
       </div>

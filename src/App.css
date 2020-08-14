@@ -8,6 +8,8 @@
 
 .App {
   font-family: "Montserrat", sans-serif;
+  height: 100%;
+  width: 100%;
 }
 
 .navbar {
@@ -53,6 +55,7 @@ a.nav-link {
 
 .footer {
   background-color: var(--cadet);
+  height: 200px;
 }
 
 .btn-secondary {
@@ -200,6 +203,22 @@ a.nav-link {
 .dropdown-menu {
   max-height: 50vh;
   overflow-y: auto;
+}
+
+/*Confirmation*/
+.confirmation {
+  padding-top: 100px;
+  width: 100%;
+  min-height: calc(100% - 200px);
+  overflow: hidden;
+}
+
+.confirm-title {
+  text-align: center;
+}
+
+.confirm-box {
+  background-color: rgba(155, 193, 188, 0.3);
 }
 
 /*Modals and toasts*/

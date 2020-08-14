@@ -81,7 +81,7 @@ class CVForm extends React.Component {
                 quantity: 1,
               },
             ],
-            successUrl: "http://cvingles.net/enviado",
+            successUrl: "http://cvingles.net/enviado?id=" + this.props.ucid,
             cancelUrl: "http://cvingles.net/enviar",
             clientReferenceId: this.props.ucid,
             customerEmail: (
