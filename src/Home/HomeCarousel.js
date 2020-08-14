@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 
 import { IoIosArrowDown } from "react-icons/io";
 
-import suit_pro_img from "../images/suit-pro.jpg";
+import suit_pro_img from "../images/suit-pro2.jpg";
 import dark_english_img from "../images/dark-english.jpg";
 import splash_img from "../images/splash.jpg";
 
